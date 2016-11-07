@@ -4,9 +4,11 @@ import javax.swing.JPanel;
 import model.Game;
 import javax.swing.KeyStroke;
 
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -43,7 +45,7 @@ public class Controller extends JPanel{
 	public void paint(Graphics g){
 		super.paint(g);
 		Graphics2D g2d = (Graphics2D) g;
-		g2d.drawRect(game.getPlayer().getXpos(), game.getPlayer().getYpos(), 30, 30);
+		g2d.draw(game.getPlayer().getBounds());
 		String salt = "Salt: ";
 		salt = salt + game.getPlayer().getSalinity();
 		g2d.drawString(salt, 10, 20);
@@ -52,7 +54,7 @@ public class Controller extends JPanel{
 				//game.getPossibleHazards().getHazardsList().get(i).setxpos(400);
 			//System.out.println("Spawning Hazard... x: " + game.getPossibleHazards().getHazardsList().get(i).getXpos() + "y: " + 
 				//	game.getPossibleHazards().getHazardsList().get(i).getYpos());
-			g2d.drawOval(game.getPossibleHazards().getHazardsList().get(i).getxpos()+300, game.getPossibleHazards().getHazardsList().get(i).getypos(), 20, 20);
+			g2d.draw(game.getPossibleHazards().getHazardsList().get(i).getBounds());
 		}
 		int x=20;
 		for(int i=0; i<game.getPlayer().getLife(); i++){
@@ -65,15 +67,20 @@ public class Controller extends JPanel{
 	}
 	
 	public void onCollision(){
+		Rectangle playerr = game.getPlayer().getBounds();
+		Rectangle hazardr;
 		for(int i=0; i<game.getPossibleHazards().getHazardsList().size(); i++){
-			if(game.getPossibleHazards().getHazardsList().get(i).getBounds().intersects(game.getPlayer().getBounds())){
+			hazardr = game.getPossibleHazards().getHazardsList().get(i).getBounds();
+			if(playerr.intersects(hazardr)){
 				System.out.println("One less life");
 				game.getPossibleHazards().getHazardsList().get(i).setXpos(900);
 				game.getPossibleHazards().getHazardsList().get(i).setYpos(900);
-				game.getPlayer().setLife(game.getPlayer().getLife()-1);
+				game.getPlayer().LoseLife();
 			}
 		}
 	}
+
+
 	
 	public void saltOnMovement() {
 		double xsaltindexprep = game.getPlayer().getXpos()/((double)game.FRAMEWIDTH);

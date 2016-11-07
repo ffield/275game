@@ -25,7 +25,13 @@ public class Main {
                 control.update();
             }
         };
+        
+        
         Timer timer = new Timer(25 ,taskPerformer);
         timer.start();
+        
+        
+        
+        
     }
 }
