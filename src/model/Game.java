@@ -27,7 +27,7 @@ public class Game {
 		System.out.println("Generating game");
 		player = new Player(30, 40, 10, 10, 200, 1, 1, 500, Tool.TRASH, State.NEUTRAL);
 		board =  new Board();
-		ph = new PossibleHazards(20);
+		ph = new PossibleHazards(75);
         ph.generateHazards();
 	}
 	
@@ -55,15 +55,15 @@ public class Game {
 	public boolean isGameOver(){
 		if(player.isSalOver()){
 			System.out.println("Salt");
-			return false;
+			return true;
 		}
 		else if(player.isSalUnder()){
 			System.out.println("Salt");
-			return false;
+			return true;
 		}
 		else if(player.getLife()<=0){
 			System.out.println("Collision");
-			return false;
+			return true;
 		}
 		return false;
 	}

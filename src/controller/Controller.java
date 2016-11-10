@@ -2,6 +2,12 @@ package controller;
 
 import javax.swing.JPanel;
 import model.Game;
+import model.Hazard;
+import model.HazardType;
+import model.MovementType;
+import model.PowerupType;
+import model.State;
+
 import javax.swing.KeyStroke;
 
 
@@ -25,6 +31,7 @@ public class Controller extends JPanel{
 	KeyFunctions k = new KeyFunctions(); 
 	Game game;
 	int count=0;
+	int powerupCount = 0;
 	public Controller(){
 		game = new Game();
 		count = 0;
@@ -54,7 +61,8 @@ public class Controller extends JPanel{
 				//game.getPossibleHazards().getHazardsList().get(i).setxpos(400);
 			//System.out.println("Spawning Hazard... x: " + game.getPossibleHazards().getHazardsList().get(i).getXpos() + "y: " + 
 				//	game.getPossibleHazards().getHazardsList().get(i).getYpos());
-			g2d.draw(game.getPossibleHazards().getHazardsList().get(i).getBounds());
+			g2d.setColor(game.getPossibleHazards().getHazardsList().get(i).getColor());
+			g2d.fill(game.getPossibleHazards().getHazardsList().get(i).getBounds());
 		}
 		int x=20;
 		for(int i=0; i<game.getPlayer().getLife(); i++){
@@ -69,15 +77,41 @@ public class Controller extends JPanel{
 	public void onCollision(){
 		Rectangle playerr = game.getPlayer().getBounds();
 		Rectangle hazardr;
+		Hazard collided;
 		for(int i=0; i<game.getPossibleHazards().getHazardsList().size(); i++){
 			hazardr = game.getPossibleHazards().getHazardsList().get(i).getBounds();
+			collided = game.getPossibleHazards().getHazardsList().get(i);
 			if(playerr.intersects(hazardr)){
-				System.out.println("One less life");
-				game.getPossibleHazards().getHazardsList().get(i).setXpos(900);
-				game.getPossibleHazards().getHazardsList().get(i).setYpos(900);
-				game.getPlayer().LoseLife();
-			}
+				if (collided.getType().equals(HazardType.POWERUP)){
+					if (collided.getPowerupType().equals(PowerupType.INVINCIBLE)){
+						game.getPlayer().setState(State.INVINCIBLE);
+					}
+					else if (collided.getPowerupType().equals(PowerupType.CLEAR)){
+						game.getPossibleHazards().clearEnemies();
+						//clear all enemies off screen
+					}
+					else {
+						//speed up player
+					}
+				}
+				else {
+					if (game.getPlayer().getState().equals(State.INVINCIBLE)){
+						if (collided.getypos()>game.getPlayer().getYpos()) {
+						collided.setMovementType(MovementType.COLLIDEDDOWN);
+						}
+						else if (collided.getypos()<=game.getPlayer().getYpos()) {
+							collided.setMovementType(MovementType.COLLIDEDUP);
+						}
+					}
+					else if (game.getPlayer().getState().equals(State.NEUTRAL)){
+						System.out.println("One less life");
+						game.getPossibleHazards().getHazardsList().get(i).setXpos(900);
+						game.getPossibleHazards().getHazardsList().get(i).setYpos(900);
+						game.getPlayer().LoseLife();
+					}
+				}
 		}
+	}
 	}
 
 
@@ -94,11 +128,18 @@ public class Controller extends JPanel{
 	}
 	
 	public void update(){
+		if (!game.getPlayer().getState().equals(State.NEUTRAL)){
+			powerupCount+=1;
+			if (powerupCount == 100) {
+				game.getPlayer().setState(State.NEUTRAL);
+				powerupCount = 0;
+			}
+		}
 		count++;
 		//System.out.println("Count: " + count);
 		for(int i = 0; i<game.getPossibleHazards().getHazardsList().size(); i++){
 			if(game.getPossibleHazards().getHazardsList().get(i).getSpawntime() < count) {
-			game.getPossibleHazards().getHazardsList().get(i).moveLeft();
+			game.getPossibleHazards().getHazardsList().get(i).move();
 			}
 		}
 		repaint();

@@ -26,7 +26,6 @@ public class Main {
             }
         };
         
-        
         Timer timer = new Timer(25 ,taskPerformer);
         timer.start();
         

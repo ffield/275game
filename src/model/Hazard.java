@@ -1,15 +1,21 @@
 package model;
 
+import java.awt.Color;
 import java.awt.Rectangle;
 
 public class Hazard extends Movers{
   int spawntime;
+  HazardType type;
+  MovementType movementType;
+  Color color;
 
   
   
-  public Hazard(int xpos, int ypos, int xvel, int yvel, int spawntime) {
+  public Hazard(int xpos, int ypos, int xvel, int yvel, int spawntime, MovementType hazardMovementType) {
 	super(xpos, ypos, xvel, yvel);
 	this.spawntime = spawntime;
+	this.movementType = hazardMovementType;
+	color = Color.BLACK;
 }
 
 
@@ -18,12 +24,21 @@ public int getSpawntime() {
 }
 
 public Rectangle getBounds(){
-	return new Rectangle(xpos,ypos,20,20);
+	Rectangle r = new Rectangle(xpos,ypos,20,20);
+	return r;
 }
 
 
 public void setSpawntime(int spawntime) {
 	this.spawntime = spawntime;
+}
+
+public HazardType getType(){
+	return this.type;
+}
+
+public void setType(HazardType hazardType){
+	this.type = hazardType;
 }
 
 
@@ -32,8 +47,27 @@ public void setSpawntime(int spawntime) {
  
  */
  
-public void moveLeft(){
-  	xpos = xpos - 1;
+public void move(){
+	switch(movementType){
+	case ENEMYMOVE:
+		this.xpos = xpos-xvel;
+	  	double y = Math.sin(xpos/5)*(-25);
+	  	this.ypos = ((int)y)+ypos;
+		break;
+	case LEFT:
+		this.xpos = xpos-1;
+		break;
+	case COLLIDEDUP:
+		this.xpos = xpos+5;
+		this.ypos = ypos-1;
+		break;
+	case COLLIDEDDOWN:
+		this.xpos = xpos+5;
+		this.ypos = ypos+1;
+	case RIGHT:
+		this.xpos = xpos+1;
+		break;
+	}
   }
  
 public int getxpos() {
@@ -69,4 +103,25 @@ public void setyvel(int yvel) {
 public void increasexvel(int increment){
   	xvel = xvel + increment;
   }
+
+public MovementType getMovementType(){
+	return this.movementType;
 }
+
+public void setMovementType(MovementType newMovementType){
+	this.movementType = newMovementType;
+}
+
+
+public PowerupType getPowerupType() {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+
+public Color getColor() {
+	return this.color;
+}
+
+}
+

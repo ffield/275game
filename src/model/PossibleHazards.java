@@ -24,25 +24,27 @@ public class PossibleHazards{
 		for(int i=0; i<hazard_num; i++){
 			spawnInt = gen.nextInt(spawnwindow);
 			System.out.println("Spawn: " + spawnInt);
-			switch(gen.nextInt(6)){
+			switch(gen.nextInt(7)){
 			case 0:
-				hazards.add( new Enemy1(350, gen.nextInt(350)+1, 1, 0, spawnInt));
+				hazards.add( new Enemy1(370, gen.nextInt(350)+1, 1, 0, spawnInt));
 				break;
 			case 1:
-				hazards.add(new Enemy2(350, gen.nextInt(350)+1, 1, 0, spawnInt));
+				hazards.add(new Enemy2(370, gen.nextInt(350)+1, 1, 0, spawnInt));
 				break;
 			case 2:
-				hazards.add(new Enemy3(350, gen.nextInt(350)+1, 1, 0, spawnInt));
+				hazards.add(new Enemy3(370, gen.nextInt(350)+1, 1, 0, spawnInt));
 				break;
 			case 3:
-				hazards.add(new Trash(350, gen.nextInt(350)+1, 1, 0, spawnInt, Tool.TRASH));
+				hazards.add(new Trash(370, gen.nextInt(350)+1, 1, 0, spawnInt, Tool.TRASH));
 				break;
 			case 4:
-				hazards.add(new Trash(350, gen.nextInt(350)+1, 1, 0, spawnInt, Tool.RECYCLE));
+				hazards.add(new Trash(370, gen.nextInt(350)+1, 1, 0, spawnInt, Tool.RECYCLE));
 				break;
 			case 5:
-				hazards.add(new Trash(350, gen.nextInt(350)+1, 1, 0, spawnInt, Tool.COMPOST));
+				hazards.add(new Trash(370, gen.nextInt(350)+1, 1, 0, spawnInt, Tool.COMPOST));
 				break;
+			case 6:
+				hazards.add(new Powerup(370, gen.nextInt(350)+1, 1, 0, spawnInt));
 			}
 			
 		}
@@ -67,7 +69,7 @@ public class PossibleHazards{
 	}
 	public void moveLeft(){
 		for(int i=0; i<hazard_num; i++){
-			hazards.get(i).moveLeft();
+			hazards.get(i).move();
 		}
 	}
 	/**
@@ -95,5 +97,34 @@ public class PossibleHazards{
 	public Hazard selectRandom(){
 		Random gen = new Random();
 		return hazards.get(gen.nextInt(hazards.size()));
+	}
+	
+	public void clearEnemies(){
+		ArrayList<Hazard> removeThese = new ArrayList<Hazard>();
+		for (Hazard h: hazards){
+			if (h.getType().equals(HazardType.ENEMY1)){
+				if (h.getXpos() < 350) {
+				removeThese.add(h);
+				}
+			}
+			else if (h.getType().equals(HazardType.ENEMY2)){
+				if (h.getXpos() < 350) {
+					removeThese.add(h);
+					}
+			}
+			else if (h.getType().equals(HazardType.ENEMY3)){
+				if (h.getXpos() < 350) {
+					removeThese.add(h);
+					}
+			}
+			else if (h.getType().equals(HazardType.TRASH)){
+				if (h.getXpos() < 350) {
+					removeThese.add(h);
+					}
+			}
+		}
+		for (Hazard h: removeThese) {
+			hazards.remove(h);
+		}
 	}
 }
