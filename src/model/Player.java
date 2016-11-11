@@ -133,6 +133,7 @@ public class Player extends Movers{
 	 * Subtracts 1 from Life. if Life is 0 do not subtract.
 	 */
 	public void LoseLife(){
+		state = State.JUSTHIT;
 	   if (life == 0){
 		   return;
 	   }
@@ -157,7 +158,7 @@ public class Player extends Movers{
 		state = State.SPEEDUP;
 		xvel = 20;
 		yvel = 20;
-		System.out.println(xvel + " hi");
+		//System.out.println(xvel + " hi");
 		//will put actual speeding up in the board?
 		 
 	 }

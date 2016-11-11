@@ -21,11 +21,13 @@ public class Game {
 	Player player;
 	Board board;
 	PossibleHazards ph;
+	Color color;
 	public static int FRAMEHEIGHT = 400;
 	public static int FRAMEWIDTH = 400;
 	public Game(){
 		System.out.println("Generating game");
 		player = new Player(30, 40, 10, 10, 200, 1, 1, 500, Tool.TRASH, State.NEUTRAL);
+		player.setColor(color.MAGENTA);
 		board =  new Board();
 		ph = new PossibleHazards(75);
         ph.generateHazards();
