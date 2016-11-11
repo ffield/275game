@@ -84,14 +84,14 @@ public class Controller extends JPanel{
 			if(playerr.intersects(hazardr)){
 				if (collided.getType().equals(HazardType.POWERUP)){
 					if (collided.getPowerupType().equals(PowerupType.INVINCIBLE)){
-						game.getPlayer().setState(State.INVINCIBLE);
+						game.getPlayer().Invincibility();
 					}
 					else if (collided.getPowerupType().equals(PowerupType.CLEAR)){
 						game.getPossibleHazards().clearEnemies();
 						//clear all enemies off screen
 					}
-					else {
-						//speed up player
+					else if (collided.getPowerupType().equals(PowerupType.SPEED)){
+						game.getPlayer().SpeedUp();
 					}
 				}
 				else {
@@ -142,6 +142,10 @@ public class Controller extends JPanel{
 			game.getPossibleHazards().getHazardsList().get(i).move();
 			}
 		}
+		bindKeyWith("y.up", KeyStroke.getKeyStroke("UP"), new VerticalAction(-(this.game.getPlayer().getYvel())));
+        bindKeyWith("y.down", KeyStroke.getKeyStroke("DOWN"), new VerticalAction(this.game.getPlayer().getYvel()));
+        bindKeyWith("x.left", KeyStroke.getKeyStroke("LEFT"), new HorizontalAction(-(this.game.getPlayer().getXvel())));
+        bindKeyWith("x.right", KeyStroke.getKeyStroke("RIGHT"), new HorizontalAction(this.game.getPlayer().getXvel()));
 		repaint();
 		//saltOnMovement();
 		onCollision();

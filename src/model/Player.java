@@ -155,6 +155,9 @@ public class Player extends Movers{
 		 */
 	 public void SpeedUp(){
 		state = State.SPEEDUP;
+		xvel = 20;
+		yvel = 20;
+		System.out.println(xvel + " hi");
 		//will put actual speeding up in the board?
 		 
 	 }
