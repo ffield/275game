@@ -119,6 +119,12 @@ public PowerupType getPowerupType() {
 }
 
 
+public Object getToolType() {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+
 
 
 }

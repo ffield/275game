@@ -7,6 +7,7 @@ import model.HazardType;
 import model.MovementType;
 import model.PowerupType;
 import model.State;
+import model.Tool;
 
 import javax.swing.KeyStroke;
 
@@ -65,8 +66,11 @@ public class Controller extends JPanel{
 		g2d.setColor(game.getPlayer().getColor());
 		g2d.fill(game.getPlayer().getBounds());
 		String salt = "Salt: ";
+		String points = "Points: ";
 		salt = salt + game.getPlayer().getSalinity();
+		points = points + game.getPoints();
 		g2d.drawString(salt, 10, 20);
+		g2d.drawString(points, 10, 30);
 		for(int i=0; i<game.getPossibleHazards().getHazardsList().size(); i++){
 			if(game.getPossibleHazards().getHazardsList().get(i).getSpawntime() < count)
 				//game.getPossibleHazards().getHazardsList().get(i).setxpos(400);
@@ -103,6 +107,7 @@ public class Controller extends JPanel{
 			collided = game.getPossibleHazards().getHazardsList().get(i);
 			if(playerr.intersects(hazardr)){
 				if (collided.getType().equals(HazardType.POWERUP)){
+					game.getPossibleHazards().removeHazard(i);
 					if (collided.getPowerupType().equals(PowerupType.INVINCIBLE)){
 						game.getPlayer().Invincibility();
 					}
@@ -124,10 +129,19 @@ public class Controller extends JPanel{
 							collided.setMovementType(MovementType.COLLIDEDUP);
 						}
 					}
+					if (collided.getType().equals(HazardType.TRASH)){
+						if (game.getPlayer().getTool().equals(collided.getToolType())){
+							game.getPossibleHazards().removeHazard(i);
+							game.getPoint();
+						}else{
+							System.out.println("One less life");
+							game.getPossibleHazards().removeHazard(i);
+							game.getPlayer().LoseLife();
+						}
+					}
 					else{
 						System.out.println("One less life");
-						game.getPossibleHazards().getHazardsList().get(i).setXpos(900);
-						game.getPossibleHazards().getHazardsList().get(i).setYpos(900);
+						game.getPossibleHazards().removeHazard(i);
 						game.getPlayer().LoseLife();
 					}
 				}

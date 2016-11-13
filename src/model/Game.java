@@ -24,6 +24,7 @@ public class Game implements Serializable{
 	Board board;
 	PossibleHazards ph;
 	Color color;
+	int points;
 	public static int FRAMEHEIGHT = 400;
 	public static int FRAMEWIDTH = 400;
 	public Game(Dimension screenSize){
@@ -31,9 +32,20 @@ public class Game implements Serializable{
 		player = new Player(30, 40, 10, 10, 200, 1, 1, 500, Tool.TRASH, State.NEUTRAL);
 		player.setColor(color.MAGENTA);
 		board =  new Board();
-		ph = new PossibleHazards(75);
+		ph = new PossibleHazards(50);
         ph.generateHazards(screenSize);
+        points = 0;
 	}
+	public int getPoints() {
+		return points;
+	}
+	public void setPoints(int points) {
+		this.points = points;
+	}
+	public void getPoint(){
+		points++;
+	}
+	
 	public void stop(){
 		player = null;
 		ph = null;
