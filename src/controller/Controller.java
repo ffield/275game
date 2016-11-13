@@ -12,9 +12,12 @@ import javax.swing.KeyStroke;
 
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -32,9 +35,12 @@ public class Controller extends JPanel{
 	Game game;
 	int count=0;
 	int powerupCount = 0;
+	Dimension SCREENSIZE = Toolkit.getDefaultToolkit().getScreenSize();
+	public int FRAMEHEIGHT = (int) SCREENSIZE.getHeight();
+	public int FRAMEWIDTH = (int) SCREENSIZE.getWidth();
 	Color color;
 	public Controller(){
-		game = new Game();
+		game = new Game(SCREENSIZE);
 		count = 0;
 		bindKeyWith("y.up", KeyStroke.getKeyStroke("UP"), new VerticalAction(-(this.game.getPlayer().getYvel())));
         bindKeyWith("y.down", KeyStroke.getKeyStroke("DOWN"), new VerticalAction(this.game.getPlayer().getYvel()));
@@ -55,7 +61,7 @@ public class Controller extends JPanel{
 	public void paint(Graphics g){
 		super.paint(g);
 		Graphics2D g2d = (Graphics2D) g;
-		//g2d.draw(game.getPlayer().getBounds());
+		g2d.draw(game.getPlayer().getBounds());
 		g2d.setColor(game.getPlayer().getColor());
 		g2d.fill(game.getPlayer().getBounds());
 		String salt = "Salt: ";
@@ -68,7 +74,6 @@ public class Controller extends JPanel{
 				//	game.getPossibleHazards().getHazardsList().get(i).getYpos());
 			g2d.setColor(game.getPossibleHazards().getHazardsList().get(i).getColor());
 			g2d.fill(game.getPossibleHazards().getHazardsList().get(i).getBounds());
-			
 		}
 		int x=20;
 		for(int i=0; i<game.getPlayer().getLife(); i++){
@@ -76,7 +81,13 @@ public class Controller extends JPanel{
 			x+=40;
 		}
 		if(game.isGameOver()){
-			g2d.drawString("GAME OVER", 150, 150);
+			int fontSize = 60;
+			Font f = new Font("Arial Black", Font.BOLD, fontSize);
+			Font s = new Font("Comic Sans MS", Font.PLAIN, 20);
+			g2d.setFont(f);
+			g2d.setColor(Color.RED);
+			g2d.drawString("GAME OVER", (int)(FRAMEWIDTH/2.5), FRAMEHEIGHT/2);
+			game.stop();
 		}
 	}
 	
@@ -97,6 +108,7 @@ public class Controller extends JPanel{
 					}
 					else if (collided.getPowerupType().equals(PowerupType.CLEAR)){
 						game.getPossibleHazards().clearEnemies();
+						System.out.println("help");
 						//clear all enemies off screen
 					}
 					else if (collided.getPowerupType().equals(PowerupType.SPEED)){
@@ -127,9 +139,9 @@ public class Controller extends JPanel{
 
 	
 	public void saltOnMovement() {
-		double xsaltindexprep = game.getPlayer().getXpos()/((double)game.FRAMEWIDTH);
+		double xsaltindexprep = game.getPlayer().getXpos()/((double)FRAMEWIDTH);
 		int xsaltindex = (int) (40*xsaltindexprep);
-		double ysaltindexprep = game.getPlayer().getYpos()/((double) game.FRAMEHEIGHT);
+		double ysaltindexprep = game.getPlayer().getYpos()/((double)FRAMEHEIGHT);
 		int ysaltindex = (int) (20*ysaltindexprep);
 		game.getPlayer().setSaldelta(game.getBoard().getTile(xsaltindex, ysaltindex));
 		System.out.print(xsaltindexprep+" ");
