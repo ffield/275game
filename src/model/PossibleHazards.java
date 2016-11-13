@@ -101,26 +101,26 @@ public class PossibleHazards{
 		return hazards.get(gen.nextInt(hazards.size()));
 	}
 	
-	public void clearEnemies(){
+	public void clearEnemies(Dimension screenSize){
 		ArrayList<Hazard> removeThese = new ArrayList<Hazard>();
 		for (Hazard h: hazards){
 			if (h.getType().equals(HazardType.ENEMY1)){
-				if (h.getXpos() < 350) {
+				if (h.getXpos() < (int)screenSize.getWidth()) {
 				removeThese.add(h);
 				}
 			}
 			else if (h.getType().equals(HazardType.ENEMY2)){
-				if (h.getXpos() < 350) {
+				if (h.getXpos() < (int)screenSize.getWidth()) {
 					removeThese.add(h);
 					}
 			}
 			else if (h.getType().equals(HazardType.ENEMY3)){
-				if (h.getXpos() < 350) {
+				if (h.getXpos() < (int)screenSize.getWidth()) {
 					removeThese.add(h);
 					}
 			}
 			else if (h.getType().equals(HazardType.TRASH)){
-				if (h.getXpos() < 350) {
+				if (h.getXpos() < (int)screenSize.getWidth()) {
 					removeThese.add(h);
 					}
 			}

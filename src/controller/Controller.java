@@ -107,7 +107,7 @@ public class Controller extends JPanel{
 						game.getPlayer().Invincibility();
 					}
 					else if (collided.getPowerupType().equals(PowerupType.CLEAR)){
-						game.getPossibleHazards().clearEnemies();
+						game.getPossibleHazards().clearEnemies(SCREENSIZE);
 						System.out.println("help");
 						//clear all enemies off screen
 					}
@@ -144,8 +144,8 @@ public class Controller extends JPanel{
 		double ysaltindexprep = game.getPlayer().getYpos()/((double)FRAMEHEIGHT);
 		int ysaltindex = (int) (20*ysaltindexprep);
 		game.getPlayer().setSaldelta(game.getBoard().getTile(xsaltindex, ysaltindex));
-		System.out.print(xsaltindexprep+" ");
-		System.out.println(game.getPlayer().getXpos());
+//		System.out.print(xsaltindexprep+" ");
+//		System.out.println(game.getPlayer().getXpos());
 		game.getPlayer().updateSalinity();
 	}
 	
