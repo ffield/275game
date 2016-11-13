@@ -40,6 +40,8 @@ public class Controller extends JPanel{
         bindKeyWith("y.down", KeyStroke.getKeyStroke("DOWN"), new VerticalAction(this.game.getPlayer().getYvel()));
         bindKeyWith("x.left", KeyStroke.getKeyStroke("LEFT"), new HorizontalAction(-(this.game.getPlayer().getXvel())));
         bindKeyWith("x.right", KeyStroke.getKeyStroke("RIGHT"), new HorizontalAction(this.game.getPlayer().getXvel()));
+        bindKeyWith("tool.space", KeyStroke.getKeyStroke("SPACE"), new SpaceAction());
+        
 	}
 	
 	protected void bindKeyWith(String name, KeyStroke keyStroke, Action action) {
@@ -219,6 +221,37 @@ public class Controller extends JPanel{
 
     }
 	
+	public abstract class ToolAction extends AbstractAction {
+
+        public ToolAction() {
+          //game.getPlayer().SwitchTool();
+        }
+        
+        protected abstract void switchTool();
+        
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            switchTool();
+        }
+        
+    }
+	
+    public class SpaceAction extends ToolAction {
+
+        public SpaceAction() {
+            super();
+        }
+
+        @Override
+        protected void switchTool() {
+          
+            game.getPlayer().SwitchTool();
+            System.out.println(game.getPlayer().getTool());
+            
+            //repaint();
+        }
+    }
+	
 
     public class VerticalAction extends MoveAction {
 
@@ -258,6 +291,7 @@ public class Controller extends JPanel{
         }
 
     }
+    
     
     public Game getGame() {
     	return this.game;
