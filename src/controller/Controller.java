@@ -87,7 +87,7 @@ public class Controller extends JPanel {
 			netcolor = netcolor.LIGHT_GRAY;
 			break;
 		case RECYCLE:
-			netcolor = netcolor.CYAN;
+			netcolor = netcolor.DARK_GRAY;
 			break;
 		case COMPOST:
 			netcolor = netcolor.GREEN;
@@ -198,7 +198,7 @@ public class Controller extends JPanel {
 				game.getPlayer().setColor(color.WHITE);
 			else
 				game.getPlayer().setColor(color.MAGENTA);
-			if (powerupCount == 50) {
+			if (powerupCount ==75) {
 				game.getPlayer().setState(State.NEUTRAL);
 				game.getPlayer().setColor(color.MAGENTA);
 				powerupCount = 0;

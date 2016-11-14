@@ -14,7 +14,7 @@ public class Powerup extends Hazard {
 		switch (r.nextInt(3)) {
 		case 0:
 			this.powerupType = PowerupType.INVINCIBLE;
-			color = color.BLUE;
+			color = color.YELLOW;
 			break;
 		case 1:
 			this.powerupType = PowerupType.CLEAR;

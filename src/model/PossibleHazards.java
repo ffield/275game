@@ -29,13 +29,13 @@ public class PossibleHazards {
 			System.out.println("Spawn: " + spawnInt);
 			switch (gen.nextInt(7)) {
 			case 0:
-				hazards.add(new Enemy1(FRAMEWIDTH, gen.nextInt(FRAMEHEIGHT) + 1, 1, 0, spawnInt));
+				hazards.add(new Enemy1(FRAMEWIDTH, gen.nextInt(FRAMEHEIGHT) + 1, 2, 0, spawnInt));
 				break;
 			case 1:
-				hazards.add(new Enemy2(FRAMEWIDTH, gen.nextInt(FRAMEHEIGHT) + 1, 1, 0, spawnInt));
+				hazards.add(new Enemy2(FRAMEWIDTH, gen.nextInt(FRAMEHEIGHT) + 1, 2, 0, spawnInt));
 				break;
 			case 2:
-				hazards.add(new Enemy3(FRAMEWIDTH, gen.nextInt(FRAMEHEIGHT) + 1, 1, 0, spawnInt));
+				hazards.add(new Enemy3(FRAMEWIDTH, gen.nextInt(FRAMEHEIGHT) + 1, 2, 0, spawnInt));
 				break;
 			case 3:
 				hazards.add(new Trash(FRAMEWIDTH, gen.nextInt(FRAMEHEIGHT) + 1, 1, 0, spawnInt, Tool.TRASH));

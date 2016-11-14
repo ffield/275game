@@ -16,7 +16,7 @@ public class Trash extends Hazard {
 			break;
 
 		case RECYCLE:
-			this.color = color.CYAN;
+			this.color = color.DARK_GRAY;
 			break;
 
 		case COMPOST:

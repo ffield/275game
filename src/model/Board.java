@@ -24,18 +24,36 @@ public class Board {
 	 * initializes possiblehazards to a default PossibleHazards.
 	 */
 	public Board() {
-		int border = 0;
+		int border = -5;
+		int changer = 1;
+		int limit = BOARDHEIGHT - (BOARDHEIGHT/3);
 		arr = new int[BOARDWIDTH][BOARDHEIGHT];
 		for (int i = 0; i < BOARDWIDTH; i++) {
-			border ++;
+			border+=changer;
 			for (int j = 0; j < BOARDHEIGHT; j++) {
-				if (i < BOARDWIDTH / 2) {
+				if(j>limit){
 					arr[i][j] = 1;
+				}else{
+				if (i < BOARDWIDTH / 2) {
+	
+					if(border<j){
+						arr[i][j] = 1;
+					}else{
+						arr[i][j] = -1;
+					}
+					
 					// System.out.println(j);
 				} else {
-					arr[i][j] = -1;
+					changer = -1;
+					if(border<j){
+						arr[i][j] = 1;
+					}else{
+						arr[i][j] = -1;
+					}
 
 				}
+				}
+				
 				System.out.print(arr[i][j]);
 			}
 			System.out.println();
