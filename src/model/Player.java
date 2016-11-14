@@ -11,7 +11,7 @@ public class Player extends Movers {
 	int life;
 	State state;
 
-	Player(int xpos, int ypos, int xvel, int yvel, int salinity, int saldelta, int salmin, int salmax, Tool tool,
+	public Player(int xpos, int ypos, int xvel, int yvel, int salinity, int saldelta, int salmin, int salmax, Tool tool,
 			State state) {
 		super(xpos, ypos, xvel, yvel);
 		this.salinity = salinity;

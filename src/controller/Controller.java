@@ -5,6 +5,7 @@ import model.Game;
 import model.Hazard;
 import model.HazardType;
 import model.MovementType;
+import model.Player;
 import model.PowerupType;
 import model.State;
 import model.Tool;
@@ -61,6 +62,25 @@ public class Controller extends JPanel {
 	public void paint(Graphics g) {
 		super.paint(g);
 		Graphics2D g2d = (Graphics2D) g;
+		int xsaltindex = 0;
+		int ysaltindex = 0;
+		for(int i = 0; i<FRAMEWIDTH; i+=(FRAMEWIDTH/40)){
+			System.out.println(i + " " + xsaltindex);
+			for(int j = 0; j<FRAMEHEIGHT; j+=(FRAMEHEIGHT/20)){
+				double xsaltindexprep = i / ((double) FRAMEWIDTH);
+				xsaltindex = (int) (40 * xsaltindexprep);
+				double ysaltindexprep = j / ((double) FRAMEHEIGHT);
+				ysaltindex = (int) (20 * ysaltindexprep);
+				if(game.getBoard().getTile(xsaltindex, ysaltindex) == 1){
+					g2d.setColor(Color.BLUE);
+				}else{
+					g2d.setColor(Color.CYAN);
+				}
+				g2d.fill(new Rectangle(i, j, FRAMEWIDTH/40, FRAMEHEIGHT/20));
+				//ysaltindex++;
+			}
+			//xsaltindex++;
+		}
 		Color netcolor = new Color(1);
 		switch (game.getPlayer().getTool()) {
 		case TRASH:
@@ -84,7 +104,7 @@ public class Controller extends JPanel {
 		salt = salt + game.getPlayer().getSalinity();
 		points = points + game.getPoints();
 		int size = 20;
-		Font p = new Font("Brodway", Font.PLAIN, size);
+		Font p = new Font("Broadway", Font.PLAIN, size);
 		g2d.setFont(p);
 		g2d.setColor(Color.BLACK);
 		g2d.drawString(salt, 10, 20);
@@ -140,7 +160,7 @@ public class Controller extends JPanel {
 								collided.setMovementType(MovementType.COLLIDEDUP);
 							}
 						}
-						if (collided.getType().equals(HazardType.TRASH)) {
+						else if (collided.getType().equals(HazardType.TRASH)) {
 							if (game.getPlayer().getTool().equals(collided.getToolType())) {
 								game.getPossibleHazards().removeHazard(i);
 								game.getPoint();
@@ -187,7 +207,7 @@ public class Controller extends JPanel {
 		if (game.getPlayer().getState().equals(State.INVINCIBLE)) {
 			powerupCount += 1;
 			game.getPlayer().setColor(color.YELLOW);
-			if (powerupCount == 100) {
+			if (powerupCount == 200) {
 				game.getPlayer().setColor(color.MAGENTA);
 				game.getPlayer().setState(State.NEUTRAL);
 				powerupCount = 0;
@@ -196,7 +216,7 @@ public class Controller extends JPanel {
 		if (game.getPlayer().getState().equals(State.SPEEDUP)) {
 			powerupCount += 1;
 			game.getPlayer().setColor(color.RED);
-			if (powerupCount == 100) {
+			if (powerupCount == 200) {
 				game.getPlayer().setXvel(10);
 				game.getPlayer().setYvel(10);
 				game.getPlayer().setColor(color.MAGENTA);
@@ -217,7 +237,7 @@ public class Controller extends JPanel {
 		bindKeyWith("x.left", KeyStroke.getKeyStroke("LEFT"), new HorizontalAction(-(this.game.getPlayer().getXvel())));
 		bindKeyWith("x.right", KeyStroke.getKeyStroke("RIGHT"), new HorizontalAction(this.game.getPlayer().getXvel()));
 		repaint();
-		// saltOnMovement();
+		saltOnMovement();
 		onCollision();
 	}
 

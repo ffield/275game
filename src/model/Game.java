@@ -80,13 +80,13 @@ public class Game implements Serializable {
 	// }
 	public boolean isGameOver() {
 		if (player.isSalOver()) {
-			System.out.println("Salt");
+			//System.out.println("Salt");
 			return true;
 		} else if (player.isSalUnder()) {
-			System.out.println("Salt");
+			//System.out.println("Salt");
 			return true;
 		} else if (player.getLife() <= 0) {
-			System.out.println("Collision");
+			//System.out.println("Collision");
 			return true;
 		}
 		return false;
@@ -95,6 +95,7 @@ public class Game implements Serializable {
 	public Board getBoard() {
 		return this.board;
 	}
+	
 
 	// public void update(int count){
 	//// if(k.keys[KeyEvent.VK_UP]){

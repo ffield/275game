@@ -24,8 +24,10 @@ public class Board {
 	 * initializes possiblehazards to a default PossibleHazards.
 	 */
 	public Board() {
+		int border = 0;
 		arr = new int[BOARDWIDTH][BOARDHEIGHT];
 		for (int i = 0; i < BOARDWIDTH; i++) {
+			border ++;
 			for (int j = 0; j < BOARDHEIGHT; j++) {
 				if (i < BOARDWIDTH / 2) {
 					arr[i][j] = 1;
@@ -57,5 +59,6 @@ public class Board {
 	 */
 	public int getTile(int x, int y) {
 		return arr[x][y];
+		
 	}
 }
