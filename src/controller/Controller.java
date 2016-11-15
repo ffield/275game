@@ -33,7 +33,7 @@ import javax.swing.ActionMap;
 import javax.swing.InputMap;
 import javax.swing.JFrame;
 
-public class Controller extends JPanel {
+public class Controller extends JPanel implements KeyListener{
 	private static final long serialVersionUID = 1L;
 	KeyFunctions k = new KeyFunctions();
 	Game game;
@@ -43,15 +43,24 @@ public class Controller extends JPanel {
 	public int FRAMEHEIGHT = (int) SCREENSIZE.getHeight();
 	public int FRAMEWIDTH = (int) SCREENSIZE.getWidth();
 	Color color;
+	boolean up;
+	boolean down;
+	boolean left;
+	boolean right;
 
 	public Controller() {
 		game = new Game(SCREENSIZE);
 		count = 0;
-		bindKeyWith("y.up", KeyStroke.getKeyStroke("UP"), new VerticalAction(-(this.game.getPlayer().getYvel())));
-		bindKeyWith("y.down", KeyStroke.getKeyStroke("DOWN"), new VerticalAction(this.game.getPlayer().getYvel()));
-		bindKeyWith("x.left", KeyStroke.getKeyStroke("LEFT"), new HorizontalAction(-(this.game.getPlayer().getXvel())));
-		bindKeyWith("x.right", KeyStroke.getKeyStroke("RIGHT"), new HorizontalAction(this.game.getPlayer().getXvel()));
-		bindKeyWith("tool.space", KeyStroke.getKeyStroke("SPACE"), new SpaceAction());
+		addKeyListener(this);
+		up = false;
+		down = false;
+		left = false;
+		right = false;
+//		bindKeyWith("y.up", KeyStroke.getKeyStroke("UP"), new VerticalAction(-(this.game.getPlayer().getYvel())));
+//		bindKeyWith("y.down", KeyStroke.getKeyStroke("DOWN"), new VerticalAction(this.game.getPlayer().getYvel()));
+//		bindKeyWith("x.left", KeyStroke.getKeyStroke("LEFT"), new HorizontalAction(-(this.game.getPlayer().getXvel())));
+//		bindKeyWith("x.right", KeyStroke.getKeyStroke("RIGHT"), new HorizontalAction(this.game.getPlayer().getXvel()));
+//		bindKeyWith("tool.space", KeyStroke.getKeyStroke("SPACE"), new SpaceAction());
 
 	}
 
@@ -69,7 +78,7 @@ public class Controller extends JPanel {
 		int xsaltindex = 0;
 		int ysaltindex = 0;
 		for(int i = 0; i<FRAMEWIDTH; i+=(FRAMEWIDTH/40)){
-			System.out.println(i + " " + xsaltindex);
+			//System.out.println(i + " " + xsaltindex);
 			for(int j = 0; j<FRAMEHEIGHT; j+=(FRAMEHEIGHT/20)){
 				double xsaltindexprep = i / ((double) FRAMEWIDTH);
 				xsaltindex = (int) (40 * xsaltindexprep);
@@ -153,7 +162,7 @@ public class Controller extends JPanel {
 							game.getPlayer().Invincibility();
 						} else if (collided.getPowerupType().equals(PowerupType.CLEAR)) {
 							game.getPossibleHazards().clearEnemies(SCREENSIZE);
-							System.out.println("help");
+							//System.out.println("help");
 							// clear all enemies off screen
 						} else if (collided.getPowerupType().equals(PowerupType.SPEED)) {
 							game.getPlayer().SpeedUp();
@@ -240,10 +249,11 @@ public class Controller extends JPanel {
 				game.getPossibleHazards().getHazardsList().get(i).move();
 			}
 		}
-		bindKeyWith("y.up", KeyStroke.getKeyStroke("UP"), new VerticalAction(-(this.game.getPlayer().getYvel())));
-		bindKeyWith("y.down", KeyStroke.getKeyStroke("DOWN"), new VerticalAction(this.game.getPlayer().getYvel()));
-		bindKeyWith("x.left", KeyStroke.getKeyStroke("LEFT"), new HorizontalAction(-(this.game.getPlayer().getXvel())));
-		bindKeyWith("x.right", KeyStroke.getKeyStroke("RIGHT"), new HorizontalAction(this.game.getPlayer().getXvel()));
+		keyUpdate();
+//		bindKeyWith("y.up", KeyStroke.getKeyStroke("UP"), new VerticalAction(-(this.game.getPlayer().getYvel())));
+//		bindKeyWith("y.down", KeyStroke.getKeyStroke("DOWN"), new VerticalAction(this.game.getPlayer().getYvel()));
+//		bindKeyWith("x.left", KeyStroke.getKeyStroke("LEFT"), new HorizontalAction(-(this.game.getPlayer().getXvel())));
+//		bindKeyWith("x.right", KeyStroke.getKeyStroke("RIGHT"), new HorizontalAction(this.game.getPlayer().getXvel()));
 		repaint();
 		saltOnMovement();
 		onCollision();
@@ -375,5 +385,115 @@ public class Controller extends JPanel {
 
 	public Game getGame() {
 		return this.game;
+	}
+
+	public void addNotify() {
+        super.addNotify();
+        requestFocus();
+    }
+	
+public void keyUpdate(){
+	 if (down) {
+		 
+         game.getPlayer().setYpos(game.getPlayer().getYpos()+game.getPlayer().getYvel()); // removing velx = 0 allows us to go vertically and horizontlly at the same time
+         if (game.getPlayer().getYpos() < 0) {
+				game.getPlayer().setYpos(0);
+			} else if (game.getPlayer().getYpos() + 30 > getHeight()) {
+				game.getPlayer().setYpos(getHeight() - 30);
+			}
+     }
+     if (up) {
+     	game.getPlayer().setYpos(game.getPlayer().getYpos()-game.getPlayer().getYvel());
+     	if (game.getPlayer().getYpos() < 0) {
+			game.getPlayer().setYpos(0);
+		} else if (game.getPlayer().getYpos() + 30 > getHeight()) {
+			game.getPlayer().setYpos(getHeight() - 30);
+		}
+     }
+     if (left) {
+
+     	game.getPlayer().setXpos(game.getPlayer().getXpos()-game.getPlayer().getXvel());
+     	if (game.getPlayer().getXpos() < 0) {
+			game.getPlayer().setXpos(0);
+		} else if (game.getPlayer().getXpos() + 30 > getWidth()) {
+			game.getPlayer().setXpos(getWidth() - 30);
+		}
+     }
+
+     
+         if (right) {
+
+         	game.getPlayer().setXpos(game.getPlayer().getXpos()+game.getPlayer().getXvel());
+         	if (game.getPlayer().getXpos() < 0) {
+				game.getPlayer().setXpos(0);
+			} else if (game.getPlayer().getXpos() + 30 > getWidth()) {
+				game.getPlayer().setXpos(getWidth() - 30);
+			}
+
+         }
+}
+	
+	@Override
+    public void keyPressed(KeyEvent e) {
+        int code = e.getKeyCode();
+
+        
+            if (code == KeyEvent.VK_DOWN) {
+               down = true; // removing velx = 0 allows us to go vertically and horizontlly at the same time
+
+            }
+            if (code == KeyEvent.VK_UP) {
+            	up = true;
+
+            }
+            if (code == KeyEvent.VK_LEFT) {
+
+            	left = true;
+            }
+
+            
+                if (code == KeyEvent.VK_RIGHT) {
+
+                	right = true;
+
+                }
+        
+    }
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		int code = e.getKeyCode();
+
+        
+        if (code == KeyEvent.VK_DOWN) {
+           down = false; // removing velx = 0 allows us to go vertically and horizontlly at the same time
+
+        }
+        if (code == KeyEvent.VK_UP) {
+        	up = false;
+
+        }
+        if (code == KeyEvent.VK_LEFT) {
+
+        	left = false;
+        }
+
+        
+            if (code == KeyEvent.VK_RIGHT) {
+
+            	right = false;
+
+            }
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		if(e.getKeyChar()==' '){
+			game.getPlayer().SwitchTool();
+		}
+//		System.out.println("HIT");
+//		System.out.println(e.getKeyCode());
+		
 	}
 }
