@@ -6,6 +6,7 @@ import model.Hazard;
 import model.HazardType;
 import model.MovementType;
 import model.Player;
+import model.PossibleHazards;
 import model.PowerupType;
 import model.State;
 import model.Tool;
@@ -22,6 +23,9 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -119,6 +123,8 @@ public class Controller extends JPanel {
 			g2d.drawOval(x, 20, 30, 20);
 			x += 40;
 		}
+		g2d.setColor(Color.BLACK);
+		g2d.drawString(game.getLevel(), (int)(FRAMEWIDTH/2), 20);
 		if (game.isGameOver()) {
 			int fontSize = 60;
 			Font f = new Font("Arial Black", Font.BOLD, fontSize);
@@ -224,7 +230,6 @@ public class Controller extends JPanel {
 				powerupCount = 0;
 			}
 		}
-
 		count++;
 		// System.out.println("Count: " + count);
 		for (int i = 0; i < game.getPossibleHazards().getHazardsList().size(); i++) {
@@ -239,8 +244,25 @@ public class Controller extends JPanel {
 		repaint();
 		saltOnMovement();
 		onCollision();
+		onNextLevel(SCREENSIZE);
 	}
-
+	
+	public void onNextLevel(Dimension screenSize){
+		ArrayList<Hazard> c = game.getPossibleHazards().getHazardsList();
+		Hazard last = c.get(0);
+		boolean r = false;
+		for(Hazard h: c){
+			if(h.getXpos()>last.getXpos()){
+				last=h;
+			}
+		}
+		//This if statement not triggering for some reason
+		if(last.getXpos()<=0){
+			game.levelUp();
+			game.setPossibleHazards(new PossibleHazards(game.getHazardNum()));
+			game.getPossibleHazards().generateHazards(screenSize);
+		}
+	}
 	private int getCount() {
 		// TODO Auto-generated method stub
 		return this.count;
