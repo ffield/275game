@@ -103,7 +103,7 @@ public class Controller extends JPanel implements KeyListener{
 			netcolor = netcolor.DARK_GRAY;
 			break;
 		case COMPOST:
-			netcolor = netcolor.GREEN;
+			netcolor = netcolor.GREEN;  
 			break;
 		}
 		g2d.setColor(netcolor);
@@ -133,7 +133,7 @@ public class Controller extends JPanel implements KeyListener{
 			x += 40;
 		}
 		g2d.setColor(Color.BLACK);
-		g2d.drawString(game.getLevel(), (int)(FRAMEWIDTH/2), 20);
+		g2d.drawString(game.levelGetter(), (int)(FRAMEWIDTH/2), 20);
 		if (game.isGameOver()) {
 			int fontSize = 60;
 			Font f = new Font("Arial Black", Font.BOLD, fontSize);
@@ -257,25 +257,31 @@ public class Controller extends JPanel implements KeyListener{
 		repaint();
 		saltOnMovement();
 		onCollision();
+		onOffScreen();
 		onNextLevel(SCREENSIZE);
+	}
+	
+	
+	public void onOffScreen(){
+		ArrayList<Hazard> c = game.getPossibleHazards().getHazardsList();
+		for(int i=0; i<c.size(); i++){
+			if(c.get(i).getXpos()<=0){
+				game.getPossibleHazards().removeHazard(i);
+			}
+		}
 	}
 	
 	public void onNextLevel(Dimension screenSize){
 		ArrayList<Hazard> c = game.getPossibleHazards().getHazardsList();
-		Hazard last = c.get(0);
-		boolean r = false;
-		for(Hazard h: c){
-			if(h.getXpos()>last.getXpos()){
-				last=h;
-			}
-		}
-		//This if statement not triggering for some reason
-		if(last.getXpos()<=0){
+		System.out.println("Size: "+c.size());
+		if(c.size()==0){
+			count = 0;
 			game.levelUp();
 			game.setPossibleHazards(new PossibleHazards(game.getHazardNum()));
-			game.getPossibleHazards().generateHazards(screenSize);
+			game.getPossibleHazards().generateHazards(screenSize, game.getLevel());
 		}
 	}
+	
 	private int getCount() {
 		// TODO Auto-generated method stub
 		return this.count;

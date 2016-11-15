@@ -23,25 +23,11 @@ public class Game implements Serializable{
 		hazardnum = 75;
 		ph = new PossibleHazards(hazardnum);
 		player.setColor(Color.MAGENTA);
-        ph.generateHazards(screenSize);
         points = 0;
         level = 1;
+        ph.generateHazards(screenSize, level);
 	}
-	public void onNextLevel(Dimension screenSize){
-		Collection<Hazard> c = getPossibleHazards().getHazardsList();
-		Hazard last = new Hazard(0, 0, 0, 0, 0, null);
-		for(Hazard h: c){
-			if(h.getXpos()>last.getXpos()){
-				last = h;
-			}
-		}
-		if(last.getXpos()<=0){
-			player.setLife(5);
-			levelUp();
-			ph = new PossibleHazards(hazardnum);
-			ph.generateHazards(screenSize);
-		}
-	}
+
 	public void levelUp(){
 		level++;
 		hazardnum = hazardnum+10;
@@ -51,13 +37,18 @@ public class Game implements Serializable{
 		this.ph=ph;
 	}
 	public int getHazardNum(){
-		return hazardnum;
+		return this.hazardnum;
 	}
 	public int getPoints() {
-		return points;
+		return this.points;
 	}
-	public String getLevel(){
+	
+	public String levelGetter() {
 		return "Level: "+level;
+	}
+	
+	public int getLevel(){
+		return level;
 	}
 	public void setPoints(int points) {
 		this.points = points;

@@ -49,7 +49,7 @@ public class Hazard extends Movers {
 			this.ypos = ((int) y) + ypos;
 			break;
 		case LEFT:
-			this.xpos = xpos - 1;
+			this.xpos = xpos - xvel;
 			break;
 		case COLLIDEDUP:
 			this.xpos = xpos + 5;
@@ -59,10 +59,10 @@ public class Hazard extends Movers {
 			this.xpos = xpos + 5;
 			this.ypos = ypos + 1;
 		case RIGHT:
-			this.xpos = xpos + 1;
+			this.xpos = xpos + xvel;
 			break;
 		case ENEMY2MOVE:
-			this.xpos = xpos + 1;
+			this.xpos = xpos - xvel;
 			break;
 		}
 	}
