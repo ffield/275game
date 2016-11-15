@@ -117,7 +117,7 @@ public class Controller extends JPanel implements KeyListener{
 		salt = salt + game.getPlayer().getSalinity();
 		points = points + game.getPoints();
 		int size = 20;
-		Font p = new Font("Broadway", Font.PLAIN, size);
+		Font p = new Font("comic sans ms", Font.BOLD, size);
 		g2d.setFont(p);
 		g2d.setColor(Color.BLACK);
 		g2d.drawString(salt, 10, 20);
