@@ -212,10 +212,13 @@ public class Controller extends JPanel {
 		}
 		if (game.getPlayer().getState().equals(State.INVINCIBLE)) {
 			powerupCount += 1;
-			game.getPlayer().setColor(color.YELLOW);
-			if (powerupCount == 200) {
+			if (game.getPlayer().getColor() == color.MAGENTA)
+				game.getPlayer().setColor(color.YELLOW);
+			else
 				game.getPlayer().setColor(color.MAGENTA);
+			if (powerupCount ==200) {
 				game.getPlayer().setState(State.NEUTRAL);
+				game.getPlayer().setColor(color.MAGENTA);
 				powerupCount = 0;
 			}
 		}
