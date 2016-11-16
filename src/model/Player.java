@@ -150,7 +150,6 @@ public class Player extends Movers {
 	 */
 	public void Invincibility() {
 		state = State.INVINCIBLE;
-
 	}
 
 	/**

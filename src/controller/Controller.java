@@ -56,12 +56,6 @@ public class Controller extends JPanel implements KeyListener{
 		down = false;
 		left = false;
 		right = false;
-//		bindKeyWith("y.up", KeyStroke.getKeyStroke("UP"), new VerticalAction(-(this.game.getPlayer().getYvel())));
-//		bindKeyWith("y.down", KeyStroke.getKeyStroke("DOWN"), new VerticalAction(this.game.getPlayer().getYvel()));
-//		bindKeyWith("x.left", KeyStroke.getKeyStroke("LEFT"), new HorizontalAction(-(this.game.getPlayer().getXvel())));
-//		bindKeyWith("x.right", KeyStroke.getKeyStroke("RIGHT"), new HorizontalAction(this.game.getPlayer().getXvel()));
-//		bindKeyWith("tool.space", KeyStroke.getKeyStroke("SPACE"), new SpaceAction());
-
 	}
 
 	protected void bindKeyWith(String name, KeyStroke keyStroke, Action action) {
@@ -166,6 +160,8 @@ public class Controller extends JPanel implements KeyListener{
 							// clear all enemies off screen
 						} else if (collided.getPowerupType().equals(PowerupType.SPEED)) {
 							game.getPlayer().SpeedUp();
+						} else if (collided.getPowerupType().equals(PowerupType.ADDLIFE)){
+							game.getPlayer().setLife(game.getPlayer().getLife()+1);
 						}
 					} else {
 						if (game.getPlayer().getState().equals(State.INVINCIBLE)) {
@@ -255,7 +251,7 @@ public class Controller extends JPanel implements KeyListener{
 //		bindKeyWith("x.left", KeyStroke.getKeyStroke("LEFT"), new HorizontalAction(-(this.game.getPlayer().getXvel())));
 //		bindKeyWith("x.right", KeyStroke.getKeyStroke("RIGHT"), new HorizontalAction(this.game.getPlayer().getXvel()));
 		repaint();
-		saltOnMovement();
+		//saltOnMovement();
 		onCollision();
 		onOffScreen();
 		onNextLevel(SCREENSIZE);
@@ -265,7 +261,7 @@ public class Controller extends JPanel implements KeyListener{
 	public void onOffScreen(){
 		ArrayList<Hazard> c = game.getPossibleHazards().getHazardsList();
 		for(int i=0; i<c.size(); i++){
-			if(c.get(i).getXpos()<=0){
+			if(c.get(i).getXpos()<=0||c.get(i).getYpos()<=-30||c.get(i).getYpos()>=FRAMEHEIGHT+30){
 				game.getPossibleHazards().removeHazard(i);
 			}
 		}

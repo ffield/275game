@@ -24,8 +24,12 @@ public class Powerup extends Hazard {
 			this.powerupType = PowerupType.SPEED;
 			color = color.RED;
 			break;
-		}
 		
+		case 3:
+			this.powerupType = PowerupType.ADDLIFE;
+			color = color.WHITE;
+			break;
+		}
 	}
 		
 		public Powerup(int xpos, int ypos, int xvel, int yvel, int spawntime, PowerupType powerupType) {
@@ -41,6 +45,8 @@ public class Powerup extends Hazard {
 			case SPEED:
 				color = color.RED;
 				break;
+			case ADDLIFE:
+				color = color.WHITE;
 			}
 			this.powerupType = powerupType;
 			
