@@ -4,7 +4,6 @@ package model;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.io.Serializable;
-import java.util.Collection;
 
 
 public class Game implements Serializable{
@@ -22,7 +21,10 @@ public class Game implements Serializable{
 		board = new Board();
 		hazardnum = 75;
 		ph = new PossibleHazards(hazardnum);
-		player.setColor(Color.MAGENTA);
+
+		 int alpha = 0; // 50% transparent
+		 Color myColor = new Color(255, 60, 50, alpha);
+		player.setColor(myColor);
         points = 0;
         level = 1;
         ph.generateHazards(screenSize, level);

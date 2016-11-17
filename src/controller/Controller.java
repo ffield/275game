@@ -18,15 +18,20 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
+import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.ActionMap;
@@ -47,7 +52,21 @@ public class Controller extends JPanel implements KeyListener{
 	boolean down;
 	boolean left;
 	boolean right;
-
+	 int alpha = 0; //makes transparent
+	 Color myColor = new Color(255, 60, 50, alpha);
+	 String sourceimage = ("images/net.png");
+     BufferedImage img = createImage(sourceimage);
+ 	BufferedImage recycle = createImage("images/recycle.png");
+	BufferedImage compost = createImage("images/compost.png");
+    BufferedImage player = createImage("images/bluecrab_0.png");
+	BufferedImage fresh = createImage("images/water_tile.png");
+    BufferedImage salt = createImage("images/salt_tile.png");
+    BufferedImage heart = createImage("images/fullHeart.png");
+	 
+	 
+	 
+	 
+	 
 	public Controller() {
 		game = new Game(SCREENSIZE);
 		count = 0;
@@ -64,6 +83,19 @@ public class Controller extends JPanel implements KeyListener{
 		im.put(keyStroke, name);
 		am.put(name, action);
 	}
+	
+
+
+    private BufferedImage createImage(String filename){
+    	BufferedImage bufferedImage;
+    	try {
+    		bufferedImage = ImageIO.read(new File(filename));
+    		return bufferedImage;
+    	} catch (IOException e) {
+    		e.printStackTrace();
+    	}
+    	return null;}
+
 
 	@Override
 	public void paint(Graphics g) {
@@ -71,6 +103,16 @@ public class Controller extends JPanel implements KeyListener{
 		Graphics2D g2d = (Graphics2D) g;
 		int xsaltindex = 0;
 		int ysaltindex = 0;
+		
+		if (game.getPlayer().getColor() == color.WHITE){
+			g2d.setColor(Color.RED);
+			int xsize = 50;
+			Font xs = new Font("Impact", Font.BOLD, xsize);
+			g2d.setFont(xs);
+			g2d.drawString("X", game.getPlayer().getXpos(), game.getPlayer().getYpos());
+		   
+			
+		}
 		for(int i = 0; i<FRAMEWIDTH; i+=(FRAMEWIDTH/40)){
 			//System.out.println(i + " " + xsaltindex);
 			for(int j = 0; j<FRAMEHEIGHT; j+=(FRAMEHEIGHT/20)){
@@ -80,10 +122,22 @@ public class Controller extends JPanel implements KeyListener{
 				ysaltindex = (int) (20 * ysaltindexprep);
 				if(game.getBoard().getTile(xsaltindex, ysaltindex) == 1){
 					g2d.setColor(Color.BLUE);
+				    g2d.drawImage(salt,i, j, FRAMEWIDTH/40,FRAMEHEIGHT/20, null);
+
+					
 				}else{
 					g2d.setColor(Color.CYAN);
+				    g2d.drawImage(fresh,i, j, FRAMEWIDTH/40,FRAMEHEIGHT/20, null);
+
 				}
-				g2d.fill(new Rectangle(i, j, FRAMEWIDTH/40, FRAMEHEIGHT/20));
+
+			 //   g2d.drawImage(player,i, j, FRAMEWIDTH/40,FRAMEHEIGHT/20, null);
+			//	g2d.fill(new Rectangle(i, j, FRAMEWIDTH/40, FRAMEHEIGHT/20));
+
+			
+				    g2d.drawImage(player,game.getPlayer().getXpos(), game.getPlayer().getYpos(), 50, 50, null);
+				
+				
 				//ysaltindex++;
 			}
 			//xsaltindex++;
@@ -91,13 +145,18 @@ public class Controller extends JPanel implements KeyListener{
 		Color netcolor = new Color(1);
 		switch (game.getPlayer().getTool()) {
 		case TRASH:
-			netcolor = netcolor.LIGHT_GRAY;
-			break;
+			netcolor = myColor;
+	       g2d.drawImage(img,game.getPlayer().getXpos()-40, game.getPlayer().getYpos()-40, 80, 80, null);
+		 break;
 		case RECYCLE:
-			netcolor = netcolor.DARK_GRAY;
+			netcolor = myColor;
+			g2d.drawImage(recycle,game.getPlayer().getXpos()-40, game.getPlayer().getYpos()-40, 80, 80, null);
+				
 			break;
 		case COMPOST:
-			netcolor = netcolor.GREEN;  
+			netcolor = myColor;
+		    g2d.drawImage(compost,game.getPlayer().getXpos()-40, game.getPlayer().getYpos()-40, 80, 80, null);
+		
 			break;
 		}
 		g2d.setColor(netcolor);
@@ -123,8 +182,8 @@ public class Controller extends JPanel implements KeyListener{
 		}
 		int x = 20;
 		for (int i = 0; i < game.getPlayer().getLife(); i++) {
-			g2d.drawOval(x, 20, 30, 20);
-			x += 40;
+			g2d.drawImage(heart,x, 35, 30,25, null);
+            x += 40;
 		}
 		g2d.setColor(Color.BLACK);
 		g2d.drawString(game.levelGetter(), (int)(FRAMEWIDTH/2), 20);
@@ -136,6 +195,13 @@ public class Controller extends JPanel implements KeyListener{
 			g2d.setColor(Color.RED);
 			g2d.drawString("GAME OVER", (int) (FRAMEWIDTH / 2.5), FRAMEHEIGHT / 2);
 			game.stop();
+			
+
+			
+			
+			
+			
+			
 		}
 	}
 
@@ -203,27 +269,30 @@ public class Controller extends JPanel implements KeyListener{
 	}
 
 	public void update() {
+
+		
 		if (game.getPlayer().getState().equals(State.JUSTHIT)) {
 			powerupCount += 1;
-			if (game.getPlayer().getColor() == color.MAGENTA)
-				game.getPlayer().setColor(color.WHITE);
+			if (game.getPlayer().getColor() == myColor )
+
+					game.getPlayer().setColor(color.WHITE);
 			else
-				game.getPlayer().setColor(color.MAGENTA);
+				game.getPlayer().setColor(myColor );
 			if (powerupCount ==75) {
 				game.getPlayer().setState(State.NEUTRAL);
-				game.getPlayer().setColor(color.MAGENTA);
+				game.getPlayer().setColor(myColor );
 				powerupCount = 0;
 			}
 		}
 		if (game.getPlayer().getState().equals(State.INVINCIBLE)) {
 			powerupCount += 1;
-			if (game.getPlayer().getColor() == color.MAGENTA)
+			if (game.getPlayer().getColor() == myColor )
 				game.getPlayer().setColor(color.YELLOW);
 			else
-				game.getPlayer().setColor(color.MAGENTA);
+				game.getPlayer().setColor(myColor );
 			if (powerupCount ==200) {
 				game.getPlayer().setState(State.NEUTRAL);
-				game.getPlayer().setColor(color.MAGENTA);
+				game.getPlayer().setColor(myColor );
 				powerupCount = 0;
 			}
 		}
@@ -233,7 +302,7 @@ public class Controller extends JPanel implements KeyListener{
 			if (powerupCount == 200) {
 				game.getPlayer().setXvel(10);
 				game.getPlayer().setYvel(10);
-				game.getPlayer().setColor(color.MAGENTA);
+				game.getPlayer().setColor(myColor );
 				game.getPlayer().setState(State.NEUTRAL);
 				powerupCount = 0;
 			}
