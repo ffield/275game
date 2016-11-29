@@ -1,19 +1,33 @@
 package model;
 
 import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 public class Movers {
 	int xpos;
 	int ypos;
 	int xvel;
 	int yvel;
+	String imageType;
 	Color color;
+	BufferedImage image;
 
-	Movers(int xpos, int ypos, int xvel, int yvel) {
+	Movers(int xpos, int ypos, int xvel, int yvel, String imageType) {
 		this.xpos = xpos;
 		this.ypos = ypos;
 		this.xvel = xvel;
 		this.yvel = yvel;
+		this.imageType = imageType;
+		try {
+    		image = ImageIO.read(new File("images/" + imageType + ".png"));
+        	} 
+    	catch (IOException e) {
+    		e.printStackTrace();
+    	}
 	}
 
 	public int getXpos() {
@@ -54,6 +68,23 @@ public class Movers {
 
 	public Color getColor() {
 		return this.color;
+	}
+	
+	public String getImageType() {
+		return imageType;
+	}
+
+	public void setImageType(String imageType) {
+		this.imageType = imageType;
+	}
+
+	
+	public BufferedImage getImage() {
+		return image;
+	}
+
+	public void setImage(BufferedImage image) {
+		this.image = image;
 	}
 
 	/**

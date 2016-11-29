@@ -5,11 +5,12 @@ import java.awt.Rectangle;
 
 public class Hazard extends Movers {
 	int spawntime;
+	String imageType;
 	HazardType type;
 	MovementType movementType;
 
-	public Hazard(int xpos, int ypos, int xvel, int yvel, int spawntime, MovementType hazardMovementType) {
-		super(xpos, ypos, xvel, yvel);
+	public Hazard(int xpos, int ypos, int xvel, int yvel, int spawntime, MovementType hazardMovementType, String imageType) {
+		super(xpos, ypos, xvel, yvel, imageType);
 		this.spawntime = spawntime;
 		this.movementType = hazardMovementType;
 		color = Color.BLACK;

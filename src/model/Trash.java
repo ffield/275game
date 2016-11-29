@@ -7,20 +7,23 @@ public class Trash extends Hazard {
 	Color color;
 
 	public Trash(int xpos, int ypos, int xvel, int yvel, int spawntime, Tool type) {
-		super(xpos, ypos, xvel, yvel, spawntime, MovementType.LEFT);
+		super(xpos, ypos, xvel, yvel, spawntime, MovementType.LEFT, "");
 		this.setType(HazardType.TRASH);
 		this.type = type;
 		switch (type) {
 		case TRASH:
 			this.color = color.LIGHT_GRAY;
+			imageType = "trash";
 			break;
 
 		case RECYCLE:
 			this.color = color.DARK_GRAY;
+			imageType = "recycle";
 			break;
 
 		case COMPOST:
 			this.color = color.GREEN;
+			imageType = "compost";
 			break;
 		}
 	}

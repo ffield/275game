@@ -273,17 +273,12 @@ public class Controller extends JPanel implements KeyListener{
 			}
 		}
 		count++;
-		// System.out.println("Count: " + count);
 		for (int i = 0; i < game.getPossibleHazards().getHazardsList().size(); i++) {
 			if (game.getPossibleHazards().getHazardsList().get(i).getSpawntime() < count) {
 				game.getPossibleHazards().getHazardsList().get(i).move();
 			}
 		}
 		keyUpdate();
-//		bindKeyWith("y.up", KeyStroke.getKeyStroke("UP"), new VerticalAction(-(this.game.getPlayer().getYvel())));
-//		bindKeyWith("y.down", KeyStroke.getKeyStroke("DOWN"), new VerticalAction(this.game.getPlayer().getYvel()));
-//		bindKeyWith("x.left", KeyStroke.getKeyStroke("LEFT"), new HorizontalAction(-(this.game.getPlayer().getXvel())));
-//		bindKeyWith("x.right", KeyStroke.getKeyStroke("RIGHT"), new HorizontalAction(this.game.getPlayer().getXvel()));
 		repaint();
 		//saltOnMovement();
 		onCollision();

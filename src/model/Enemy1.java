@@ -4,7 +4,7 @@ import java.lang.Math;
 
 public class Enemy1 extends Hazard {
 	public Enemy1(int xpos, int ypos, int xvel, int yvel, int spawntime) {
-		super(xpos, ypos, xvel, yvel, spawntime, MovementType.ENEMYMOVE);
+		super(xpos, ypos, xvel, yvel, spawntime, MovementType.ENEMYMOVE, "fish");
 		this.setType(HazardType.ENEMY1);
 	}
 	// public Enemy1(){
