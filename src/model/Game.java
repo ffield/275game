@@ -21,9 +21,8 @@ public class Game implements Serializable{
 		board = new Board();
 		hazardnum = 75;
 		ph = new PossibleHazards(hazardnum);
-
-		 int alpha = 0; // 50% transparent
-		 Color myColor = new Color(255, 60, 50, alpha);
+		int alpha = 0; // 50% transparent
+		Color myColor = new Color(255, 60, 50, alpha);
 		player.setColor(myColor);
         points = 0;
         level = 1;

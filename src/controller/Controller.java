@@ -63,10 +63,7 @@ public class Controller extends JPanel implements KeyListener{
     BufferedImage salt = createImage("images/salt_tile.png");
     BufferedImage heart = createImage("images/fullHeart.png");
 	 
-	 
-	 
-	 
-	 
+
 	public Controller() {
 		game = new Game(SCREENSIZE);
 		count = 0;
@@ -114,7 +111,6 @@ public class Controller extends JPanel implements KeyListener{
 			
 		}
 		for(int i = 0; i<FRAMEWIDTH; i+=(FRAMEWIDTH/40)){
-			//System.out.println(i + " " + xsaltindex);
 			for(int j = 0; j<FRAMEHEIGHT; j+=(FRAMEHEIGHT/20)){
 				double xsaltindexprep = i / ((double) FRAMEWIDTH);
 				xsaltindex = (int) (40 * xsaltindexprep);
@@ -195,13 +191,6 @@ public class Controller extends JPanel implements KeyListener{
 			g2d.setColor(Color.RED);
 			g2d.drawString("GAME OVER", (int) (FRAMEWIDTH / 2.5), FRAMEHEIGHT / 2);
 			game.stop();
-			
-
-			
-			
-			
-			
-			
 		}
 	}
 
@@ -320,7 +309,7 @@ public class Controller extends JPanel implements KeyListener{
 //		bindKeyWith("x.left", KeyStroke.getKeyStroke("LEFT"), new HorizontalAction(-(this.game.getPlayer().getXvel())));
 //		bindKeyWith("x.right", KeyStroke.getKeyStroke("RIGHT"), new HorizontalAction(this.game.getPlayer().getXvel()));
 		repaint();
-		//saltOnMovement();
+		saltOnMovement();
 		onCollision();
 		onOffScreen();
 		onNextLevel(SCREENSIZE);

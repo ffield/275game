@@ -31,7 +31,7 @@ public class PossibleHazards {
 		switch(level){
 		default: 
 			hazard_num = 25;
-			vel = 1;
+			vel = FRAMEWIDTH/300;
 			for (int i = 0; i < hazard_num; i++) {
 				spawnInt = gen.nextInt(spawnwindow);
 				System.out.println("Spawn: " + spawnInt);
@@ -52,7 +52,7 @@ public class PossibleHazards {
 		case 2: 
 			hazard_num = 35;
 			for (int i = 0; i < hazard_num; i++) {
-				vel = 3;
+				vel = FRAMEWIDTH/200;
 				spawnInt = gen.nextInt(spawnwindow);
 				int x = gen.nextInt(15);
 				if(isBetweenInc(x, 0, 2))
@@ -73,7 +73,7 @@ public class PossibleHazards {
 			break;
 			
 		case 3: 
-			vel = 5;
+			vel = FRAMEWIDTH/150;
 			spawnInt = gen.nextInt(spawnwindow);
 			hazard_num = 45;
 			for (int i = 0; i < hazard_num; i++) {
@@ -105,7 +105,7 @@ public class PossibleHazards {
 	case 4: 
 		gen = new Random();
 		spawnInt = gen.nextInt(spawnwindow);
-		vel = 7;
+		vel = FRAMEWIDTH/125;
 		hazard_num = 60;
 		for (int i = 0; i < hazard_num; i++) {
 			spawnInt = gen.nextInt(spawnwindow);
@@ -134,7 +134,7 @@ public class PossibleHazards {
 		
 		
 	case 5: 
-		vel = 9;
+		vel = FRAMEWIDTH/100;
 		spawnInt = gen.nextInt(spawnwindow);
 		hazard_num = 80;
 		for (int i = 0; i < hazard_num; i++) {
