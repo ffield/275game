@@ -126,17 +126,10 @@ public class Controller extends JPanel implements KeyListener{
 				    g2d.drawImage(fresh,i, j, FRAMEWIDTH/40,FRAMEHEIGHT/20, null);
 
 				}
+				g2d.drawImage(player,game.getPlayer().getXpos(), game.getPlayer().getYpos(), 50, 50, null);
 
-			 //   g2d.drawImage(player,i, j, FRAMEWIDTH/40,FRAMEHEIGHT/20, null);
-			//	g2d.fill(new Rectangle(i, j, FRAMEWIDTH/40, FRAMEHEIGHT/20));
-
-			
-				    g2d.drawImage(player,game.getPlayer().getXpos(), game.getPlayer().getYpos(), 50, 50, null);
-				
-				
-				//ysaltindex++;
 			}
-			//xsaltindex++;
+
 		}
 		Color netcolor = new Color(1);
 		switch (game.getPlayer().getTool()) {
@@ -297,17 +290,13 @@ public class Controller extends JPanel implements KeyListener{
 			}
 		}
 		count++;
-		// System.out.println("Count: " + count);
 		for (int i = 0; i < game.getPossibleHazards().getHazardsList().size(); i++) {
 			if (game.getPossibleHazards().getHazardsList().get(i).getSpawntime() < count) {
 				game.getPossibleHazards().getHazardsList().get(i).move();
 			}
 		}
 		keyUpdate();
-//		bindKeyWith("y.up", KeyStroke.getKeyStroke("UP"), new VerticalAction(-(this.game.getPlayer().getYvel())));
-//		bindKeyWith("y.down", KeyStroke.getKeyStroke("DOWN"), new VerticalAction(this.game.getPlayer().getYvel()));
-//		bindKeyWith("x.left", KeyStroke.getKeyStroke("LEFT"), new HorizontalAction(-(this.game.getPlayer().getXvel())));
-//		bindKeyWith("x.right", KeyStroke.getKeyStroke("RIGHT"), new HorizontalAction(this.game.getPlayer().getXvel()));
+
 		repaint();
 		saltOnMovement();
 		onCollision();
@@ -336,112 +325,7 @@ public class Controller extends JPanel implements KeyListener{
 		}
 	}
 	
-	private int getCount() {
-		// TODO Auto-generated method stub
-		return this.count;
-	}
 
-	private void setCount(int count) {
-		// TODO Auto-generated method stub
-		this.count = count;
-	}
-
-	private void upCount() {
-		count++;
-
-	}
-
-	public abstract class MoveAction extends AbstractAction {
-
-		private int delta;
-
-		public MoveAction(int delta) {
-			this.delta = delta;
-		}
-
-		public int getDelta() {
-			return delta;
-		}
-
-		protected abstract void applyDelta();
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			applyDelta();
-		}
-
-	}
-
-	public abstract class ToolAction extends AbstractAction {
-
-		public ToolAction() {
-			// game.getPlayer().SwitchTool();
-		}
-
-		protected abstract void switchTool();
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			switchTool();
-		}
-
-	}
-
-	public class SpaceAction extends ToolAction {
-
-		public SpaceAction() {
-			super();
-		}
-
-		@Override
-		protected void switchTool() {
-
-			game.getPlayer().SwitchTool();
-			System.out.println(game.getPlayer().getTool());
-
-			// repaint();
-		}
-	}
-
-	public class VerticalAction extends MoveAction {
-
-		public VerticalAction(int delta) {
-			super(delta);
-		}
-
-		@Override
-		protected void applyDelta() {
-			int delta = getDelta();
-			game.getPlayer().setYpos(game.getPlayer().getYpos() + delta);
-			if (game.getPlayer().getYpos() < 0) {
-				game.getPlayer().setYpos(0);
-			} else if (game.getPlayer().getYpos() + 30 > getHeight()) {
-				game.getPlayer().setYpos(getHeight() - 30);
-			}
-			// repaint();
-		}
-
-	}
-
-	public class HorizontalAction extends MoveAction {
-
-		public HorizontalAction(int delta) {
-			super(delta);
-		}
-
-		@Override
-		protected void applyDelta() {
-			int delta = getDelta();
-			game.getPlayer().setXpos(game.getPlayer().getXpos() + delta);
-			if (game.getPlayer().getXpos() < 0) {
-				game.getPlayer().setXpos(0);
-			} else if (game.getPlayer().getXpos() + 30 > getWidth()) {
-				game.getPlayer().setXpos(getWidth() - 30);
-			}
-			// repaint();
-		}
-
-	}
 
 	public Game getGame() {
 		return this.game;
@@ -552,8 +436,6 @@ public void keyUpdate(){
 		if(e.getKeyChar()==' '){
 			game.getPlayer().SwitchTool();
 		}
-//		System.out.println("HIT");
-//		System.out.println(e.getKeyCode());
 		
 	}
 }
