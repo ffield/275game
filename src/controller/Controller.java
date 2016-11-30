@@ -126,7 +126,7 @@ public class Controller extends JPanel implements KeyListener{
 				    g2d.drawImage(fresh,i, j, FRAMEWIDTH/40,FRAMEHEIGHT/20, null);
 
 				}
-				g2d.drawImage(player,game.getPlayer().getXpos(), game.getPlayer().getYpos(), 50, 50, null);
+				g2d.drawImage(player, game.getPlayer().getXpos(), game.getPlayer().getYpos(), 50, 50, null);
 
 			}
 
@@ -135,7 +135,7 @@ public class Controller extends JPanel implements KeyListener{
 		switch (game.getPlayer().getTool()) {
 		case TRASH:
 			netcolor = myColor;
-	       g2d.drawImage(img,game.getPlayer().getXpos()-40, game.getPlayer().getYpos()-40, 80, 80, null);
+	       g2d.drawImage(img, game.getPlayer().getXpos()-40, game.getPlayer().getYpos()-40, 80, 80, null);
 		 break;
 		case RECYCLE:
 			netcolor = myColor;
@@ -168,9 +168,7 @@ public class Controller extends JPanel implements KeyListener{
 			if (game.getPossibleHazards().getHazardsList().get(i).getSpawntime() < count)
 				g2d.setColor(game.getPossibleHazards().getHazardsList().get(i).getColor());
 			g2d.fill(game.getPossibleHazards().getHazardsList().get(i).getBounds());
-			g2d.drawImage(game.getPossibleHazards().getHazardsList().get(i).getImage(),
-					null, game.getPossibleHazards().getHazardsList().get(i).getxpos(),
-				game.getPossibleHazards().getHazardsList().get(i).getypos());
+			g2d.drawImage(game.getPossibleHazards().getHazardsList().get(i).getImage(), game.getPossibleHazards().getHazardsList().get(i).getxpos(),game.getPossibleHazards().getHazardsList().get(i).getypos(), 50, 50, null);
 		}
 		int x = 20;
 		for (int i = 0; i < game.getPlayer().getLife(); i++) {

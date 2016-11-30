@@ -40,7 +40,7 @@ public class Player extends Movers {
 	}
 
 	public Rectangle getBounds() {
-		return new Rectangle(xpos, ypos, 30, 30);
+		return new Rectangle(xpos, ypos, 50, 50);
 	}
 
 	public int getYpos() {

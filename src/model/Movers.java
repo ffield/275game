@@ -27,6 +27,7 @@ public class Movers {
         	} 
     	catch (IOException e) {
     		e.printStackTrace();
+    		System.out.println("we done fucked up: "+ imageType);
     	}
 	}
 
@@ -76,6 +77,13 @@ public class Movers {
 
 	public void setImageType(String imageType) {
 		this.imageType = imageType;
+		try {
+    		image = ImageIO.read(new File("images/" + imageType + ".png"));
+        	} 
+    	catch (IOException e) {
+    		e.printStackTrace();
+    		System.out.println("we done fucked up: "+ imageType);
+    	}
 	}
 
 	
@@ -85,6 +93,7 @@ public class Movers {
 
 	public void setImage(BufferedImage image) {
 		this.image = image;
+		
 	}
 
 	/**

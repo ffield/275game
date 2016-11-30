@@ -37,24 +37,24 @@ public class Powerup extends Hazard {
 	}
 		
 		public Powerup(int xpos, int ypos, int xvel, int yvel, int spawntime, PowerupType powerupType) {
-			super(xpos, ypos, xvel, yvel, spawntime, MovementType.LEFT, "");
+			super(xpos, ypos, xvel, yvel, spawntime, MovementType.LEFT, "recycle");
 			this.setType(HazardType.POWERUP);
 			switch (powerupType) {
 			case INVINCIBLE:
 				color = color.YELLOW;
-				imageType = "invincible";
+				this.setImageType("trashpicker");
 				break;
 			case CLEAR:
 				color = color.ORANGE;
-				imageType = "clear";
+				this.setImageType("fish_eggs");
 				break;
 			case SPEED:
 				color = color.RED;
-				imageType = "speedup";
+				this.setImageType("zebramussel");
 				break;
 			case ADDLIFE:
 				color = color.WHITE;
-				imageType = "addlife";
+				this.setImageType("food_pellet");
 			}
 			this.powerupType = powerupType;
 			

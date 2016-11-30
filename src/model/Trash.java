@@ -13,17 +13,17 @@ public class Trash extends Hazard {
 		switch (type) {
 		case TRASH:
 			this.color = color.LIGHT_GRAY;
-			imageType = "trash";
+			this.setImageType("trashbag");
 			break;
 
 		case RECYCLE:
 			this.color = color.DARK_GRAY;
-			imageType = "recycle";
+			this.setImageType("soda");
 			break;
 
 		case COMPOST:
 			this.color = color.GREEN;
-			imageType = "compost";
+			this.setImageType("banana");
 			break;
 		}
 	}
