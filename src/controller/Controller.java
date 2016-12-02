@@ -76,6 +76,17 @@ public class Controller extends JPanel implements KeyListener{
 		left = false;
 		right = false;
 	}
+	
+	public Controller(String imageName) {
+		game = new Game(SCREENSIZE, imageName);
+	    painter = new Painter();
+		count = 0;
+		addKeyListener(this);
+		up = false;
+		down = false;
+		left = false;
+		right = false;
+	}
 
 	protected void bindKeyWith(String name, KeyStroke keyStroke, Action action) {
 		InputMap im = getInputMap(WHEN_IN_FOCUSED_WINDOW);
@@ -308,8 +319,6 @@ public class Controller extends JPanel implements KeyListener{
 		onCollision();
 		onOffScreen();
 		onNextLevel(SCREENSIZE);
-//		if(game.isGameOver())
-//			game.stop();
 	}
 	
 	

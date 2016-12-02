@@ -1,4 +1,4 @@
-package controller;
+	package controller;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -58,6 +58,7 @@ public class StartMenu extends JPanel{
 			@Override
 			public void mouseClicked(MouseEvent event) {
 				CharacterSelect cs = new CharacterSelect();
+				cs.setFrame(frame);
 				frame.setSize(FRAMEWIDTH, FRAMEHEIGHT);
 				frame.remove(sm);
 				frame.add(cs);
