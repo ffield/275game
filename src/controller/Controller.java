@@ -308,6 +308,8 @@ public class Controller extends JPanel implements KeyListener{
 		onCollision();
 		onOffScreen();
 		onNextLevel(SCREENSIZE);
+//		if(game.isGameOver())
+//			game.stop();
 	}
 	
 	

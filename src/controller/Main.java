@@ -21,6 +21,8 @@ public class Main {
 		ActionListener taskPerformer = new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				control.update();
+//				if(control.getGame().isGameOver())
+//					control.getGame().stop();
 			}
 		};
 		Timer timer = new Timer(25, taskPerformer);
