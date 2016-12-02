@@ -64,7 +64,6 @@ public class Painter extends JPanel{
 		this.xbounds = xbounds;
 		this.ybounds = ybounds;
 		this.lives = lives;
-		this.level = level;
 		this.salinity = salinity;
 		this.score = score;
 		this.FRAMEWIDTH = FRAMEWIDTH;
