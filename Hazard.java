@@ -1,35 +1,19 @@
 package model;
 
 import java.awt.Color;
-import java.awt.Image;
 import java.awt.Rectangle;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
 
 public class Hazard extends Movers {
 	int spawntime;
-	String hazardImageType;
+	String imageType;
 	HazardType type;
 	MovementType movementType;
-	Game game;
-	BufferedImage image;
 
 	public Hazard(int xpos, int ypos, int xvel, int yvel, int spawntime, MovementType hazardMovementType, String imageType) {
-		super(xpos, ypos, xvel, yvel);
-		System.out.println("Is this file writing getting called al ot");
+		super(xpos, ypos, xvel, yvel, imageType);
 		this.spawntime = spawntime;
 		this.movementType = hazardMovementType;
-		this.hazardImageType = imageType;
-		color = Color.BLACK;;
-    	try {
-    		image = ImageIO.read(new File("images/" + hazardImageType + ".png"));
-        	} 
-    	catch (IOException e) {
-    		e.printStackTrace();
-    	}
+		color = Color.BLACK;
 	}
 
 	public int getSpawntime() {
@@ -37,7 +21,7 @@ public class Hazard extends Movers {
 	}
 
 	public Rectangle getBounds() {
-		Rectangle r = new Rectangle(xpos, ypos, 200, 200);
+		Rectangle r = new Rectangle(xpos, ypos, 20, 20);
 		return r;
 	}
 
@@ -66,7 +50,7 @@ public class Hazard extends Movers {
 			this.ypos = ((int) y) + ypos;
 			break;
 		case LEFT:
-			this.xpos = xpos - 1;
+			this.xpos = xpos - xvel;
 			break;
 		case COLLIDEDUP:
 			this.xpos = xpos + 5;
@@ -76,38 +60,12 @@ public class Hazard extends Movers {
 			this.xpos = xpos + 5;
 			this.ypos = ypos + 1;
 		case RIGHT:
-			this.xpos = xpos + 1;
+			this.xpos = xpos + xvel;
 			break;
 		case ENEMY2MOVE:
-			if (this.getFoundLine().equals(false)) {
-				if (this.ypos == game.getPlayer().getYpos()) {
-					this.setFoundLine(true);
-				}
-				else if (this.ypos < game.getPlayer().getYpos()) {
-					this.ypos += 5;
-					this.xpos -=1;
-				}
-				else if (this.ypos > game.getPlayer().getLife()) {
-					this.ypos -=5;
-					this.xpos-=1;
-				}
-			}
-			else {
-				this.xpos -= 15;
-			}
-			
+			this.xpos = xpos - xvel;
 			break;
 		}
-	}
-
-	private Object getFoundLine() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	private void setFoundLine(boolean b) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	public int getxpos() {
@@ -172,11 +130,4 @@ public class Hazard extends Movers {
 		return null;
 	}
 
-	public void setGame(Game classGame){
-		this.game = classGame;
-	}
-
-	public BufferedImage getImage() {
-		return image;
-			}
 }
