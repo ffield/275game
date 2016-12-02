@@ -29,6 +29,20 @@ public class Game implements Serializable{
         level = 1;
         ph.generateHazards(screenSize, level);
 	}
+	
+	public Game(Dimension screenSize, String imageName){
+		System.out.println("Generating game");
+		player = new Player(30, 40, 10, 10, 500, 1, 1, 1000, Tool.TRASH, State.NEUTRAL, imageName);
+		board = new Board();
+		hazardnum = 75;
+		ph = new PossibleHazards(hazardnum);
+		int alpha = 0; // 50% transparent
+		Color myColor = new Color(255, 60, 50, alpha);
+		player.setColor(myColor);
+        points = 0;
+        level = 1;
+        ph.generateHazards(screenSize, level);
+	}
 
 	public void levelUp(){
 		level++;

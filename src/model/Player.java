@@ -22,6 +22,18 @@ public class Player extends Movers {
 		this.state = state;
 		this.life = 3;
 	}
+	
+	public Player(int xpos, int ypos, int xvel, int yvel, int salinity, int saldelta, int salmin, int salmax, Tool tool,
+			State state, String imageName) {
+		super(xpos, ypos, xvel, yvel, imageName);
+		this.salinity = salinity;
+		this.saldelta = saldelta;
+		this.salmin = salmin;
+		this.salmax = salmax;
+		this.tool = tool;
+		this.state = state;
+		this.life = 3;
+	}
 
 	public int getSaldelta() {
 		return saldelta;
