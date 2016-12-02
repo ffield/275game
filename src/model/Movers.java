@@ -21,7 +21,7 @@ public class Movers {
 		this.ypos = ypos;
 		this.xvel = xvel;
 		this.yvel = yvel;
-		this.imageType = imageType;
+		this.imageType = imageType+".png";
 		try {
     		image = ImageIO.read(new File("images/" + imageType + ".png"));
         	} 
@@ -76,14 +76,7 @@ public class Movers {
 	}
 
 	public void setImageType(String imageType) {
-		this.imageType = imageType;
-		try {
-    		image = ImageIO.read(new File("images/" + imageType + ".png"));
-        	} 
-    	catch (IOException e) {
-    		e.printStackTrace();
-    		System.out.println("we done fucked up: "+ imageType);
-    	}
+		this.imageType = imageType+".png";
 	}
 
 	

@@ -75,8 +75,19 @@ public class Board {
 	 *            The y coordinate of the specified tile
 	 * @return String the specified file.
 	 */
+	
+	
+	
 	public int getTile(int x, int y) {
 		return arr[x][y];
 		
+	}
+
+	public int[][] getArr() {
+		return arr;
+	}
+
+	public void setArr(int[][] arr) {
+		this.arr = arr;
 	}
 }

@@ -4,6 +4,7 @@ package model;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 
 public class Game implements Serializable{
@@ -76,13 +77,13 @@ public class Game implements Serializable{
 	}
 	public boolean isGameOver(){
 		if(player.isSalOver()){
-			System.out.println("Salt");
+			//System.out.println("Salt");
 			return true;
 		} else if(player.isSalUnder()){
-			System.out.println("Salt");
+			//System.out.println("Salt");
 			return true;
 		} else if(player.getLife() <= 0){
-			System.out.println("Collision");
+			//System.out.println("Collision");
 			return true;
 		}
 		return false;
@@ -90,6 +91,51 @@ public class Game implements Serializable{
 	
 	public Board getBoard() {
 		return this.board;
+	}
+	
+	public ArrayList<Integer> makeXpos(){
+		ArrayList<Integer> xpos = new ArrayList<Integer>();
+		xpos.add(player.getXpos());
+		for(int i = 0; i<ph.getHazardsList().size(); i++){
+			xpos.add(ph.getHazardsList().get(i).getXpos());
+		}
+		return xpos;	
+	}
+	
+	public ArrayList<Integer> makeYpos(){
+		ArrayList<Integer> ypos = new ArrayList<Integer>();
+		ypos.add(player.getYpos());
+		for(int i = 0; i<ph.getHazardsList().size(); i++){
+			ypos.add(ph.getHazardsList().get(i).getYpos());
+		}
+		return ypos;	
+	}
+	
+	public ArrayList<Integer> makeXbounds(){
+		ArrayList<Integer> xbounds = new ArrayList<Integer>();
+		xbounds.add((int) player.getBounds().getWidth());
+		for(int i = 0; i<ph.getHazardsList().size(); i++){
+			xbounds.add((int) ph.getHazardsList().get(i).getBounds().getWidth());
+		}
+		return xbounds;	
+	}
+	
+	public ArrayList<Integer> makeYbounds(){
+		ArrayList<Integer> ybounds = new ArrayList<Integer>();
+		ybounds.add((int) player.getBounds().getHeight());
+		for(int i = 0; i<ph.getHazardsList().size(); i++){
+			ybounds.add((int) ph.getHazardsList().get(i).getBounds().getHeight());
+		}
+		return ybounds;	
+	}
+	
+	public ArrayList<String> makeNames(){
+		ArrayList<String> names = new ArrayList<String>();
+		names.add(player.getImageType());
+		for(int i = 0; i<ph.getHazardsList().size(); i++){
+			names.add(ph.getHazardsList().get(i).getImageType());
+		}
+		return names;	
 	}
 
 	
