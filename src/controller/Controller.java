@@ -64,7 +64,7 @@ public class Controller extends JPanel implements KeyListener{
 //	BufferedImage fresh = createImage("images/water_tile.png");
 //    BufferedImage salt = createImage("images/salt_tile.png");
 //    BufferedImage heart = createImage("images/fullHeart.png");
-	 
+		 
 
 	public Controller() {
 		game = new Game(SCREENSIZE);
@@ -313,7 +313,7 @@ public class Controller extends JPanel implements KeyListener{
 			}
 		}
 		keyUpdate();
-		painter.updateView(game.makeNames(), game.makeXpos(), game.makeXbounds(), game.makeYbounds(), game.makeYpos(), game.getBoard().getArr(), game.getPlayer().getLife(), game.getLevel(), game.getPlayer().getSalinity(), game.getPoints(), FRAMEWIDTH, FRAMEHEIGHT, game.getPlayer().getTool(), game.isGameOver());
+		painter.updateView(game.makeNames(), game.makeXpos(), game.makeXbounds(), game.makeYbounds(), game.makeYpos(), game.getBoard().getArr(), game.getPlayer().getLife(), game.getLevel(), game.getPlayer().getSalinity(), game.getPoints(), game.getPlayer().getSalmax(), FRAMEWIDTH, FRAMEHEIGHT, game.getPlayer().getTool(), game.isGameOver());
 		repaint();
 		saltOnMovement();
 		onCollision();

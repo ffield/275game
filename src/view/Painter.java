@@ -26,7 +26,7 @@ public class Painter extends JPanel{
 	BufferedImage fresh = createImage("images/water_tile.png");
     BufferedImage salt = createImage("images/salt_tile.png");
     BufferedImage heart = createImage("images/fullHeart.png");
-	
+    BufferedImage meter = createImage("images/meter.png");
 	
 	ArrayList<String> names;
 	ArrayList<Integer> xpos;
@@ -38,6 +38,7 @@ public class Painter extends JPanel{
 	int level;
 	int salinity;
 	int score;
+	int saltmax;
 	int FRAMEWIDTH;
 	int FRAMEHEIGHT;
 	Tool net;
@@ -56,7 +57,7 @@ public class Painter extends JPanel{
 		    }
 	}
 	
-	public void updateView(ArrayList<String> names, ArrayList<Integer> xpos, ArrayList<Integer> xbounds, ArrayList<Integer> ybounds, ArrayList<Integer> ypos, int[][] board, int lives, int level, int salinity, int score, int FRAMEWIDTH, int FRAMEHEIGHT, Tool net, boolean gameover){
+	public void updateView(ArrayList<String> names, ArrayList<Integer> xpos, ArrayList<Integer> xbounds, ArrayList<Integer> ybounds, ArrayList<Integer> ypos, int[][] board, int lives, int level, int salinity, int score,int saltmax, int FRAMEWIDTH, int FRAMEHEIGHT, Tool net, boolean gameover){
 		this.names = names;
 		this.xpos = xpos;
 		this.ypos = ypos;
@@ -67,6 +68,7 @@ public class Painter extends JPanel{
 		this.level = level;
 		this.salinity = salinity;
 		this.score = score;
+		this.saltmax=saltmax;
 		this.FRAMEWIDTH = FRAMEWIDTH;
 		this.FRAMEHEIGHT = FRAMEHEIGHT;
 		this.net = net;
@@ -133,28 +135,43 @@ public class Painter extends JPanel{
 		//Color netcolor = new Color(1);
 		switch (net) {
 		case TRASH:
-	       g2d.drawImage(trash, xpos.get(0)-40, ypos.get(0)-40, xbounds.get(0), ybounds.get(0), null);
+	       g2d.drawImage(trash, xpos.get(0)+27, ypos.get(0)-25, xbounds.get(0), ybounds.get(0), null);
 		 break;
 		case RECYCLE:
-			g2d.drawImage(recycle, xpos.get(0)-40, ypos.get(0)-40, xbounds.get(0), ybounds.get(0), null);				
+			g2d.drawImage(recycle, xpos.get(0)+29, ypos.get(0)-25, xbounds.get(0), ybounds.get(0), null);				
 			break;
 		case COMPOST:
-		    g2d.drawImage(compost, xpos.get(0)-40, ypos.get(0)-40, xbounds.get(0), ybounds.get(0), null);
+		    g2d.drawImage(compost, xpos.get(0)+27, ypos.get(0)-25, xbounds.get(0), ybounds.get(0), null);
 		
 			break;
 		}
-		String saltstring = "Salt: ";
+		
+		
+	
+		
+	    g2d.drawImage(meter,-100,-30, 280, 230, null);
+		String saltstring = "";
 		String scorestring = "Points: ";
 		String levelstring = "Level: ";
 		saltstring = saltstring + salinity;
 		scorestring = scorestring + score;
 		levelstring = levelstring + level;
+
+		Font d = new Font("monospaced", Font.BOLD, 30);
+		g2d.setFont(d);
+		if (salinity <  saltmax/5 ||salinity > saltmax - saltmax/5 ) {
+			g2d.setColor(Color.RED);
+		}
+		else {
+			g2d.setColor(Color.GREEN);
+		}
+
+		g2d.drawString(saltstring, 20, 90);
 		int size = 20;
 		Font p = new Font("comic sans ms", Font.BOLD, size);
 		g2d.setFont(p);
 		g2d.setColor(Color.BLACK);
-		g2d.drawString(saltstring, 10, 20);
-		g2d.drawString(scorestring, 150, 20);
+		g2d.drawString(scorestring, 100, 25);
 		g2d.drawString(levelstring, (int)(FRAMEWIDTH/2), 20);
 		BufferedImage image;
 		for (int i = 0; i < xpos.size(); i++) {
@@ -166,7 +183,7 @@ public class Painter extends JPanel{
 				g2d.drawImage(heart, xpos.get(i), ypos.get(i),xbounds.get(i), ybounds.get(i), null);
 			}
 		}
-		int x = 20;
+		int x = 100;
 		for (int i = 0; i < lives; i++) {
 			g2d.drawImage(heart,x, 35, 30,25, null);
             x += 40;
