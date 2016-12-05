@@ -33,10 +33,12 @@ public class StartMenu extends JPanel{
 	public static int FRAMEWIDTH = (int) SCREENSIZE.getWidth();
 	JButton play = new JButton();
 	JButton help = new JButton();
+	JFrame frame;
 	
-	public StartMenu(){
+	public StartMenu(JFrame aframe){
+		this.frame = aframe;
 		setLayout(new FlowLayout());
-		setSize((int) (.33*FRAMEWIDTH), (int) (.5*FRAMEHEIGHT));
+		frame.setSize((int) (.33*FRAMEWIDTH), (int) (.5*FRAMEHEIGHT));
 		try{
 			Image p = ImageIO.read(new File("images/play.png"));
 			Image h = ImageIO.read(new File("images/help.png"));
@@ -50,19 +52,15 @@ public class StartMenu extends JPanel{
 		add("Play", play);
 		add("Help", help);
 		setBackground(Color.BLUE);
-	}
-
-	public static void main(String[] args){
-		JFrame frame = new JFrame("CrabGame");
-		StartMenu sm = new StartMenu();
-		sm.play.addMouseListener(new MouseListener(){
+		StartMenu sm = this;
+		play.addMouseListener(new MouseListener(){
 			@Override
 			public void mouseClicked(MouseEvent event) {
 				CharacterSelect cs = new CharacterSelect();
 				cs.setFrame(frame);
 				frame.setSize(FRAMEWIDTH, FRAMEHEIGHT);
-				frame.remove(sm);
 				frame.add(cs);
+				frame.remove(sm);
 			}
 			@Override
 			public void mouseEntered(MouseEvent arg0) {}
@@ -73,36 +71,27 @@ public class StartMenu extends JPanel{
 			@Override
 			public void mouseReleased(MouseEvent arg0) {}
 		});
-		sm.help.addMouseListener(new MouseListener(){
+		help.addMouseListener(new MouseListener(){
 			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				frame.setSize((int) (.8*FRAMEWIDTH), (int) (.8*FRAMEHEIGHT));
+			public void mouseClicked(MouseEvent event) {
+				Help h = new Help(frame);
+				frame.add(h);
 				frame.remove(sm);
-				JLabel background = null;
-				JButton back = new JButton();
-				try {
-					background = new JLabel(new ImageIcon(ImageIO.read(new File("Images/tutorial.png"))));
-					back = new JButton(new ImageIcon(ImageIO.read(new File("Images/back.png"))));
-				} catch (IOException e) {
-					System.out.println(e);
-				}
-				frame.setContentPane(background);
-				frame.setLayout(new FlowLayout());
-				frame.add(background);
-				frame.add(back, 10);
 			}
 			@Override
-			public void mouseEntered(MouseEvent e) {}
+			public void mouseEntered(MouseEvent arg0) {}
 			@Override
-			public void mouseExited(MouseEvent e) {}
-
+			public void mouseExited(MouseEvent arg0) {}
 			@Override
-			public void mousePressed(MouseEvent e) {}
-
+			public void mousePressed(MouseEvent arg0) {}
 			@Override
-			public void mouseReleased(MouseEvent e) {}
-			
+			public void mouseReleased(MouseEvent arg0) {}
 		});
+	}
+
+	public static void main(String[] args){
+		JFrame frame = new JFrame("CrabGame");
+		StartMenu sm = new StartMenu(frame);
 		frame.setSize((int)(.33*FRAMEWIDTH), (int)(.5*FRAMEHEIGHT));
 		frame.add(sm);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
