@@ -49,6 +49,7 @@ public class Help extends JPanel{
 				StartMenu sm = new StartMenu(frame);
 				frame.add(sm);
 				frame.remove(h);
+				frame.remove(back);
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {}
@@ -60,33 +61,18 @@ public class Help extends JPanel{
 			public void mouseReleased(MouseEvent e) {}
 		});
 		background.add(back);
-		back.setBounds((int)(.6*FRAMEWIDTH), (int)(.6*FRAMEHEIGHT), 100, 100);
+		back.setBounds((int)(.47*FRAMEWIDTH), (int)(.39*FRAMEHEIGHT), 200, 80);
 		frame.add(back);
-		//frame.add(background);
 	}
-	public static BufferedImage resize(BufferedImage img, int newW, int newH) { 
-	    Image tmp = img.getScaledInstance(newW, newH, Image.SCALE_SMOOTH);
-	    BufferedImage dimg = new BufferedImage(newW, newH, BufferedImage.TYPE_INT_ARGB);
-
-	    Graphics2D g2d = dimg.createGraphics();
-	    g2d.drawImage(tmp, 0, 0, null);
-	    g2d.dispose();
-
-	    return dimg;
-	}  
+	
 	protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         BufferedImage backg = null;
-        BufferedImage back = null;
         try {
 			backg = ImageIO.read(new File("Images/tutorial.png"));
-			back = ImageIO.read(new File("Images/back.png"));
 		} catch (IOException e) {
 			System.out.println(e);
 		}
         g.drawImage(backg, 0, 0, getWidth(), getHeight(), this);
-        back = resize(back, 200, 80);
-        g.drawImage(back, (int)(.47*FRAMEWIDTH), (int)(.39*FRAMEHEIGHT), 200, 80, this);
-        this.back.setBounds((int)(.47*FRAMEWIDTH), (int)(.39*FRAMEHEIGHT), 200, 80);
     }
 }
