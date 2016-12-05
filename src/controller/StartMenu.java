@@ -72,10 +72,13 @@ public class StartMenu extends JPanel{
 			@Override
 			public void mouseReleased(MouseEvent arg0) {}
 		});
-		sm.addMouseListener(new MouseListener(){
+		sm.help.addMouseListener(new MouseListener(){
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				
+				HelpMenu hm = new HelpMenu();
+				frame.setSize((int) (.8*FRAMEWIDTH), (int) (.8*FRAMEHEIGHT));
+				frame.remove(sm);
+				frame.add(hm);
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {}

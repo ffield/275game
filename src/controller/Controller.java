@@ -112,96 +112,6 @@ public class Controller extends JPanel implements KeyListener{
 	public void paint(Graphics g) {
 		painter.paint(g);
 	}
-//		int xsaltindex = 0;
-//		int ysaltindex = 0;
-//		
-//		if (game.getPlayer().getColor() == color.WHITE){
-//			g2d.setColor(Color.RED);
-//			int xsize = 50;
-//			Font xs = new Font("Impact", Font.BOLD, xsize);
-//			g2d.setFont(xs);
-//			g2d.drawString("X", game.getPlayer().getXpos(), game.getPlayer().getYpos());
-//		   
-//			
-//		}
-//		for(int i = 0; i<FRAMEWIDTH; i+=(FRAMEWIDTH/40)){
-//			for(int j = 0; j<FRAMEHEIGHT; j+=(FRAMEHEIGHT/20)){
-//				double xsaltindexprep = i / ((double) FRAMEWIDTH);
-//				xsaltindex = (int) (40 * xsaltindexprep);
-//				double ysaltindexprep = j / ((double) FRAMEHEIGHT);
-//				ysaltindex = (int) (20 * ysaltindexprep);
-//				if(game.getBoard().getTile(xsaltindex, ysaltindex) == 1){
-//					g2d.setColor(Color.BLUE);
-//				    g2d.drawImage(salt,i, j, FRAMEWIDTH/40,FRAMEHEIGHT/20, null);
-//
-//					
-//				}else{
-//					g2d.setColor(Color.CYAN);
-//				    g2d.drawImage(fresh,i, j, FRAMEWIDTH/40,FRAMEHEIGHT/20, null);
-//
-//				}
-//				g2d.drawImage(player, game.getPlayer().getXpos(), game.getPlayer().getYpos(), 50, 50, null);
-//
-//			}
-//
-//		}
-//		Color netcolor = new Color(1);
-//		switch (game.getPlayer().getTool()) {
-//		case TRASH:
-//			netcolor = myColor;
-//	       g2d.drawImage(img, game.getPlayer().getXpos()-40, game.getPlayer().getYpos()-40, 80, 80, null);
-//		 break;
-//		case RECYCLE:
-//			netcolor = myColor;
-//			g2d.drawImage(recycle,game.getPlayer().getXpos()-40, game.getPlayer().getYpos()-40, 80, 80, null);
-//				
-//			break;
-//		case COMPOST:
-//			netcolor = myColor;
-//		    g2d.drawImage(compost,game.getPlayer().getXpos()-40, game.getPlayer().getYpos()-40, 80, 80, null);
-//		
-//			break;
-//		}
-//		g2d.setColor(netcolor);
-//		Rectangle net = game.getPlayer().getBounds();
-//		net.setLocation(game.getPlayer().getXpos() - 10, game.getPlayer().getYpos() - 10);
-//		g2d.fill(net);
-//		g2d.setColor(game.getPlayer().getColor());
-//		g2d.fill(game.getPlayer().getBounds());
-//		String salt = "Salt: ";
-//		String points = "Points: ";
-//		salt = salt + game.getPlayer().getSalinity();
-//		points = points + game.getPoints();
-//		int size = 20;
-//		Font p = new Font("comic sans ms", Font.BOLD, size);
-//		g2d.setFont(p);
-//		g2d.setColor(Color.BLACK);
-//		g2d.drawString(salt, 10, 20);
-//		g2d.drawString(points, 150, 20);
-//		for (int i = 0; i < game.getPossibleHazards().getHazardsList().size(); i++) {
-//			if (game.getPossibleHazards().getHazardsList().get(i).getSpawntime() < count)
-//				g2d.setColor(game.getPossibleHazards().getHazardsList().get(i).getColor());
-//			g2d.fill(game.getPossibleHazards().getHazardsList().get(i).getBounds());
-//			g2d.drawImage(game.getPossibleHazards().getHazardsList().get(i).getImage(), game.getPossibleHazards().getHazardsList().get(i).getxpos(),game.getPossibleHazards().getHazardsList().get(i).getypos(), 50, 50, null);
-//		}
-//		int x = 20;
-//		for (int i = 0; i < game.getPlayer().getLife(); i++) {
-//			g2d.drawImage(heart,x, 35, 30,25, null);
-//            x += 40;
-//		}
-//		g2d.setColor(Color.BLACK);
-//		g2d.drawString(game.levelGetter(), (int)(FRAMEWIDTH/2), 20);
-//		if (game.isGameOver()) {
-//			int fontSize = 60;
-//			Font f = new Font("Arial Black", Font.BOLD, fontSize);
-//			Font s = new Font("Comic Sans MS", Font.PLAIN, 20);
-//			g2d.setFont(f);
-//			g2d.setColor(Color.RED);
-//			g2d.drawString("GAME OVER", (int) (FRAMEWIDTH / 2.5), FRAMEHEIGHT / 2);
-//			game.stop();
-//		}
-//	}
-	
 
 
 	public void onCollision() {
@@ -262,8 +172,6 @@ public class Controller extends JPanel implements KeyListener{
 		double ysaltindexprep = game.getPlayer().getYpos() / ((double) FRAMEHEIGHT);
 		int ysaltindex = (int) (20 * ysaltindexprep);
 		game.getPlayer().setSaldelta(game.getBoard().getTile(xsaltindex, ysaltindex));
-		// System.out.print(xsaltindexprep+" ");
-		// System.out.println(game.getPlayer().getXpos());
 		game.getPlayer().updateSalinity();
 	}
 
@@ -315,6 +223,8 @@ public class Controller extends JPanel implements KeyListener{
 		keyUpdate();
 		painter.updateView(game.makeNames(), game.makeXpos(), game.makeXbounds(), game.makeYbounds(), game.makeYpos(), game.getBoard().getArr(), game.getPlayer().getLife(), game.getLevel(), game.getPlayer().getSalinity(), game.getPoints(), game.getPlayer().getSalmax(), FRAMEWIDTH, FRAMEHEIGHT, game.getPlayer().getTool(), game.isGameOver());
 		repaint();
+		if(game.isGameOver())
+			game.stop();
 		saltOnMovement();
 		onCollision();
 		onOffScreen();

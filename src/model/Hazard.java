@@ -21,7 +21,7 @@ public class Hazard extends Movers {
 	}
 
 	public Rectangle getBounds() {
-		Rectangle r = new Rectangle(xpos, ypos, 20, 20);
+		Rectangle r = new Rectangle(xpos, ypos, 40, 40);
 		return r;
 	}
 

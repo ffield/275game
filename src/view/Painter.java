@@ -196,7 +196,6 @@ public class Painter extends JPanel{
 			g2d.setFont(f);
 			g2d.setColor(Color.RED);
 			g2d.drawString("GAME OVER", (int) (FRAMEWIDTH / 2.5), FRAMEHEIGHT / 2);
-			//game.stop();
 		}
 	}
 }

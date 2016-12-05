@@ -39,7 +39,6 @@
 				Image b = ImageIO.read(new File("images/crabbutton.png"));
 				Image h = ImageIO.read(new File("images/horsebutton.png"));
 				Image o = ImageIO.read(new File("images/oysterbutton.png"));
-				System.out.print("did it");
 				blue.setIcon(new ImageIcon(b));
 				horseshoe.setIcon(new ImageIcon(h));
 				oyster.setIcon(new ImageIcon(o));
