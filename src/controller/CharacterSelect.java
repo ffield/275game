@@ -25,6 +25,7 @@
 		JButton blue = new JButton();
 		JButton horseshoe = new JButton();
 		JButton oyster = new JButton();
+		JButton back = new JButton();
 		JFrame frame;
 		
 		public void setFrame(JFrame f){
@@ -39,24 +40,46 @@
 				Image b = ImageIO.read(new File("images/crabbutton.png"));
 				Image h = ImageIO.read(new File("images/horsebutton.png"));
 				Image o = ImageIO.read(new File("images/oysterbutton.png"));
+				Image backi = ImageIO.read(new File("images/back.png"));
 				blue.setIcon(new ImageIcon(b));
 				horseshoe.setIcon(new ImageIcon(h));
 				oyster.setIcon(new ImageIcon(o));
+				back.setIcon(new ImageIcon(backi));
 			} catch (Exception ex){
 				System.out.println(ex);
 			}
 			blue.setBackground(null);
 			horseshoe.setBackground(null);
 			oyster.setBackground(null);
+			back.setBackground(null);
 			add("BlueCrab", blue);
 			add("HorseShoe", horseshoe);
 			add("Oyster", oyster);
+			add("Back", back);
 			setBackground(Color.BLUE);
+			CharacterSelect cs = this;
+			back.addMouseListener(new MouseListener(){
+				@Override
+				public void mouseClicked(MouseEvent event) {
+					currentFrame.setVisible(false);
+					StartMenu sm = new StartMenu(frame);
+					frame.add(sm);
+					frame.remove(cs);
+				}
+				@Override
+				public void mousePressed(MouseEvent e) {}
+				@Override
+				public void mouseReleased(MouseEvent e) {}
+				@Override
+				public void mouseEntered(MouseEvent e) {}
+				@Override
+				public void mouseExited(MouseEvent e) {}
+			});
 			blue.addMouseListener(new MouseListener(){
 				@Override
 				public void mouseClicked(MouseEvent event) {
 					System.out.println("Registering mouse click");
-					GameWindow gw = new GameWindow("blue_crab");
+					GameWindow gw = new GameWindow("bluecrab_0");
 					gw.setFrame(frame);
 					currentFrame.setVisible(false);
 					frame.add(gw);
@@ -69,36 +92,20 @@
 					Timer timer = new Timer(25, taskPerformer);
 					timer.start();
 				}
-
 				@Override
-				public void mousePressed(MouseEvent e) {
-					// TODO Auto-generated method stub
-					
-				}
-
+				public void mousePressed(MouseEvent e) {}
 				@Override
-				public void mouseReleased(MouseEvent e) {
-					// TODO Auto-generated method stub
-					
-				}
-
+				public void mouseReleased(MouseEvent e) {}
 				@Override
-				public void mouseEntered(MouseEvent e) {
-					// TODO Auto-generated method stub
-					
-				}
-
+				public void mouseEntered(MouseEvent e) {}
 				@Override
-				public void mouseExited(MouseEvent e) {
-					// TODO Auto-generated method stub
-					
-				}
+				public void mouseExited(MouseEvent e) {}
 			});
 			horseshoe.addMouseListener(new MouseListener(){
 				@Override
 				public void mouseClicked(MouseEvent event) {
 					System.out.println("Registering mouse click");
-					GameWindow gw = new GameWindow("horseshoe_crab");
+					GameWindow gw = new GameWindow("horsebutton");
 					gw.setFrame(frame);
 					currentFrame.setVisible(false);
 					frame.add(gw);
@@ -140,7 +147,7 @@
 				@Override
 				public void mouseClicked(MouseEvent event) {
 					System.out.println("Registering mouse click");
-					GameWindow gw = new GameWindow("oyster");
+					GameWindow gw = new GameWindow("oysterbutton");
 					gw.setFrame(frame);
 					currentFrame.setVisible(false);
 					frame.add(gw);

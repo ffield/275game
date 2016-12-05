@@ -3,9 +3,12 @@ package controller;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -31,25 +34,25 @@ public class Help extends JPanel{
 		frame = aframe;
 		frame.setSize((int) (.8*FRAMEWIDTH), (int) (.8*FRAMEHEIGHT));
 		try {
-			background = new JLabel(new ImageIcon(ImageIO.read(new File("Images/tutorial.png"))));
+//			background = new JLabel(new ImageIcon(ImageIO.read(new File("Images/tutorial.png"))));
 			back = new JButton(new ImageIcon(ImageIO.read(new File("Images/back.png"))));
 		} catch (IOException e) {
 			System.out.println(e);
 		}
-		background.setLayout(new FlowLayout(FlowLayout.RIGHT));
-		Container cp = frame.getContentPane();
-		frame.setContentPane(background);
+//		background.setLayout(new FlowLayout(FlowLayout.RIGHT));
+//		Container cp = frame.getContentPane();
+//		//frame.setContentPane(background);
 		Help h = this;
+//		back.setBackground(null);
+		back.setBounds((int)(.47*FRAMEWIDTH), (int)(.39*FRAMEHEIGHT), 200, 80);
 		back.addMouseListener(new MouseListener(){
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				frame.setContentPane(cp);
-				frame.setSize((int) (.33*FRAMEWIDTH), (int) (.5*FRAMEHEIGHT));
+				//frame.setContentPane(cp);
+//				h.setVisible(false);
 				StartMenu sm = new StartMenu(frame);
 				frame.add(sm);
 				frame.remove(h);
-				frame.remove(back);
-				frame.remove(background);
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {}
@@ -61,6 +64,21 @@ public class Help extends JPanel{
 			public void mouseReleased(MouseEvent e) {}
 		});
 		background.add(back);
-		frame.add(background);
+		back.setBounds((int)(.6*FRAMEWIDTH), (int)(.6*FRAMEHEIGHT), 100, 100);
+		//frame.add(background);
 	}
+	protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        BufferedImage backg = null;
+        BufferedImage back = null;
+        try {
+			backg = ImageIO.read(new File("Images/tutorial.png"));
+			back = ImageIO.read(new File("Images/back.png"));
+		} catch (IOException e) {
+			System.out.println(e);
+		}
+        g.drawImage(backg, 0, 0, getWidth(), getHeight(), this);
+        g.drawImage(back, (int)(.47*FRAMEWIDTH), (int)(.39*FRAMEHEIGHT), 200, 80, this);
+        this.back.setBounds((int)(.47*FRAMEWIDTH), (int)(.39*FRAMEHEIGHT), 200, 80);
+    }
 }

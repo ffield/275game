@@ -16,16 +16,12 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.Timer;
 
 public class StartMenu extends JPanel{
 	static Dimension SCREENSIZE = Toolkit.getDefaultToolkit().getScreenSize();
@@ -56,6 +52,7 @@ public class StartMenu extends JPanel{
 		play.addMouseListener(new MouseListener(){
 			@Override
 			public void mouseClicked(MouseEvent event) {
+				sm.setVisible(false);
 				CharacterSelect cs = new CharacterSelect();
 				cs.setFrame(frame);
 				frame.setSize(FRAMEWIDTH, FRAMEHEIGHT);
