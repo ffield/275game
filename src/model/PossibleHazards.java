@@ -59,7 +59,7 @@ public class PossibleHazards {
 				else if(isBetweenInc(x, 3, 5))
 					hazards.add(new Trash(FRAMEWIDTH, gen.nextInt(FRAMEHEIGHT) + 1, vel, 0, spawnInt, Tool.RECYCLE));
 				else if(isBetweenInc(x, 6, 8))
-					hazards.add(new Enemy1(FRAMEWIDTH, gen.nextInt(FRAMEHEIGHT) + 1, vel, 0, spawnInt));
+					hazards.add(new Enemy1(FRAMEWIDTH, gen.nextInt(FRAMEHEIGHT) + 1, vel, 0, spawnInt, FRAMEHEIGHT));
 				else if(isBetweenInc(x, 9, 11))
 					hazards.add(new Trash(FRAMEWIDTH, gen.nextInt(FRAMEHEIGHT) + 1, vel, 0, spawnInt, Tool.COMPOST));
 				else if(x==12)
@@ -84,7 +84,7 @@ public class PossibleHazards {
 				else if(isBetweenInc(x, 3, 5))
 					hazards.add(new Trash(FRAMEWIDTH, gen.nextInt(FRAMEHEIGHT) + 1, vel, 0, spawnInt, Tool.RECYCLE));
 				else if(isBetweenInc(x, 6, 8))
-					hazards.add(new Enemy1(FRAMEWIDTH, gen.nextInt(FRAMEHEIGHT) + 1, vel, 0, spawnInt));
+					hazards.add(new Enemy1(FRAMEWIDTH, gen.nextInt(FRAMEHEIGHT) + 1, vel, 0, spawnInt, FRAMEHEIGHT));
 				else if(isBetweenInc(x, 9, 11))
 					hazards.add(new Enemy2(FRAMEWIDTH, gen.nextInt(FRAMEHEIGHT) + 1, vel, 0, spawnInt));
 				else if(isBetweenInc(x, 12, 14))
@@ -115,7 +115,7 @@ public class PossibleHazards {
 			else if(isBetweenInc(x, 3, 5))
 				hazards.add(new Trash(FRAMEWIDTH, gen.nextInt(FRAMEHEIGHT) + 1, vel, 0, spawnInt, Tool.RECYCLE));
 			else if(isBetweenInc(x, 6, 8))
-				hazards.add(new Enemy1(FRAMEWIDTH, gen.nextInt(FRAMEHEIGHT) + 1, vel, 0, spawnInt));
+				hazards.add(new Enemy1(FRAMEWIDTH, gen.nextInt(FRAMEHEIGHT) + 1, vel, 0, spawnInt, FRAMEHEIGHT));
 			else if(isBetweenInc(x, 9, 11))
 				hazards.add(new Enemy2(FRAMEWIDTH, gen.nextInt(FRAMEHEIGHT) + 1, vel, 0, spawnInt));
 			else if(isBetweenInc(x, 12, 14))
@@ -145,7 +145,7 @@ public class PossibleHazards {
 			else if(isBetweenInc(x, 3, 5))
 				hazards.add(new Trash(FRAMEWIDTH, gen.nextInt(FRAMEHEIGHT) + 1, vel, 0, spawnInt, Tool.RECYCLE));
 			else if(isBetweenInc(x, 6, 8))
-				hazards.add(new Enemy1(FRAMEWIDTH, gen.nextInt(FRAMEHEIGHT) + 1, vel, 0, spawnInt));
+				hazards.add(new Enemy1(FRAMEWIDTH, gen.nextInt(FRAMEHEIGHT) + 1, vel, 0, spawnInt, FRAMEHEIGHT));
 			else if(isBetweenInc(x, 9, 11))
 				hazards.add(new Enemy2(FRAMEWIDTH, gen.nextInt(FRAMEHEIGHT) + 1, vel, 0, spawnInt));
 			else if(isBetweenInc(x, 12, 14))

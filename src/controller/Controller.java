@@ -211,7 +211,7 @@ public class Controller extends JPanel implements KeyListener {
 				game.getPlayer().setImageType(speedy);
 			else
 				game.getPlayer().setImageType(name);
-			if (powerupCount == 200) {
+			if (powerupCount >= 200) {
 				game.getPlayer().setXvel(10);
 				game.getPlayer().setYvel(10);
 				game.getPlayer().setImageType(name);

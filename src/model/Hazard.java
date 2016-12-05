@@ -8,7 +8,27 @@ public class Hazard extends Movers {
 	String imageType;
 	HazardType type;
 	MovementType movementType;
+	int SCREENHEIGHT;
+	int playery;
 
+	public Hazard(int xpos, int ypos, int xvel, int yvel, int spawntime, MovementType hazardMovementType, String imageType, int SCREENHEIGHT) {
+		super(xpos, ypos, xvel, yvel, imageType);
+		
+		this.spawntime = spawntime;
+		this.movementType = hazardMovementType;
+		this.SCREENHEIGHT = SCREENHEIGHT;
+		color = Color.BLACK;
+	}
+	
+	public Hazard(int xpos, int ypos, int xvel, int yvel, int spawntime, MovementType hazardMovementType, int playery, String imageType) {
+		super(xpos, ypos, xvel, yvel, imageType);
+		
+		this.spawntime = spawntime;
+		this.movementType = hazardMovementType;
+		this.playery = playery;
+		color = Color.BLACK;
+	}
+	
 	public Hazard(int xpos, int ypos, int xvel, int yvel, int spawntime, MovementType hazardMovementType, String imageType) {
 		super(xpos, ypos, xvel, yvel, imageType);
 		this.spawntime = spawntime;
@@ -46,7 +66,7 @@ public class Hazard extends Movers {
 		switch (movementType) {
 		case ENEMYMOVE:
 			this.xpos = xpos - xvel;
-			double y = Math.sin(xpos / 20) * (-12);
+			double y = Math.sin(xpos / 50) * (SCREENHEIGHT/30);
 			this.ypos = ((int) y) + ypos;
 			break;
 		case LEFT:
