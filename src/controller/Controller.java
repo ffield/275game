@@ -39,7 +39,7 @@ import javax.swing.ActionMap;
 import javax.swing.InputMap;
 import javax.swing.JFrame;
 
-public class Controller extends JPanel implements KeyListener{
+public class Controller extends JPanel implements KeyListener {
 	private static final long serialVersionUID = 1L;
 	KeyFunctions k = new KeyFunctions();
 	Game game;
@@ -54,21 +54,20 @@ public class Controller extends JPanel implements KeyListener{
 	boolean down;
 	boolean left;
 	boolean right;
-	 int alpha = 0; //makes transparent
-	 Color myColor = new Color(255, 60, 50, alpha);
-//	 String sourceimage = ("images/net.png");
-//     BufferedImage img = createImage(sourceimage);
-// 	BufferedImage recycle = createImage("images/recycle.png");
-//	BufferedImage compost = createImage("images/compost.png");
-//    BufferedImage player = createImage("images/bluecrab_0.png");
-//	BufferedImage fresh = createImage("images/water_tile.png");
-//    BufferedImage salt = createImage("images/salt_tile.png");
-//    BufferedImage heart = createImage("images/fullHeart.png");
-		 
+	int alpha = 0; // makes transparent
+	Color myColor = new Color(255, 60, 50, alpha);
+	// String sourceimage = ("images/net.png");
+	// BufferedImage img = createImage(sourceimage);
+	// BufferedImage recycle = createImage("images/recycle.png");
+	// BufferedImage compost = createImage("images/compost.png");
+	// BufferedImage player = createImage("images/bluecrab_0.png");
+	// BufferedImage fresh = createImage("images/water_tile.png");
+	// BufferedImage salt = createImage("images/salt_tile.png");
+	// BufferedImage heart = createImage("images/fullHeart.png");
 
 	public Controller() {
 		game = new Game(SCREENSIZE);
-	    painter = new Painter();
+		painter = new Painter();
 		count = 0;
 		addKeyListener(this);
 		up = false;
@@ -76,10 +75,10 @@ public class Controller extends JPanel implements KeyListener{
 		left = false;
 		right = false;
 	}
-	
+
 	public Controller(String imageName) {
 		game = new Game(SCREENSIZE, imageName);
-	    painter = new Painter();
+		painter = new Painter();
 		count = 0;
 		addKeyListener(this);
 		up = false;
@@ -94,25 +93,21 @@ public class Controller extends JPanel implements KeyListener{
 		im.put(keyStroke, name);
 		am.put(name, action);
 	}
-	
 
-
-//    private BufferedImage createImage(String filename){
-//    	BufferedImage bufferedImage;
-//    	try {
-//    		bufferedImage = ImageIO.read(new File(filename));
-//    		return bufferedImage;
-//    	} catch (IOException e) {
-//    		e.printStackTrace();
-//    	}
-//    	return null;}
-
+	// private BufferedImage createImage(String filename){
+	// BufferedImage bufferedImage;
+	// try {
+	// bufferedImage = ImageIO.read(new File(filename));
+	// return bufferedImage;
+	// } catch (IOException e) {
+	// e.printStackTrace();
+	// }
+	// return null;}
 
 	@Override
 	public void paint(Graphics g) {
 		painter.paint(g);
 	}
-
 
 	public void onCollision() {
 		Rectangle playerr = game.getPlayer().getBounds();
@@ -131,12 +126,12 @@ public class Controller extends JPanel implements KeyListener{
 							game.getPlayer().Invincibility();
 						} else if (collided.getPowerupType().equals(PowerupType.CLEAR)) {
 							game.getPossibleHazards().clearEnemies(SCREENSIZE);
-							//System.out.println("help");
+							// System.out.println("help");
 							// clear all enemies off screen
 						} else if (collided.getPowerupType().equals(PowerupType.SPEED)) {
 							game.getPlayer().SpeedUp();
-						} else if (collided.getPowerupType().equals(PowerupType.ADDLIFE)){
-							game.getPlayer().setLife(game.getPlayer().getLife()+1);
+						} else if (collided.getPowerupType().equals(PowerupType.ADDLIFE)) {
+							game.getPlayer().setLife(game.getPlayer().getLife() + 1);
 						}
 					} else {
 						if (game.getPlayer().getState().equals(State.INVINCIBLE)) {
@@ -145,8 +140,7 @@ public class Controller extends JPanel implements KeyListener{
 							} else if (collided.getypos() <= game.getPlayer().getYpos()) {
 								collided.setMovementType(MovementType.COLLIDEDUP);
 							}
-						}
-						else if (collided.getType().equals(HazardType.TRASH)) {
+						} else if (collided.getType().equals(HazardType.TRASH)) {
 							if (game.getPlayer().getTool().equals(collided.getToolType())) {
 								game.getPossibleHazards().removeHazard(i);
 								game.getPoint();
@@ -177,29 +171,28 @@ public class Controller extends JPanel implements KeyListener{
 
 	public void update() {
 
-		
 		if (game.getPlayer().getState().equals(State.JUSTHIT)) {
 			powerupCount += 1;
-			if (game.getPlayer().getColor() == myColor )
+			if (game.getPlayer().getColor() == myColor)
 
-					game.getPlayer().setColor(color.WHITE);
+				game.getPlayer().setColor(color.WHITE);
 			else
-				game.getPlayer().setColor(myColor );
-			if (powerupCount ==75) {
+				game.getPlayer().setColor(myColor);
+			if (powerupCount == 75) {
 				game.getPlayer().setState(State.NEUTRAL);
-				game.getPlayer().setColor(myColor );
+				game.getPlayer().setColor(myColor);
 				powerupCount = 0;
 			}
 		}
 		if (game.getPlayer().getState().equals(State.INVINCIBLE)) {
 			powerupCount += 1;
-			if (game.getPlayer().getColor() == myColor )
+			if (game.getPlayer().getColor() == myColor)
 				game.getPlayer().setColor(color.YELLOW);
 			else
-				game.getPlayer().setColor(myColor );
-			if (powerupCount ==200) {
+				game.getPlayer().setColor(myColor);
+			if (powerupCount == 200) {
 				game.getPlayer().setState(State.NEUTRAL);
-				game.getPlayer().setColor(myColor );
+				game.getPlayer().setColor(myColor);
 				powerupCount = 0;
 			}
 		}
@@ -209,7 +202,7 @@ public class Controller extends JPanel implements KeyListener{
 			if (powerupCount == 200) {
 				game.getPlayer().setXvel(10);
 				game.getPlayer().setYvel(10);
-				game.getPlayer().setColor(myColor );
+				game.getPlayer().setColor(myColor);
 				game.getPlayer().setState(State.NEUTRAL);
 				powerupCount = 0;
 			}
@@ -221,148 +214,145 @@ public class Controller extends JPanel implements KeyListener{
 			}
 		}
 		keyUpdate();
-		painter.updateView(game.makeNames(), game.makeXpos(), game.makeXbounds(), game.makeYbounds(), game.makeYpos(), game.getBoard().getArr(), game.getPlayer().getLife(), game.getLevel(), game.getPlayer().getSalinity(), game.getPoints(), game.getPlayer().getSalmax(), FRAMEWIDTH, FRAMEHEIGHT, game.getPlayer().getTool(), game.isGameOver());
+		painter.updateView(game.makeNames(), game.makeXpos(), game.makeXbounds(), game.makeYbounds(), game.makeYpos(),
+				game.getBoard().getArr(), game.getPlayer().getLife(), game.getLevel(), game.getPlayer().getSalinity(),
+				game.getPoints(), game.getPlayer().getSalmax(), FRAMEWIDTH, FRAMEHEIGHT, game.getPlayer().getTool(),
+				game.isGameOver());
 		repaint();
-		if(game.isGameOver())
+		if (game.isGameOver())
 			game.stop();
 		saltOnMovement();
 		onCollision();
 		onOffScreen();
 		onNextLevel(SCREENSIZE);
 	}
-	
-	
-	public void onOffScreen(){
+
+	public void onOffScreen() {
 		ArrayList<Hazard> c = game.getPossibleHazards().getHazardsList();
-		for(int i=0; i<c.size(); i++){
-			if(c.get(i).getXpos()<=0||c.get(i).getYpos()<=-30||c.get(i).getYpos()>=FRAMEHEIGHT+30){
+		for (int i = 0; i < c.size(); i++) {
+			if (c.get(i).getXpos() <= 0 || c.get(i).getYpos() <= -30 || c.get(i).getYpos() >= FRAMEHEIGHT + 30) {
 				game.getPossibleHazards().removeHazard(i);
 			}
 		}
 	}
-	
-	public void onNextLevel(Dimension screenSize){
+
+	public void onNextLevel(Dimension screenSize) {
 		ArrayList<Hazard> c = game.getPossibleHazards().getHazardsList();
-		System.out.println("Size: "+c.size());
-		if(c.size()==0){
+		System.out.println("Size: " + c.size());
+		if (c.size() == 0) {
 			count = 0;
 			game.levelUp();
 			game.setPossibleHazards(new PossibleHazards(game.getHazardNum()));
 			game.getPossibleHazards().generateHazards(screenSize, game.getLevel());
 		}
 	}
-	
-
 
 	public Game getGame() {
 		return this.game;
 	}
 
 	public void addNotify() {
-        super.addNotify();
-        requestFocus();
-    }
-	
-public void keyUpdate(){
-	 if (down) {
-		 
-         game.getPlayer().setYpos(game.getPlayer().getYpos()+game.getPlayer().getYvel()); // removing velx = 0 allows us to go vertically and horizontlly at the same time
-         if (game.getPlayer().getYpos() < 0) {
+		super.addNotify();
+		requestFocus();
+	}
+
+	public void keyUpdate() {
+		if (down) {
+
+			game.getPlayer().setYpos(game.getPlayer().getYpos() + game.getPlayer().getYvel());
+			if (game.getPlayer().getYpos() < 0) {
 				game.getPlayer().setYpos(0);
 			} else if (game.getPlayer().getYpos() + 30 > getHeight()) {
 				game.getPlayer().setYpos(getHeight() - 30);
 			}
-     }
-     if (up) {
-     	game.getPlayer().setYpos(game.getPlayer().getYpos()-game.getPlayer().getYvel());
-     	if (game.getPlayer().getYpos() < 0) {
-			game.getPlayer().setYpos(0);
-		} else if (game.getPlayer().getYpos() + 30 > getHeight()) {
-			game.getPlayer().setYpos(getHeight() - 30);
 		}
-     }
-     if (left) {
-
-     	game.getPlayer().setXpos(game.getPlayer().getXpos()-game.getPlayer().getXvel());
-     	if (game.getPlayer().getXpos() < 0) {
-			game.getPlayer().setXpos(0);
-		} else if (game.getPlayer().getXpos() + 30 > getWidth()) {
-			game.getPlayer().setXpos(getWidth() - 30);
+		if (up) {
+			game.getPlayer().setYpos(game.getPlayer().getYpos() - game.getPlayer().getYvel());
+			if (game.getPlayer().getYpos() < 0) {
+				game.getPlayer().setYpos(0);
+			} else if (game.getPlayer().getYpos() + 30 > getHeight()) {
+				game.getPlayer().setYpos(getHeight() - 30);
+			}
 		}
-     }
+		if (left) {
 
-     
-         if (right) {
+			game.getPlayer().setXpos(game.getPlayer().getXpos() - game.getPlayer().getXvel());
+			if (game.getPlayer().getXpos() < 0) {
+				game.getPlayer().setXpos(0);
+			} else if (game.getPlayer().getXpos() + 30 > getWidth()) {
+				game.getPlayer().setXpos(getWidth() - 30);
+			}
+		}
 
-         	game.getPlayer().setXpos(game.getPlayer().getXpos()+game.getPlayer().getXvel());
-         	if (game.getPlayer().getXpos() < 0) {
+		if (right) {
+
+			game.getPlayer().setXpos(game.getPlayer().getXpos() + game.getPlayer().getXvel());
+			if (game.getPlayer().getXpos() < 0) {
 				game.getPlayer().setXpos(0);
 			} else if (game.getPlayer().getXpos() + 30 > getWidth()) {
 				game.getPlayer().setXpos(getWidth() - 30);
 			}
 
-         }
-}
-	
+		}
+	}
+
 	@Override
-    public void keyPressed(KeyEvent e) {
-        int code = e.getKeyCode();
+	public void keyPressed(KeyEvent e) {
+		int code = e.getKeyCode();
 
-        
-            if (code == KeyEvent.VK_DOWN) {
-               down = true; // removing velx = 0 allows us to go vertically and horizontlly at the same time
+		if (code == KeyEvent.VK_DOWN) {
+			down = true; // removing velx = 0 allows us to go vertically and
+							// horizontlly at the same time
 
-            }
-            if (code == KeyEvent.VK_UP) {
-            	up = true;
+		}
+		if (code == KeyEvent.VK_UP) {
+			up = true;
 
-            }
-            if (code == KeyEvent.VK_LEFT) {
+		}
+		if (code == KeyEvent.VK_LEFT) {
 
-            	left = true;
-            }
+			left = true;
+		}
 
-            
-                if (code == KeyEvent.VK_RIGHT) {
+		if (code == KeyEvent.VK_RIGHT) {
 
-                	right = true;
+			right = true;
 
-                }
-        
-    }
+		}
+
+	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		int code = e.getKeyCode();
 
-        
-        if (code == KeyEvent.VK_DOWN) {
-           down = false; // removing velx = 0 allows us to go vertically and horizontlly at the same time
+		if (code == KeyEvent.VK_DOWN) {
+			down = false; // removing velx = 0 allows us to go vertically and
+							// horizontlly at the same time
 
-        }
-        if (code == KeyEvent.VK_UP) {
-        	up = false;
+		}
+		if (code == KeyEvent.VK_UP) {
+			up = false;
 
-        }
-        if (code == KeyEvent.VK_LEFT) {
+		}
+		if (code == KeyEvent.VK_LEFT) {
 
-        	left = false;
-        }
+			left = false;
+		}
 
-        
-            if (code == KeyEvent.VK_RIGHT) {
+		if (code == KeyEvent.VK_RIGHT) {
 
-            	right = false;
+			right = false;
 
-            }
-		
+		}
+
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		if(e.getKeyChar()==' '){
+		if (e.getKeyChar() == ' ') {
 			game.getPlayer().SwitchTool();
 		}
-		
+
 	}
 }

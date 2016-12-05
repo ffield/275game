@@ -16,6 +16,7 @@ import java.util.*;
 public class Board {
 	int[][] arr;
 	int BOARDHEIGHT = 20;
+	int limit;
 	final int BOARDWIDTH = 40;
 
 	/**
@@ -26,37 +27,36 @@ public class Board {
 	public Board() {
 		int border = -5;
 		int changer = 1;
-		int limit = BOARDHEIGHT - (BOARDHEIGHT/3);
+		limit = BOARDHEIGHT - (BOARDHEIGHT / 3);
 		arr = new int[BOARDWIDTH][BOARDHEIGHT];
 		for (int i = 0; i < BOARDWIDTH; i++) {
-			border+=changer;
+			border += changer;
 			for (int j = 0; j < BOARDHEIGHT; j++) {
-				if(j>limit){
+				if (j > limit) {
 					arr[i][j] = 1;
-				}else{
-				if (i < BOARDWIDTH / 2) {
-	
-					if(border<j){
-						arr[i][j] = 1;
-					}else{
-						arr[i][j] = -1;
-					}
-					
-					// System.out.println(j);
 				} else {
-					changer = -1;
-					if(border<j){
-						arr[i][j] = 1;
-					}else{
-						arr[i][j] = -1;
-					}
+					if (i < BOARDWIDTH / 2) {
 
+						if (border < j) {
+							arr[i][j] = 1;
+						} else {
+							arr[i][j] = -1;
+						}
+
+						// System.out.println(j);
+					} else {
+						changer = -1;
+						if (border < j) {
+							arr[i][j] = 1;
+						} else {
+							arr[i][j] = -1;
+						}
+
+					}
 				}
-				}
-				
-				System.out.print(arr[i][j]);
+
 			}
-			System.out.println();
+
 		}
 		// arr[BOARDWIDTH/2][0]=1;
 		// arr[BOARDWIDTH/2+1][0]=1;
@@ -75,12 +75,84 @@ public class Board {
 	 *            The y coordinate of the specified tile
 	 * @return String the specified file.
 	 */
-	
-	
-	
+
 	public int getTile(int x, int y) {
 		return arr[x][y];
-		
+
+	}
+
+	public void southWind() {
+		int border = -5;
+		int changer = 1;
+		if(limit!=((BOARDHEIGHT / 2)-(BOARDHEIGHT/6)))
+			limit+=1;
+		arr = new int[BOARDWIDTH][BOARDHEIGHT];
+		for (int i = 0; i < BOARDWIDTH; i++) {
+			border += changer;
+			for (int j = 0; j < BOARDHEIGHT; j++) {
+				if (j > limit) {
+					arr[i][j] = 1;
+				} else {
+					if (i < BOARDWIDTH / 2) {
+
+						if (border < j) {
+							arr[i][j] = 1;
+						} else {
+							arr[i][j] = -1;
+						}
+
+						// System.out.println(j);
+					} else {
+						changer = -1;
+						if (border < j) {
+							arr[i][j] = 1;
+						} else {
+							arr[i][j] = -1;
+						}
+
+					}
+				}
+
+			}
+
+		}
+	}
+	
+	public void northWind() {
+		int border = -5;
+		int changer = 1;
+		if(limit!=(BOARDHEIGHT / 6))
+			limit-=1;
+		arr = new int[BOARDWIDTH][BOARDHEIGHT];
+		for (int i = 0; i < BOARDWIDTH; i++) {
+			border += changer;
+			for (int j = 0; j < BOARDHEIGHT; j++) {
+				if (j > limit) {
+					arr[i][j] = 1;
+				} else {
+					if (i < BOARDWIDTH / 2) {
+
+						if (border < j) {
+							arr[i][j] = 1;
+						} else {
+							arr[i][j] = -1;
+						}
+
+						// System.out.println(j);
+					} else {
+						changer = -1;
+						if (border < j) {
+							arr[i][j] = 1;
+						} else {
+							arr[i][j] = -1;
+						}
+
+					}
+				}
+
+			}
+
+		}
 	}
 
 	public int[][] getArr() {
