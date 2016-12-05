@@ -16,6 +16,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -75,10 +76,20 @@ public class StartMenu extends JPanel{
 		sm.help.addMouseListener(new MouseListener(){
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				HelpMenu hm = new HelpMenu();
 				frame.setSize((int) (.8*FRAMEWIDTH), (int) (.8*FRAMEHEIGHT));
 				frame.remove(sm);
-				frame.add(hm);
+				JLabel background = null;
+				JButton back = new JButton();
+				try {
+					background = new JLabel(new ImageIcon(ImageIO.read(new File("Images/tutorial.png"))));
+					back = new JButton(new ImageIcon(ImageIO.read(new File("Images/back.png"))));
+				} catch (IOException e) {
+					System.out.println(e);
+				}
+				frame.setContentPane(background);
+				frame.setLayout(new FlowLayout());
+				frame.add(background);
+				frame.add(back, 10);
 			}
 			@Override
 			public void mouseEntered(MouseEvent e) {}
