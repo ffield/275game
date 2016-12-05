@@ -17,6 +17,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import model.Tool;
+import model.Wind;
 
 public class Painter extends JPanel{
 	
@@ -39,6 +40,7 @@ public class Painter extends JPanel{
 	int salinity;
 	int score;
 	int saltmax;
+	Wind wind;
 	int FRAMEWIDTH;
 	int FRAMEHEIGHT;
 	Tool net;
@@ -57,7 +59,7 @@ public class Painter extends JPanel{
 		    }
 	}
 	
-	public void updateView(ArrayList<String> names, ArrayList<Integer> xpos, ArrayList<Integer> xbounds, ArrayList<Integer> ybounds, ArrayList<Integer> ypos, int[][] board, int lives, int level, int salinity, int score,int saltmax, int FRAMEWIDTH, int FRAMEHEIGHT, Tool net, boolean gameover){
+	public void updateView(ArrayList<String> names, ArrayList<Integer> xpos, ArrayList<Integer> xbounds, ArrayList<Integer> ybounds, ArrayList<Integer> ypos, int[][] board, int lives, int level, int salinity, int score,int saltmax, int FRAMEWIDTH, int FRAMEHEIGHT, Wind wind, Tool net, boolean gameover){
 		this.names = names;
 		this.xpos = xpos;
 		this.ypos = ypos;
@@ -69,6 +71,7 @@ public class Painter extends JPanel{
 		this.salinity = salinity;
 		this.score = score;
 		this.saltmax=saltmax;
+		this.wind = wind;
 		this.FRAMEWIDTH = FRAMEWIDTH;
 		this.FRAMEHEIGHT = FRAMEHEIGHT;
 		this.net = net;
@@ -153,9 +156,11 @@ public class Painter extends JPanel{
 		String saltstring = "";
 		String scorestring = "Points: ";
 		String levelstring = "Level: ";
+		String windstring = "Wind: ";
 		saltstring = saltstring + salinity;
 		scorestring = scorestring + score;
 		levelstring = levelstring + level;
+		windstring = windstring + wind;
 
 		Font d = new Font("monospaced", Font.BOLD, 30);
 		g2d.setFont(d);
@@ -173,8 +178,10 @@ public class Painter extends JPanel{
 		g2d.setColor(Color.BLACK);
 		g2d.drawString(scorestring, 100, 25);
 		g2d.drawString(levelstring, (int)(FRAMEWIDTH/2), 20);
+		g2d.drawString(windstring, (int)(FRAMEWIDTH/4)+(FRAMEWIDTH/2), 20);
 		BufferedImage image;
 		for (int i = 0; i < xpos.size(); i++) {
+			//System.out.println(names.get(i));
 			if(images!=null){
 			image = images.get(names.get(i));
 			g2d.drawImage(image, xpos.get(i), ypos.get(i),xbounds.get(i), ybounds.get(i), null);

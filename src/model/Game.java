@@ -15,12 +15,14 @@ public class Game implements Serializable{
 	int points;
 	int level;
 	int hazardnum;
+	Wind wind;
 	
 	public Game(Dimension screenSize){
 		System.out.println("Generating game");
 		player = new Player(30, 40, 10, 10, 500, 1, 1, 1000, Tool.TRASH, State.NEUTRAL);
 		board = new Board();
 		hazardnum = 75;
+		wind = Wind.NEUTRAL;
 		ph = new PossibleHazards(hazardnum);
 		int alpha = 0; // 50% transparent
 		Color myColor = new Color(255, 60, 50, alpha);
@@ -35,6 +37,7 @@ public class Game implements Serializable{
 		player = new Player(30, 40, 10, 10, 500, 1, 1, 1000, Tool.TRASH, State.NEUTRAL, imageName);
 		board = new Board();
 		hazardnum = 75;
+		wind = Wind.NEUTRAL;
 		ph = new PossibleHazards(hazardnum);
 		int alpha = 0; // 50% transparent
 		Color myColor = new Color(255, 60, 50, alpha);
@@ -66,6 +69,15 @@ public class Game implements Serializable{
 	public int getLevel(){
 		return level;
 	}
+	
+	public Wind getWind() {
+		return wind;
+	}
+
+	public void setWind(Wind wind) {
+		this.wind = wind;
+	}
+	
 	public void setPoints(int points) {
 		this.points = points;
 	}

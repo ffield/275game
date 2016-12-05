@@ -22,13 +22,6 @@ public class Movers {
 		this.xvel = xvel;
 		this.yvel = yvel;
 		this.imageType = imageType+".png";
-		try {
-    		image = ImageIO.read(new File("images/" + imageType + ".png"));
-        	} 
-    	catch (IOException e) {
-    		e.printStackTrace();
-    		System.out.println("we done fucked up: "+ imageType);
-    	}
 	}
 
 	public int getXpos() {

@@ -11,6 +11,7 @@ import model.PossibleHazards;
 import model.PowerupType;
 import model.State;
 import model.Tool;
+import model.Wind;
 
 import javax.swing.KeyStroke;
 
@@ -31,6 +32,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
@@ -43,6 +45,7 @@ public class Controller extends JPanel implements KeyListener {
 	private static final long serialVersionUID = 1L;
 	KeyFunctions k = new KeyFunctions();
 	Game game;
+	String name;
 	Painter painter;
 	int count = 0;
 	int powerupCount = 0;
@@ -70,6 +73,8 @@ public class Controller extends JPanel implements KeyListener {
 		painter = new Painter();
 		count = 0;
 		addKeyListener(this);
+		name = game.getPlayer().getImageType();
+		name = name.replace(".png", "");
 		up = false;
 		down = false;
 		left = false;
@@ -81,6 +86,8 @@ public class Controller extends JPanel implements KeyListener {
 		painter = new Painter();
 		count = 0;
 		addKeyListener(this);
+		name = game.getPlayer().getImageType();
+		name = name.replace(".png", "");
 		up = false;
 		down = false;
 		left = false;
@@ -170,39 +177,44 @@ public class Controller extends JPanel implements KeyListener {
 	}
 
 	public void update() {
-
+		String empty = "empty";
+		String invincible = "invincible_"+name;
+		String speedy = "speedy_"+name;
+		System.out.println(name + " : " +game.getPlayer().getImageType());
 		if (game.getPlayer().getState().equals(State.JUSTHIT)) {
 			powerupCount += 1;
-			if (game.getPlayer().getColor() == myColor)
-
-				game.getPlayer().setColor(color.WHITE);
+			if (game.getPlayer().getImageType().replace(".png", "").equals(name))
+				game.getPlayer().setImageType(empty);
 			else
-				game.getPlayer().setColor(myColor);
-			if (powerupCount == 75) {
+				game.getPlayer().setImageType(name);
+			if (powerupCount >= 75) {
 				game.getPlayer().setState(State.NEUTRAL);
-				game.getPlayer().setColor(myColor);
+				game.getPlayer().setImageType(name);
 				powerupCount = 0;
 			}
 		}
 		if (game.getPlayer().getState().equals(State.INVINCIBLE)) {
 			powerupCount += 1;
-			if (game.getPlayer().getColor() == myColor)
-				game.getPlayer().setColor(color.YELLOW);
+			if (game.getPlayer().getImageType().replace(".png", "").equals(name))
+				game.getPlayer().setImageType(invincible);
 			else
-				game.getPlayer().setColor(myColor);
-			if (powerupCount == 200) {
+				game.getPlayer().setImageType(name);
+			if (powerupCount >= 200) {
 				game.getPlayer().setState(State.NEUTRAL);
-				game.getPlayer().setColor(myColor);
+				game.getPlayer().setImageType(name);
 				powerupCount = 0;
 			}
 		}
 		if (game.getPlayer().getState().equals(State.SPEEDUP)) {
 			powerupCount += 1;
-			game.getPlayer().setColor(color.RED);
+			if (game.getPlayer().getImageType().replace(".png", "").equals(name))
+				game.getPlayer().setImageType(speedy);
+			else
+				game.getPlayer().setImageType(name);
 			if (powerupCount == 200) {
 				game.getPlayer().setXvel(10);
 				game.getPlayer().setYvel(10);
-				game.getPlayer().setColor(myColor);
+				game.getPlayer().setImageType(name);
 				game.getPlayer().setState(State.NEUTRAL);
 				powerupCount = 0;
 			}
@@ -216,17 +228,53 @@ public class Controller extends JPanel implements KeyListener {
 		keyUpdate();
 		painter.updateView(game.makeNames(), game.makeXpos(), game.makeXbounds(), game.makeYbounds(), game.makeYpos(),
 				game.getBoard().getArr(), game.getPlayer().getLife(), game.getLevel(), game.getPlayer().getSalinity(),
-				game.getPoints(), game.getPlayer().getSalmax(), FRAMEWIDTH, FRAMEHEIGHT, game.getPlayer().getTool(),
+				game.getPoints(), game.getPlayer().getSalmax(), FRAMEWIDTH, FRAMEHEIGHT, game.getWind(), game.getPlayer().getTool(),
 				game.isGameOver());
 		repaint();
 		if (game.isGameOver())
 			game.stop();
+		if(count%300 == 0)
+			changeWind();
+		if(count%100 == 0)
+			handleWind();
 		saltOnMovement();
 		onCollision();
 		onOffScreen();
 		onNextLevel(SCREENSIZE);
 	}
 
+		
+	public void changeWind() {
+		Random gen = new Random();
+		int x = gen.nextInt(3);
+		switch(x){
+		case 0:
+			game.setWind(Wind.NEUTRAL);
+			break;
+		case 1:
+			game.setWind(Wind.NORTH);
+			break;
+		case 2:
+			game.setWind(Wind.SOUTH);
+			break;
+		}
+	}
+	
+	public void handleWind() {
+		Wind wind = game.getWind();
+		System.out.println(wind);
+		switch(wind){
+		case NEUTRAL:
+			break;
+		case NORTH:
+			game.getBoard().northWind();
+			break;
+		case SOUTH:
+			game.getBoard().southWind();
+			break;
+		}
+	}
+	
 	public void onOffScreen() {
 		ArrayList<Hazard> c = game.getPossibleHazards().getHazardsList();
 		for (int i = 0; i < c.size(); i++) {

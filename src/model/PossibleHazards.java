@@ -22,7 +22,6 @@ public class PossibleHazards {
 	}
 	public void generateHazards(Dimension screenSize, int level) {
 		Random gen = new Random();
-		System.out.println(level);
 		int spawnwindow = 750;
 		int FRAMEHEIGHT = (int) screenSize.getHeight();
 		int FRAMEWIDTH = (int) screenSize.getWidth();
