@@ -24,7 +24,6 @@ public class Help extends JPanel{
 	static Dimension SCREENSIZE = Toolkit.getDefaultToolkit().getScreenSize();
 	public static int FRAMEHEIGHT = (int) SCREENSIZE.getHeight();
 	public static int FRAMEWIDTH = (int) SCREENSIZE.getWidth();
-	JLabel background = new JLabel();
 	JButton back = new JButton();
 	JFrame frame;
 	
@@ -34,14 +33,19 @@ public class Help extends JPanel{
 	public Help(JFrame aframe){
 		frame = aframe;
 		frame.setSize((int) (.8*FRAMEWIDTH), (int) (.8*FRAMEHEIGHT));
+		ImageIcon imgi = null;
 		try {
-			back = new JButton(new ImageIcon(ImageIO.read(new File("Images/back.png"))));
+			imgi = new ImageIcon(ImageIO.read(new File("Images/back.png")));
 		} catch (IOException e) {
 			System.out.println(e);
 		}
+		Image img = imgi.getImage();
+		Image newimg = img.getScaledInstance(200, 80, Image.SCALE_SMOOTH);
+		ImageIcon backimg= new ImageIcon(newimg);
+		back.setIcon(backimg);
 		Help h = this;
-		back.setSize(200, 80);
 		back.setBounds((int)(.47*FRAMEWIDTH), (int)(.39*FRAMEHEIGHT), 200, 80);
+		back.setBackground(null);
 		back.addMouseListener(new MouseListener(){
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -60,7 +64,6 @@ public class Help extends JPanel{
 			@Override
 			public void mouseReleased(MouseEvent e) {}
 		});
-		background.add(back);
 		back.setBounds((int)(.47*FRAMEWIDTH), (int)(.39*FRAMEHEIGHT), 200, 80);
 		frame.add(back);
 	}
