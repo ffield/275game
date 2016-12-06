@@ -6,7 +6,6 @@ import java.util.Random;
 
 public class PossibleHazards {
 	int hazard_num;
-	int playery;
 	ArrayList<Hazard> hazards;
 
 	/**
@@ -21,31 +20,23 @@ public class PossibleHazards {
 	public static boolean isBetweenInc(int num, int lower, int upper){
 		return lower<=num&&num<=upper;
 	}
-	
-//	public void updatePlayerY(int playery){
-//		this.playery = playery;
-//		for (int i = 0; i < hazard_num; i++) {
-//			hazards.get(i).setPlayery(playery);
-//		}
-//	}
-	
 	public void generateHazards(Dimension screenSize, int level) {
 		Random gen = new Random();
 		int spawnwindow = 750;
 		int FRAMEHEIGHT = (int) screenSize.getHeight();
 		int FRAMEWIDTH = (int) screenSize.getWidth();
 		int spawnInt;
-		int vel = FRAMEWIDTH/250;
+		int vel;
 		switch(level){
 		default: 
 			hazard_num = 25;
+			vel = FRAMEWIDTH/300;
 			for (int i = 0; i < hazard_num; i++) {
 				spawnInt = gen.nextInt(spawnwindow);
 				System.out.println("Spawn: " + spawnInt);
 				int x = gen.nextInt(11);
 				if(isBetweenInc(x, 0, 2))
-					hazards.add(new Enemy3(FRAMEWIDTH, gen.nextInt(FRAMEHEIGHT) + 1, vel, 0, spawnInt, playery));
-					//hazards.add(new Trash(FRAMEWIDTH, gen.nextInt(FRAMEHEIGHT) + 1, vel, 0, spawnInt, Tool.TRASH));
+					hazards.add(new Trash(FRAMEWIDTH, gen.nextInt(FRAMEHEIGHT) + 1, vel, 0, spawnInt, Tool.TRASH));
 				else if(isBetweenInc(x, 3, 5))
 					hazards.add(new Trash(FRAMEWIDTH, gen.nextInt(FRAMEHEIGHT) + 1, vel, 0, spawnInt, Tool.RECYCLE));
 				else if(isBetweenInc(x, 6, 8))
@@ -60,6 +51,7 @@ public class PossibleHazards {
 		case 2: 
 			hazard_num = 35;
 			for (int i = 0; i < hazard_num; i++) {
+				vel = FRAMEWIDTH/200;
 				spawnInt = gen.nextInt(spawnwindow);
 				int x = gen.nextInt(15);
 				if(isBetweenInc(x, 0, 2))
@@ -67,7 +59,7 @@ public class PossibleHazards {
 				else if(isBetweenInc(x, 3, 5))
 					hazards.add(new Trash(FRAMEWIDTH, gen.nextInt(FRAMEHEIGHT) + 1, vel, 0, spawnInt, Tool.RECYCLE));
 				else if(isBetweenInc(x, 6, 8))
-					hazards.add(new Enemy1(FRAMEWIDTH, gen.nextInt(FRAMEHEIGHT) + 1, vel, 0, spawnInt, FRAMEHEIGHT));
+					hazards.add(new Enemy1(FRAMEWIDTH, gen.nextInt(FRAMEHEIGHT) + 1, vel, 0, spawnInt));
 				else if(isBetweenInc(x, 9, 11))
 					hazards.add(new Trash(FRAMEWIDTH, gen.nextInt(FRAMEHEIGHT) + 1, vel, 0, spawnInt, Tool.COMPOST));
 				else if(x==12)
@@ -80,6 +72,7 @@ public class PossibleHazards {
 			break;
 			
 		case 3: 
+			vel = FRAMEWIDTH/150;
 			spawnInt = gen.nextInt(spawnwindow);
 			hazard_num = 45;
 			for (int i = 0; i < hazard_num; i++) {
@@ -91,7 +84,7 @@ public class PossibleHazards {
 				else if(isBetweenInc(x, 3, 5))
 					hazards.add(new Trash(FRAMEWIDTH, gen.nextInt(FRAMEHEIGHT) + 1, vel, 0, spawnInt, Tool.RECYCLE));
 				else if(isBetweenInc(x, 6, 8))
-					hazards.add(new Enemy1(FRAMEWIDTH, gen.nextInt(FRAMEHEIGHT) + 1, vel, 0, spawnInt, FRAMEHEIGHT));
+					hazards.add(new Enemy1(FRAMEWIDTH, gen.nextInt(FRAMEHEIGHT) + 1, vel, 0, spawnInt));
 				else if(isBetweenInc(x, 9, 11))
 					hazards.add(new Enemy2(FRAMEWIDTH, gen.nextInt(FRAMEHEIGHT) + 1, vel, 0, spawnInt));
 				else if(isBetweenInc(x, 12, 14))
@@ -111,6 +104,7 @@ public class PossibleHazards {
 	case 4: 
 		gen = new Random();
 		spawnInt = gen.nextInt(spawnwindow);
+		vel = FRAMEWIDTH/125;
 		hazard_num = 60;
 		for (int i = 0; i < hazard_num; i++) {
 			spawnInt = gen.nextInt(spawnwindow);
@@ -121,7 +115,7 @@ public class PossibleHazards {
 			else if(isBetweenInc(x, 3, 5))
 				hazards.add(new Trash(FRAMEWIDTH, gen.nextInt(FRAMEHEIGHT) + 1, vel, 0, spawnInt, Tool.RECYCLE));
 			else if(isBetweenInc(x, 6, 8))
-				hazards.add(new Enemy1(FRAMEWIDTH, gen.nextInt(FRAMEHEIGHT) + 1, vel, 0, spawnInt, FRAMEHEIGHT));
+				hazards.add(new Enemy1(FRAMEWIDTH, gen.nextInt(FRAMEHEIGHT) + 1, vel, 0, spawnInt));
 			else if(isBetweenInc(x, 9, 11))
 				hazards.add(new Enemy2(FRAMEWIDTH, gen.nextInt(FRAMEHEIGHT) + 1, vel, 0, spawnInt));
 			else if(isBetweenInc(x, 12, 14))
@@ -139,6 +133,7 @@ public class PossibleHazards {
 		
 		
 	case 5: 
+		vel = FRAMEWIDTH/100;
 		spawnInt = gen.nextInt(spawnwindow);
 		hazard_num = 80;
 		for (int i = 0; i < hazard_num; i++) {
@@ -150,7 +145,7 @@ public class PossibleHazards {
 			else if(isBetweenInc(x, 3, 5))
 				hazards.add(new Trash(FRAMEWIDTH, gen.nextInt(FRAMEHEIGHT) + 1, vel, 0, spawnInt, Tool.RECYCLE));
 			else if(isBetweenInc(x, 6, 8))
-				hazards.add(new Enemy1(FRAMEWIDTH, gen.nextInt(FRAMEHEIGHT) + 1, vel, 0, spawnInt, FRAMEHEIGHT));
+				hazards.add(new Enemy1(FRAMEWIDTH, gen.nextInt(FRAMEHEIGHT) + 1, vel, 0, spawnInt));
 			else if(isBetweenInc(x, 9, 11))
 				hazards.add(new Enemy2(FRAMEWIDTH, gen.nextInt(FRAMEHEIGHT) + 1, vel, 0, spawnInt));
 			else if(isBetweenInc(x, 12, 14))
@@ -164,7 +159,7 @@ public class PossibleHazards {
 			else if(x==18)
 				hazards.add(new Powerup(FRAMEWIDTH, gen.nextInt(FRAMEHEIGHT)+1, vel, 0, spawnInt, PowerupType.CLEAR));
 			else if(isBetweenInc(x, 19, 21))
-				hazards.add(new Enemy3(FRAMEWIDTH, gen.nextInt(FRAMEHEIGHT) + 1, vel, 0, spawnInt, playery));
+				hazards.add(new Enemy3(FRAMEWIDTH, gen.nextInt(FRAMEHEIGHT) + 1, vel, 0, spawnInt));
 		}
 		break;
 		

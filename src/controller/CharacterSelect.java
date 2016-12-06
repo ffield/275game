@@ -79,7 +79,7 @@
 				@Override
 				public void mouseClicked(MouseEvent event) {
 					System.out.println("Registering mouse click");
-					GameWindow gw = new GameWindow("blue_crab");
+					GameWindow gw = new GameWindow("bluecrab_0");
 					gw.setFrame(frame);
 					currentFrame.setVisible(false);
 					frame.add(gw);
@@ -105,7 +105,7 @@
 				@Override
 				public void mouseClicked(MouseEvent event) {
 					System.out.println("Registering mouse click");
-					GameWindow gw = new GameWindow("horseshoe_crab");
+					GameWindow gw = new GameWindow("horsebutton");
 					gw.setFrame(frame);
 					currentFrame.setVisible(false);
 					frame.add(gw);
@@ -147,7 +147,7 @@
 				@Override
 				public void mouseClicked(MouseEvent event) {
 					System.out.println("Registering mouse click");
-					GameWindow gw = new GameWindow("oyster");
+					GameWindow gw = new GameWindow("oysterbutton");
 					gw.setFrame(frame);
 					currentFrame.setVisible(false);
 					frame.add(gw);

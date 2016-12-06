@@ -211,7 +211,7 @@ public class Controller extends JPanel implements KeyListener {
 				game.getPlayer().setImageType(speedy);
 			else
 				game.getPlayer().setImageType(name);
-			if (powerupCount >= 200) {
+			if (powerupCount == 200) {
 				game.getPlayer().setXvel(10);
 				game.getPlayer().setYvel(10);
 				game.getPlayer().setImageType(name);
@@ -223,7 +223,6 @@ public class Controller extends JPanel implements KeyListener {
 		for (int i = 0; i < game.getPossibleHazards().getHazardsList().size(); i++) {
 			if (game.getPossibleHazards().getHazardsList().get(i).getSpawntime() < count) {
 				game.getPossibleHazards().getHazardsList().get(i).move();
-				game.getPossibleHazards().getHazardsList().get(i).setPlayery(game.getPlayer().getYpos());
 			}
 		}
 		keyUpdate();
@@ -266,7 +265,6 @@ public class Controller extends JPanel implements KeyListener {
 		System.out.println(wind);
 		switch(wind){
 		case NEUTRAL:
-			game.getBoard().noWind();
 			break;
 		case NORTH:
 			game.getBoard().northWind();
