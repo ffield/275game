@@ -266,6 +266,7 @@ public class Controller extends JPanel implements KeyListener {
 		System.out.println(wind);
 		switch(wind){
 		case NEUTRAL:
+			game.getBoard().noWind();
 			break;
 		case NORTH:
 			game.getBoard().northWind();

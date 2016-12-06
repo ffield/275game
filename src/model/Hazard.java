@@ -66,7 +66,7 @@ public class Hazard extends Movers {
 		switch (movementType) {
 		case ENEMYMOVE:
 			this.xpos = xpos - xvel;
-			double y = Math.sin(xpos / 50) * (SCREENHEIGHT/30);
+			double y = Math.sin(xpos / 40) * (SCREENHEIGHT/30);
 			this.ypos = ((int) y) + ypos;
 			break;
 		case LEFT:

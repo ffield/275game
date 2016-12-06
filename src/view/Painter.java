@@ -159,7 +159,7 @@ public class Painter extends JPanel{
 		String saltstring = "";
 		String scorestring = "Points: ";
 		String levelstring = "Level: ";
-		String windstring = "Wind: ";
+		String windstring = "";
 		saltstring = saltstring + salinity;
 		scorestring = scorestring + score;
 		levelstring = levelstring + level;
@@ -183,16 +183,16 @@ public class Painter extends JPanel{
 		g2d.drawString(levelstring, (int)(FRAMEWIDTH/2), 20);
 		switch(wind){
 		case NEUTRAL:
-			g2d.drawImage(nowind, (int)(FRAMEWIDTH/4)+(FRAMEWIDTH/2), 20, 70, 70, null);
+			g2d.drawImage(nowind, (int)(FRAMEWIDTH/4)+(FRAMEWIDTH/2), 0, 70, 70, null);
 			break;
 		case NORTH:
-			g2d.drawImage(northwind, (int)(FRAMEWIDTH/4)+(FRAMEWIDTH/2), 20, 70, 70, null);
+			g2d.drawImage(northwind, (int)(FRAMEWIDTH/4)+(FRAMEWIDTH/2), 0, 70, 70, null);
 			break;
 		case SOUTH:
-			g2d.drawImage(southwind, (int)(FRAMEWIDTH/4)+(FRAMEWIDTH/2), 20, 70, 70, null);
+			g2d.drawImage(southwind, (int)(FRAMEWIDTH/4)+(FRAMEWIDTH/2), 0, 70, 70, null);
 			break;
 		}
-		g2d.drawString(windstring, (int)(FRAMEWIDTH/4)+(FRAMEWIDTH/2), 20);
+		g2d.drawString(windstring, (int)(FRAMEWIDTH/4)+(FRAMEWIDTH/2)+70, 40);
 		BufferedImage image;
 		for (int i = 0; i < xpos.size(); i++) {
 			if(images!=null){

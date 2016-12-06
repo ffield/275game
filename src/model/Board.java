@@ -82,7 +82,7 @@ public class Board {
 	}
 
 	public void southWind() {
-		int border = -5;
+		int border = -4;
 		int changer = 1;
 		if(limit!=((BOARDHEIGHT / 2)-(BOARDHEIGHT/6)))
 			limit+=1;
@@ -119,7 +119,7 @@ public class Board {
 	}
 	
 	public void northWind() {
-		int border = -5;
+		int border = -6;
 		int changer = 1;
 		if(limit!=(BOARDHEIGHT / 6))
 			limit-=1;
@@ -155,6 +155,45 @@ public class Board {
 		}
 	}
 
+	public void noWind() {
+		int border = -5;
+		int changer = 1;
+		if(limit>= BOARDHEIGHT - (BOARDHEIGHT / 3))
+			limit-=1;
+		if(limit<= BOARDHEIGHT - (BOARDHEIGHT / 3))
+			limit+=1;
+		arr = new int[BOARDWIDTH][BOARDHEIGHT];
+		for (int i = 0; i < BOARDWIDTH; i++) {
+			border += changer;
+			for (int j = 0; j < BOARDHEIGHT; j++) {
+				if (j > limit) {
+					arr[i][j] = 1;
+				} else {
+					if (i < BOARDWIDTH / 2) {
+
+						if (border < j) {
+							arr[i][j] = 1;
+						} else {
+							arr[i][j] = -1;
+						}
+
+						// System.out.println(j);
+					} else {
+						changer = -1;
+						if (border < j) {
+							arr[i][j] = 1;
+						} else {
+							arr[i][j] = -1;
+						}
+
+					}
+				}
+
+			}
+
+		}
+	}
+	
 	public int[][] getArr() {
 		return arr;
 	}
