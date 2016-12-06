@@ -3,7 +3,17 @@ package model;
 import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Random;
-
+/**
+ * PossibleHazards Model Object
+ * <p>
+ * The PossibleHazards object represents all the of the hazards that attack the player on the screen.  PossibleHazards has attributes:
+ * <ul>
+ * <li> int hazard_num - The number of hazards in the level
+ * <li> ArrayList hazards - The ArrayList containing all the hazards
+ * </ul>
+ * @author Group 1
+ * @see Hazard
+ */
 public class PossibleHazards {
 	int hazard_num;
 	ArrayList<Hazard> hazards;
@@ -11,15 +21,28 @@ public class PossibleHazards {
 	/**
 	 * constructor for the possible hazards class which contains all of the
 	 * possible hazards that can spawn in a given round
+	 * @param hazard_num The number of hazards in a round
 	 * 
 	 */
 	public PossibleHazards(int hazard_num) {
 		this.hazard_num = hazard_num;
 		this.hazards = new ArrayList<Hazard>();
 	}
+	/**
+	 * This function returns if the given num is between the given lower and upper limits, inclusively
+	 * @param num The number you want compared
+	 * @param lower The lower limit you specify
+	 * @param upper The upper limit you specify
+	 * @return true if it is between inclusively, false otherwise
+	 */
 	public static boolean isBetweenInc(int num, int lower, int upper){
 		return lower<=num&&num<=upper;
 	}
+	/**
+	 * This method generates hazards based on which level it is
+	 * @param screenSize - The dimensions of the screen
+	 * @param level - the level it is in the game
+	 */
 	public void generateHazards(Dimension screenSize, int level) {
 		Random gen = new Random();
 		int spawnwindow = 750;
@@ -168,9 +191,8 @@ public class PossibleHazards {
 		
 	
 
-	/**
-	 * @param hazards
-	 *            hazards are an array of all possible hazards Sets the array
+	/** Sets possibleHazards attribute to a given ArrayList of hazards
+	 * @param hazards hazards are an array of all possible hazards Sets the array
 	 *            containing all of the possible hazards
 	 */
 
@@ -179,21 +201,22 @@ public class PossibleHazards {
 	}
 
 	/**
-	 * an array of all possible hazards
-	 * 
-	 * @return void gets the possible Hazards from the array list
+	 * Returns the hazards attribute of PossibleHazards object
+	 * @return hazards The hazards attribute of this object
 	 */
 	public ArrayList<Hazard> getHazardsList() {
 		return this.hazards;
 	}
-
+	/**
+	 * This method moves all the hazards in the hazards attribute left
+	 */
 	public void moveLeft() {
 		for (int i = 0; i < hazard_num; i++) {
 			hazards.get(i).move();
 		}
 	}
 
-	/**
+	/** This method adds a given hazard to the ArrayList of hazards attribute
 	 * @param hazard
 	 *            an array of all possible hazards adds a single hazard to the
 	 *            array
@@ -203,7 +226,7 @@ public class PossibleHazards {
 		hazards.add(hazard);
 	}
 
-	/**
+	/** This method removes the hazard from the hazards attribute at a given index.
 	 * @param index
 	 *            index is an int that represents the position we want in the
 	 *            array Removes a hazard from the array at the given index
@@ -214,12 +237,18 @@ public class PossibleHazards {
 
 	/**
 	 * select a random hazard in array
+	 * @return Hazard
 	 */
 	public Hazard selectRandom() {
 		Random gen = new Random();
 		return hazards.get(gen.nextInt(hazards.size()));
 	}
 
+	/**
+	 * This method clears all enemies and trash off the screen
+	 * @param screenSize - Dimensions of screen size (Dimension)
+	 * @see Dimension
+	 */
 	public void clearEnemies(Dimension screenSize) {
 		ArrayList<Hazard> removeThese = new ArrayList<Hazard>();
 		for (Hazard h : hazards) {

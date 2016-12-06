@@ -2,23 +2,22 @@ package model;
 
 import java.lang.Math;
 /**
- * Enemy1 is a subclass of Hazard
+ * Enemy2 Model Object
  * <p>
- * Enemy1 represents the Catfish. Enemy1's attributes are the same as all hazards:
- * <ul>
- * <li> int xpos - The X position of the enemy
- * <li> int ypos - The Y position of the enemy
- * <li> int xvel - The X velocity of the enemy
- * <li> int yvel - The Y velocity of the enemy
- * <li> int limit - tool used to set fresh water and salt water zones
- * <li> enum MovementType - The type of movement the enemy takes on
- * <li> String 
- * </ul>
+ * Enemy2 represents the Pickerel. Enemy2's attributes are the same as all hazards
  * 
  * @author Group 1
  * @see Hazard
  */
 public class Enemy2 extends Hazard {
+	/**
+	 * Constructor
+	 * @param xpos X position of hazard
+	 * @param ypos Y position of hazard
+	 * @param xvel X velocity of hazard
+	 * @param yvel Y velocity of hazard
+	 * @param spawntime integer representing when the enemy will spawn.
+	 */
 	public Enemy2(int xpos, int ypos, int xvel, int yvel, int spawntime) {
 		super(xpos, ypos, xvel, yvel, spawntime, MovementType.ENEMY2MOVE, "fish_pickerel_left");
 		this.setType(HazardType.ENEMY2);

@@ -5,5 +5,28 @@ package model;
  *
  */
 public enum MovementType {
-	LEFT, COLLIDEDUP, COLLIDEDDOWN, RIGHT, ENEMYMOVE, ENEMY2MOVE
+	/**
+	 * Move left
+	 */
+	LEFT, 
+	/**
+	 * Movement when collided with other object on north side
+	 */
+	COLLIDEDUP, 
+	/**
+	 * Movement when collided with other object on south side
+	 */
+	COLLIDEDDOWN, 
+	/**
+	 * Move right
+	 */
+	RIGHT, 
+	/**
+	 * Enemy moves
+	 */
+	ENEMYMOVE, 
+	/**
+	 * Enemy moves a second way
+	 */
+	ENEMY2MOVE
 }

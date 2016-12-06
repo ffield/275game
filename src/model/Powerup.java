@@ -2,11 +2,28 @@ package model;
 
 import java.awt.Color;
 import java.util.Random;
-
+/**
+ * Powerup Model Object
+ * <p>
+ * Powerup inherits attributes from hazard. Unique attributes include:
+ * <ul>
+ * <li> Powerup powerupType - Enum describing which type of powerup it is
+ * <li> Color color - Which color the powerup is (Color)
+ * </ul>
+ * @author Group 1
+ *
+ */
 public class Powerup extends Hazard {
 	PowerupType powerupType;
 	Color color;
-
+	/**
+	 * Constructor
+	 * @param xpos The x position of the powerup
+	 * @param ypos The y position of the powerup
+	 * @param xvel The x velocity of the powerup
+	 * @param yvel The y velocity of the powerup
+	 * @param spawntime The time the powerup will spawn on the screen
+	 */
 	public Powerup(int xpos, int ypos, int xvel, int yvel, int spawntime) {
 		super(xpos, ypos, xvel, yvel, spawntime, MovementType.LEFT, "");
 		this.setType(HazardType.POWERUP);
@@ -35,7 +52,15 @@ public class Powerup extends Hazard {
 			break;
 		}
 	}
-		
+		/**
+		 * Constructor
+		 * @param xpos The x position of the powerup
+		 * @param ypos The y position of the powerup
+		 * @param xvel The x velocity of the powerup
+		 * @param yvel The y velocity of the powerup
+		 * @param spawntime The time the powerup will spawn on the screen
+		 * @param powerupType Enum describing types of powerups
+		 */
 		public Powerup(int xpos, int ypos, int xvel, int yvel, int spawntime, PowerupType powerupType) {
 			super(xpos, ypos, xvel, yvel, spawntime, MovementType.LEFT, "recycle");
 			this.setType(HazardType.POWERUP);
@@ -59,11 +84,17 @@ public class Powerup extends Hazard {
 			this.powerupType = powerupType;
 			
 	}
-
+	/**
+	 * Returns powerupType attribute
+	 * @return powerupType (PowerupType)
+	 */
 	public PowerupType getPowerupType() {
 		return this.powerupType;
 	}
-
+	/**
+	 * Returns color attribute
+	 * @return color (Color of the powerup)
+	 */
 	public Color getColor() {
 		return this.color;
 	}
