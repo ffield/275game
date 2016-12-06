@@ -85,7 +85,22 @@ public class Hazard extends Movers {
 		case ENEMY2MOVE:
 			this.xpos = xpos - xvel;
 			break;
+		case ENEMYMOVE3:
+			this.xpos = xpos - xvel;
+			if(ypos<playery)
+				ypos+=3;
+			if(ypos>playery)
+				ypos-=3;
+			break;
 		}
+	}
+
+	public int getPlayery() {
+		return playery;
+	}
+
+	public void setPlayery(int playery) {
+		this.playery = playery;
 	}
 
 	public int getxpos() {

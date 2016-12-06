@@ -223,6 +223,7 @@ public class Controller extends JPanel implements KeyListener {
 		for (int i = 0; i < game.getPossibleHazards().getHazardsList().size(); i++) {
 			if (game.getPossibleHazards().getHazardsList().get(i).getSpawntime() < count) {
 				game.getPossibleHazards().getHazardsList().get(i).move();
+				game.getPossibleHazards().getHazardsList().get(i).setPlayery(game.getPlayer().getYpos());
 			}
 		}
 		keyUpdate();
