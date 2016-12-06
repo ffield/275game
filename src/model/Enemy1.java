@@ -1,26 +1,25 @@
 package model;
 
-import java.awt.Rectangle;
 import java.lang.Math;
-
+/**
+ * Enemy1 Model Object
+ * <p>
+ * Enemy1 represents the Catfish. Enemy1's attributes are the same as all hazards
+ * 
+ * @author Group 1
+ * @see Hazard
+ */
 public class Enemy1 extends Hazard {
-	public Enemy1(int xpos, int ypos, int xvel, int yvel, int spawntime, int SCREENHEIGHT) {
-		super(xpos, ypos, xvel, yvel, spawntime, MovementType.ENEMYMOVE, "catfish", SCREENHEIGHT);
+	/**
+	 * Constructor
+	 * @param xpos X position of hazard
+	 * @param ypos Y position of hazard
+	 * @param xvel X velocity of hazard
+	 * @param yvel Y velocity of hazard
+	 * @param spawntime integer representing when the enemy will spawn.
+	 */
+	public Enemy1(int xpos, int ypos, int xvel, int yvel, int spawntime) {
+		super(xpos, ypos, xvel, yvel, spawntime, MovementType.ENEMYMOVE, "fish_catfish_left_0");
 		this.setType(HazardType.ENEMY1);
 	}
-	
-	@Override
-	public Rectangle getBounds() {
-		Rectangle r = new Rectangle(xpos, ypos, 80, 40);
-		return r;
-	}
-	// public Enemy1(){
-	// super(200,200,1,1);
-	// }
-
-	// public void moveLeft(){
-	// this.xpos = xpos-xvel;
-	// double y = Math.sin(xpos/6)*15;
-	// this.ypos = ((int)y)+ypos;
-	// }
 }

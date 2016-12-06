@@ -93,16 +93,6 @@ public class Controller extends JPanel implements KeyListener {
 		am.put(name, action);
 	}
 
-	// private BufferedImage createImage(String filename){
-	// BufferedImage bufferedImage;
-	// try {
-	// bufferedImage = ImageIO.read(new File(filename));
-	// return bufferedImage;
-	// } catch (IOException e) {
-	// e.printStackTrace();
-	// }
-	// return null;}
-
 	@Override
 	public void paint(Graphics g) {
 		painter.paint(g);
@@ -125,8 +115,6 @@ public class Controller extends JPanel implements KeyListener {
 							game.getPlayer().Invincibility();
 						} else if (collided.getPowerupType().equals(PowerupType.CLEAR)) {
 							game.getPossibleHazards().clearEnemies(SCREENSIZE);
-							// System.out.println("help");
-							// clear all enemies off screen
 						} else if (collided.getPowerupType().equals(PowerupType.SPEED)) {
 							game.getPlayer().SpeedUp();
 						} else if (collided.getPowerupType().equals(PowerupType.ADDLIFE)) {
@@ -144,12 +132,10 @@ public class Controller extends JPanel implements KeyListener {
 								game.getPossibleHazards().removeHazard(i);
 								game.getPoint();
 							} else {
-								System.out.println("One less life");
 								game.getPossibleHazards().removeHazard(i);
 								game.getPlayer().LoseLife();
 							}
 						} else {
-							System.out.println("One less life");
 							game.getPossibleHazards().removeHazard(i);
 							game.getPlayer().LoseLife();
 						}
@@ -159,14 +145,6 @@ public class Controller extends JPanel implements KeyListener {
 		}
 	}
 
-	public void saltOnMovement() {
-		double xsaltindexprep = game.getPlayer().getXpos() / ((double) FRAMEWIDTH);
-		int xsaltindex = (int) (40 * xsaltindexprep);
-		double ysaltindexprep = game.getPlayer().getYpos() / ((double) FRAMEHEIGHT);
-		int ysaltindex = (int) (20 * ysaltindexprep);
-		game.getPlayer().setSaldelta(game.getBoard().getTile(xsaltindex, ysaltindex));
-		game.getPlayer().updateSalinity();
-	}
 
 	public void update() {
 		String empty = "empty";
@@ -203,7 +181,7 @@ public class Controller extends JPanel implements KeyListener {
 				game.getPlayer().setImageType(speedy);
 			else
 				game.getPlayer().setImageType(name);
-			if (powerupCount >= 200) {
+			if (powerupCount == 200) {
 				game.getPlayer().setXvel(10);
 				game.getPlayer().setYvel(10);
 				game.getPlayer().setImageType(name);
@@ -215,7 +193,6 @@ public class Controller extends JPanel implements KeyListener {
 		for (int i = 0; i < game.getPossibleHazards().getHazardsList().size(); i++) {
 			if (game.getPossibleHazards().getHazardsList().get(i).getSpawntime() < count) {
 				game.getPossibleHazards().getHazardsList().get(i).move();
-				game.getPossibleHazards().getHazardsList().get(i).setPlayery(game.getPlayer().getYpos());
 			}
 		}
 		keyUpdate();
@@ -227,67 +204,18 @@ public class Controller extends JPanel implements KeyListener {
 		if (game.isGameOver())
 			game.stop();
 		if(count%300 == 0)
-			changeWind();
+			game.changeWind();
 		if(count%100 == 0)
-			handleWind();
-		saltOnMovement();
+			game.handleWind();
+		game.saltOnMovement(SCREENSIZE);
 		onCollision();
-		onOffScreen();
-		onNextLevel(SCREENSIZE);
+		game.onOffScreen(SCREENSIZE);
+		ArrayList<Hazard> c = game.getPossibleHazards().getHazardsList();
+		if (c.size() == 0) 
+			count=0;
+		game.onNextLevel(SCREENSIZE);
 	}
 
-		
-	public void changeWind() {
-		Random gen = new Random();
-		int x = gen.nextInt(3);
-		switch(x){
-		case 0:
-			game.setWind(Wind.NEUTRAL);
-			break;
-		case 1:
-			game.setWind(Wind.NORTH);
-			break;
-		case 2:
-			game.setWind(Wind.SOUTH);
-			break;
-		}
-	}
-	
-	public void handleWind() {
-		Wind wind = game.getWind();
-		System.out.println(wind);
-		switch(wind){
-		case NEUTRAL:
-			game.getBoard().noWind();
-			break;
-		case NORTH:
-			game.getBoard().northWind();
-			break;
-		case SOUTH:
-			game.getBoard().southWind();
-			break;
-		}
-	}
-	
-	public void onOffScreen() {
-		ArrayList<Hazard> c = game.getPossibleHazards().getHazardsList();
-		for (int i = 0; i < c.size(); i++) {
-			if (c.get(i).getXpos() <= 0 || c.get(i).getYpos() <= -30 || c.get(i).getYpos() >= FRAMEHEIGHT + 30) {
-				game.getPossibleHazards().removeHazard(i);
-			}
-		}
-	}
-
-	public void onNextLevel(Dimension screenSize) {
-		ArrayList<Hazard> c = game.getPossibleHazards().getHazardsList();
-		System.out.println("Size: " + c.size());
-		if (c.size() == 0) {
-			count = 0;
-			game.levelUp();
-			game.setPossibleHazards(new PossibleHazards(game.getHazardNum()));
-			game.getPossibleHazards().generateHazards(screenSize, game.getLevel());
-		}
-	}
 
 	public Game getGame() {
 		return this.game;
@@ -343,9 +271,7 @@ public class Controller extends JPanel implements KeyListener {
 		int code = e.getKeyCode();
 
 		if (code == KeyEvent.VK_DOWN) {
-			down = true; // removing velx = 0 allows us to go vertically and
-							// horizontlly at the same time
-
+			down = true;
 		}
 		if (code == KeyEvent.VK_UP) {
 			up = true;
