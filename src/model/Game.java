@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Game Model Object
@@ -258,5 +259,78 @@ public class Game implements Serializable{
 			names.add(ph.getHazardsList().get(i).getImageType());
 		}
 		return names;	
+	}
+	/**
+	 * This method determines if it's time for the next level, and then levels you up and generates new hazards
+	 * @param screenSize Dimensions of screen
+	 */
+	public void onNextLevel(Dimension screenSize) {
+		ArrayList<Hazard> c = getPossibleHazards().getHazardsList();
+		if (c.size() == 0) {
+			levelUp();
+			setPossibleHazards(new PossibleHazards(getHazardNum()));
+			getPossibleHazards().generateHazards(screenSize, getLevel());
+		}
+	}
+	/**
+	 * This method deletes the hazards as they touch the end of the screen
+	 * @param screenSize Dimension of screen
+	 */
+	public void onOffScreen(Dimension screenSize) {
+		int FRAMEHEIGHT = (int) screenSize.getHeight();
+		ArrayList<Hazard> c = getPossibleHazards().getHazardsList();
+		for (int i = 0; i < c.size(); i++) {
+			if (c.get(i).getXpos() <= 0 || c.get(i).getYpos() <= -30 || c.get(i).getYpos() >= FRAMEHEIGHT + 30) {
+				getPossibleHazards().removeHazard(i);
+			}
+		}
+	}
+	/**
+	 * Changes wind direction randomly
+	 */
+	public void changeWind() {
+		Random gen = new Random();
+		int x = gen.nextInt(3);
+		switch(x){
+		case 0:
+			setWind(Wind.NEUTRAL);
+			break;
+		case 1:
+			setWind(Wind.NORTH);
+			break;
+		case 2:
+			setWind(Wind.SOUTH);
+			break;
+		}
+	}
+	/**
+	 * Determines how salinity affects player
+	 * @param screenSize Dimension of screen
+	 */
+	public void saltOnMovement(Dimension screenSize) {
+		int FRAMEWIDTH = (int) screenSize.getWidth();
+		int FRAMEHEIGHT = (int) screenSize.getHeight();
+		double xsaltindexprep = getPlayer().getXpos() / ((double) FRAMEWIDTH);
+		int xsaltindex = (int) (40 * xsaltindexprep);
+		double ysaltindexprep = getPlayer().getYpos() / ((double) FRAMEHEIGHT);
+		int ysaltindex = (int) (20 * ysaltindexprep);
+		getPlayer().setSaldelta(getBoard().getTile(xsaltindex, ysaltindex));
+		getPlayer().updateSalinity();
+	}
+	/**
+	 * This method handles how wind affects the board
+	 */
+	public void handleWind() {
+		Wind wind = getWind();
+		switch(wind){
+		case NEUTRAL:
+			break;
+		case NORTH:
+			getBoard().northWind();
+			break;
+		case SOUTH:
+			getBoard().southWind();
+			break;
+		}
 	}
 }
