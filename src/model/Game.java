@@ -324,6 +324,7 @@ public class Game implements Serializable{
 		Wind wind = getWind();
 		switch(wind){
 		case NEUTRAL:
+			getBoard().neutralWind();
 			break;
 		case NORTH:
 			getBoard().northWind();

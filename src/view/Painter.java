@@ -28,6 +28,9 @@ public class Painter extends JPanel{
     BufferedImage salt = createImage("images/salt_tile.png");
     BufferedImage heart = createImage("images/fullHeart.png");
     BufferedImage meter = createImage("images/meter.png");
+    BufferedImage nowind = createImage("images/neutral_cloud.png");
+    BufferedImage northwind = createImage("images/north_cloud.png");
+    BufferedImage southwind = createImage("images/south_cloud.png");
 	
 	ArrayList<String> names;
 	ArrayList<Integer> xpos;
@@ -178,6 +181,17 @@ public class Painter extends JPanel{
 		g2d.setColor(Color.BLACK);
 		g2d.drawString(scorestring, 100, 25);
 		g2d.drawString(levelstring, (int)(FRAMEWIDTH/2), 20);
+		switch(wind){
+		case NEUTRAL:
+			g2d.drawImage(nowind, (int)(FRAMEWIDTH/4)+(FRAMEWIDTH/2), 20, 50, 50, null);
+			break;
+		case SOUTH:
+			g2d.drawImage(southwind, (int)(FRAMEWIDTH/4)+(FRAMEWIDTH/2), 20, 50, 50, null);
+			break;
+		case NORTH:
+			g2d.drawImage(northwind, (int)(FRAMEWIDTH/4)+(FRAMEWIDTH/2), 20, 50, 50, null);
+			break;
+		}
 		g2d.drawString(windstring, (int)(FRAMEWIDTH/4)+(FRAMEWIDTH/2), 20);
 		BufferedImage image;
 		for (int i = 0; i < xpos.size(); i++) {
