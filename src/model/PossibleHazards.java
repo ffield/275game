@@ -44,8 +44,7 @@ public class PossibleHazards {
 				System.out.println("Spawn: " + spawnInt);
 				int x = gen.nextInt(11);
 				if(isBetweenInc(x, 0, 2))
-					hazards.add(new Enemy3(FRAMEWIDTH, gen.nextInt(FRAMEHEIGHT) + 1, vel, 0, spawnInt, playery));
-					//hazards.add(new Trash(FRAMEWIDTH, gen.nextInt(FRAMEHEIGHT) + 1, vel, 0, spawnInt, Tool.TRASH));
+					hazards.add(new Trash(FRAMEWIDTH, gen.nextInt(FRAMEHEIGHT) + 1, vel, 0, spawnInt, Tool.TRASH));
 				else if(isBetweenInc(x, 3, 5))
 					hazards.add(new Trash(FRAMEWIDTH, gen.nextInt(FRAMEHEIGHT) + 1, vel, 0, spawnInt, Tool.RECYCLE));
 				else if(isBetweenInc(x, 6, 8))

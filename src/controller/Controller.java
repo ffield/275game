@@ -59,14 +59,6 @@ public class Controller extends JPanel implements KeyListener {
 	boolean right;
 	int alpha = 0; // makes transparent
 	Color myColor = new Color(255, 60, 50, alpha);
-	// String sourceimage = ("images/net.png");
-	// BufferedImage img = createImage(sourceimage);
-	// BufferedImage recycle = createImage("images/recycle.png");
-	// BufferedImage compost = createImage("images/compost.png");
-	// BufferedImage player = createImage("images/bluecrab_0.png");
-	// BufferedImage fresh = createImage("images/water_tile.png");
-	// BufferedImage salt = createImage("images/salt_tile.png");
-	// BufferedImage heart = createImage("images/fullHeart.png");
 
 	public Controller() {
 		game = new Game(SCREENSIZE);
