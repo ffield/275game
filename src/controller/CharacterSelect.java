@@ -88,6 +88,12 @@
 					currentFrame.setVisible(false);
 					frame.add(gw);
 					frame.add(gw.control);
+					
+					
+					gw.control.getGame().getPlayer().setSalmax(800);
+					gw.control.getGame().getPlayer().setSalmin(0);
+					
+					
 					ActionListener taskPerformer = new ActionListener() {
 						public void actionPerformed(ActionEvent evt) {
 							if (gw.control.getGame().getLevel()==3){
@@ -132,6 +138,12 @@
 					currentFrame.setVisible(false);
 					frame.add(gw);
 					frame.add(gw.control);
+					
+
+					gw.control.getGame().getPlayer().setSalmax(600);
+					gw.control.getGame().getPlayer().setSalmin(0);
+					
+					
 					ActionListener taskPerformer = new ActionListener() {
 						public void actionPerformed(ActionEvent evt) {
 							if (gw.control.getGame().getLevel()==3){
@@ -193,6 +205,11 @@
 					currentFrame.setVisible(false);
 					frame.add(gw);
 					frame.add(gw.control);
+					
+
+					gw.control.getGame().getPlayer().setSalmax(1000);
+					gw.control.getGame().getPlayer().setSalmin(0);
+					
 					ActionListener taskPerformer = new ActionListener() {
 						public void actionPerformed(ActionEvent evt) {
 							if (gw.control.getGame().getLevel()==3){
