@@ -199,13 +199,13 @@ public class Painter extends JPanel{
             x += 40;
 		}
 		g2d.setColor(Color.BLACK);
-		if (gameover) {
-			int fontSize = 60;
-			Font f = new Font("Arial Black", Font.BOLD, fontSize);
-			Font s = new Font("Comic Sans MS", Font.PLAIN, 20);
-			g2d.setFont(f);
-			g2d.setColor(Color.RED);
-			g2d.drawString("GAME OVER", (int) (FRAMEWIDTH / 2.5), FRAMEHEIGHT / 2);
-		}
+//		if (gameover) {
+//			int fontSize = 60;
+//			Font f = new Font("Arial Black", Font.BOLD, fontSize);
+//			Font s = new Font("Comic Sans MS", Font.PLAIN, 20);
+//			g2d.setFont(f);
+//			g2d.setColor(Color.RED);
+//			g2d.drawString("GAME OVER", (int) (FRAMEWIDTH / 2.5), FRAMEHEIGHT / 2);
+//		}
 	}
 }

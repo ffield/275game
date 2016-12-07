@@ -18,8 +18,6 @@
 	import javax.swing.JPanel;
 	import javax.swing.Timer;
 
-import controller.GameWindow;
-
 	public class CharacterSelect extends JPanel{
 		static Dimension SCREENSIZE = Toolkit.getDefaultToolkit().getScreenSize();
 		public static int FRAMEHEIGHT = (int) SCREENSIZE.getHeight();
@@ -90,21 +88,23 @@ import controller.GameWindow;
 					frame.add(gw.control);
 					ActionListener taskPerformer = new ActionListener() {
 						public void actionPerformed(ActionEvent evt) {
-//							if (gw.control.getGame().getLevel()==5){
-//								frame.remove(gw.control);
-//								frame.remove(gw);
-//								Party p = new Party(frame);
-//								frame.add(p);
-//								frame.setSize(gw.control.FRAMEWIDTH , gw.control.FRAMEHEIGHT );
-//								p.setFrame(frame);
-//							}
-//							if (gw.control.getGame().isGameOver() == true){
-//								frame.remove(gw.control);
-//								Death d = new Death(frame);
-//								frame.add(d);
-//								frame.setSize(gw.control.FRAMEWIDTH ,  gw.control.FRAMEHEIGHT );
-//								d.setFrame(frame);
-//							}
+							if (gw.control.getGame().getLevel()==3){
+								frame.remove(gw.control);
+								frame.remove(gw);
+								Party p = new Party(frame);
+								frame.add(p);
+								frame.setSize(gw.control.FRAMEWIDTH , gw.control.FRAMEHEIGHT );
+								p.setFrame(frame);
+								
+							}
+							if (gw.control.getGame().isGameOver() == true){
+								frame.remove(gw);
+								frame.remove(gw.control);
+								Death d = new Death(frame);
+								frame.add(d);
+								frame.setSize(gw.control.FRAMEWIDTH ,  gw.control.FRAMEHEIGHT );
+								d.setFrame(frame);
+							}
 							gw.control.update();
 						}
 					};
@@ -131,23 +131,24 @@ import controller.GameWindow;
 					frame.add(gw.control);
 					ActionListener taskPerformer = new ActionListener() {
 						public void actionPerformed(ActionEvent evt) {
-//							if (gw.control.getGame().getLevel()==3){
-//								frame.remove(gw.control);
-//								frame.remove(gw);
-//								Party p = new Party(frame);
-//								frame.add(p);
-//								frame.setSize(gw.control.FRAMEWIDTH , gw.control.FRAMEHEIGHT );
-//								p.setFrame(frame);
-//								
-//							}
-//							if (gw.control.getGame().isGameOver() == true){
-//								frame.remove(gw.control);
-//								Death d = new Death(frame);
-//								frame.add(d);
-//								frame.setSize(gw.control.FRAMEWIDTH ,  gw.control.FRAMEHEIGHT );
-//								d.setFrame(frame);
-//							}
-//							
+							if (gw.control.getGame().getLevel()==3){
+								frame.remove(gw.control);
+								frame.remove(gw);
+								Party p = new Party(frame);
+								frame.add(p);
+								frame.setSize(gw.control.FRAMEWIDTH , gw.control.FRAMEHEIGHT );
+								p.setFrame(frame);
+								
+							}
+							if (gw.control.getGame().isGameOver() == true){
+								frame.remove(gw);
+								frame.remove(gw.control);
+								Death d = new Death(frame);
+								frame.add(d);
+								frame.setSize(gw.control.FRAMEWIDTH ,  gw.control.FRAMEHEIGHT );
+								d.setFrame(frame);
+							}
+							
 							gw.control.update();
 					
 						}
@@ -191,23 +192,23 @@ import controller.GameWindow;
 					frame.add(gw.control);
 					ActionListener taskPerformer = new ActionListener() {
 						public void actionPerformed(ActionEvent evt) {
-//							if (gw.control.getGame().getLevel()==3){
-//								frame.remove(gw.control);
-//								frame.remove(gw);
-//								Party p = new Party(frame);
-//								frame.add(p);
-//								frame.setSize(FRAMEWIDTH , FRAMEHEIGHT );
-//								p.setFrame(frame);
-//								
-//							}
-//							if (gw.control.getGame().isGameOver() == true){
-//								frame.remove(gw.control);
-//								Death d = new Death(frame);
-//								frame.add(d);
-//								frame.setSize(FRAMEWIDTH , FRAMEHEIGHT );
-//								d.setFrame(frame);
-//						
-//							}
+							if (gw.control.getGame().getLevel()==3){
+							frame.remove(gw.control);
+							frame.remove(gw);
+							Party p = new Party(frame);
+							frame.add(p);
+							frame.setSize(gw.control.FRAMEWIDTH , gw.control.FRAMEHEIGHT );
+							p.setFrame(frame);
+							
+						}
+						if (gw.control.getGame().isGameOver() == true){
+							frame.remove(gw);
+							frame.remove(gw.control);
+							Death d = new Death(frame);
+							frame.add(d);
+							frame.setSize(gw.control.FRAMEWIDTH ,  gw.control.FRAMEHEIGHT );
+							d.setFrame(frame);
+						}
 							
 							gw.control.update();
 						}
@@ -240,15 +241,6 @@ import controller.GameWindow;
 					
 				}
 			});
-		}
-		public static void main(String[] args){
-			System.out.println("CharacterSelect main is being called");
-			JFrame frame = new JFrame();
-			CharacterSelect cs = new CharacterSelect();
-			frame.setSize(FRAMEWIDTH, FRAMEHEIGHT);
-			frame.add(cs);
-			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			frame.setVisible(true);
 		}
 	}
 

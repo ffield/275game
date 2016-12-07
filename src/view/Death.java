@@ -83,14 +83,6 @@ public class Death extends JPanel{
 		}
         g.drawImage(backg, 0, 0, getWidth(), getHeight(), this);
     }
-	public static void main(String[] args){
-		JFrame frame = new JFrame("crabgame");
-		Death d = new Death(frame);
-		frame.setSize((int)(FRAMEWIDTH), (int)(FRAMEHEIGHT));
-		frame.add(d);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setVisible(true);
-	}
 
 	
 }
