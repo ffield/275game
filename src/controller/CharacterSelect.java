@@ -28,6 +28,7 @@
 		JButton back = new JButton();
 		JFrame frame;
 		
+		
 		public void setFrame(JFrame f){
 			this.frame = f;
 		}
@@ -48,6 +49,8 @@
 			} catch (Exception ex){
 				System.out.println(ex);
 			}
+
+			setBackground(Color.BLUE);
 			blue.setBackground(null);
 			horseshoe.setBackground(null);
 			oyster.setBackground(null);
@@ -56,7 +59,6 @@
 			add("HorseShoe", horseshoe);
 			add("Oyster", oyster);
 			add("Back", back);
-			setBackground(Color.BLUE);
 			CharacterSelect cs = this;
 			back.addMouseListener(new MouseListener(){
 				@Override
@@ -86,6 +88,24 @@
 					frame.add(gw.control);
 					ActionListener taskPerformer = new ActionListener() {
 						public void actionPerformed(ActionEvent evt) {
+							if (gw.control.getGame().getLevel()==3){
+								frame.remove(gw.control);
+								frame.remove(gw);
+								Party p = new Party(frame);
+								frame.add(p);
+								frame.setSize(gw.control.FRAMEWIDTH , gw.control.FRAMEHEIGHT );
+								p.setFrame(frame);
+								
+							}
+							if (gw.control.getGame().isGameOver() == true){
+								frame.remove(gw.control);
+								Death d = new Death(frame);
+								frame.add(d);
+								frame.setSize(gw.control.FRAMEWIDTH ,  gw.control.FRAMEHEIGHT );
+								d.setFrame(frame);
+						
+							}
+							
 							gw.control.update();
 						}
 					};
@@ -112,7 +132,26 @@
 					frame.add(gw.control);
 					ActionListener taskPerformer = new ActionListener() {
 						public void actionPerformed(ActionEvent evt) {
+							if (gw.control.getGame().getLevel()==3){
+								frame.remove(gw.control);
+								frame.remove(gw);
+								Party p = new Party(frame);
+								frame.add(p);
+								frame.setSize(gw.control.FRAMEWIDTH , gw.control.FRAMEHEIGHT );
+								p.setFrame(frame);
+								
+							}
+							if (gw.control.getGame().isGameOver() == true){
+								frame.remove(gw.control);
+								Death d = new Death(frame);
+								frame.add(d);
+								frame.setSize(gw.control.FRAMEWIDTH ,  gw.control.FRAMEHEIGHT );
+								d.setFrame(frame);
+						
+							}
+							
 							gw.control.update();
+					
 						}
 					};
 					Timer timer = new Timer(25, taskPerformer);
@@ -154,6 +193,24 @@
 					frame.add(gw.control);
 					ActionListener taskPerformer = new ActionListener() {
 						public void actionPerformed(ActionEvent evt) {
+							if (gw.control.getGame().getLevel()==3){
+								frame.remove(gw.control);
+								frame.remove(gw);
+								Party p = new Party(frame);
+								frame.add(p);
+								frame.setSize(FRAMEWIDTH , FRAMEHEIGHT );
+								p.setFrame(frame);
+								
+							}
+							if (gw.control.getGame().isGameOver() == true){
+								frame.remove(gw.control);
+								Death d = new Death(frame);
+								frame.add(d);
+								frame.setSize(FRAMEWIDTH , FRAMEHEIGHT );
+								d.setFrame(frame);
+						
+							}
+							
 							gw.control.update();
 						}
 					};

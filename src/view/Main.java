@@ -10,6 +10,8 @@ import javax.swing.JFrame;
 import javax.swing.Timer;
 
 import controller.Controller;
+import controller.Death;
+import controller.Party;
 
 public class Main {
 	public static void main(String[] args) throws InterruptedException {
@@ -23,6 +25,22 @@ public class Main {
 		ActionListener taskPerformer = new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				control.update();
+				if (control.getGame().getLevel()==3){
+					frame.remove(control);
+					Party p = new Party(frame);
+					frame.add(p);
+					frame.setSize((int) (control.FRAMEWIDTH ), (int) (control.FRAMEHEIGHT ));
+					p.setFrame(frame);
+					
+				}
+				if (control.getGame().isGameOver() == true){
+					frame.remove(control);
+					Death d = new Death(frame);
+					frame.add(d);
+					frame.setSize((int) (control.FRAMEWIDTH ), (int) (control.FRAMEHEIGHT ));
+					d.setFrame(frame);
+			
+				}
 			}
 		};
 		Timer timer = new Timer(25, taskPerformer);

@@ -16,6 +16,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -23,42 +24,48 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class StartMenu extends JPanel{
+public class Death extends JPanel{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	static Dimension SCREENSIZE = Toolkit.getDefaultToolkit().getScreenSize();
 	public static int FRAMEHEIGHT = (int) SCREENSIZE.getHeight();
 	public static int FRAMEWIDTH = (int) SCREENSIZE.getWidth();
-	JButton play = new JButton();
-	JButton help = new JButton();
+	JButton tryAgain = new JButton();
 	JFrame frame;
 	
-	public StartMenu(JFrame aframe){
+	public void setFrame(JFrame f) {
+	    this.frame = f;		
+		}
+	
+	public Death(JFrame aframe){
 		this.frame = aframe;
 		setLayout(new FlowLayout());
 		frame.setSize((int) (FRAMEWIDTH), (int) (FRAMEHEIGHT));
 		try{
-			Image p = ImageIO.read(new File("images/play.png"));
-			Image h = ImageIO.read(new File("images/help.png"));
-			play.setIcon(new ImageIcon(p));
-			help.setIcon(new ImageIcon(h));
+			Image b = ImageIO.read(new File("images/playagain.png"));
+			tryAgain.setIcon(new ImageIcon(b));
 		} catch (Exception ex){
 			System.out.println(ex);
 		}
-		play.setBackground(null);
-		help.setBackground(null);
-		add("Play", play);
-		add("Help", help);
-		setBackground(Color.BLUE);
-		StartMenu sm = this;
-		play.addMouseListener(new MouseListener(){
+		tryAgain.setBackground(null);
+		add("Try Again", tryAgain);
+	
+		Death d = this;
+		tryAgain.addMouseListener(new MouseListener(){
 			@Override
 			public void mouseClicked(MouseEvent event) {
-				sm.setVisible(false);
+				d.setVisible(false);
 				CharacterSelect cs = new CharacterSelect();
 				cs.setFrame(frame);
 				frame.setSize(FRAMEWIDTH, FRAMEHEIGHT);
 				frame.add(cs);
-				frame.remove(sm);
+				frame.remove(d);
 			}
+			
+			
+			
 			@Override
 			public void mouseEntered(MouseEvent arg0) {}
 			@Override
@@ -68,30 +75,28 @@ public class StartMenu extends JPanel{
 			@Override
 			public void mouseReleased(MouseEvent arg0) {}
 		});
-		help.addMouseListener(new MouseListener(){
-			@Override
-			public void mouseClicked(MouseEvent event) {
-				Help h = new Help(frame);
-				frame.add(h);
-				frame.remove(sm);
-			}
-			@Override
-			public void mouseEntered(MouseEvent arg0) {}
-			@Override
-			public void mouseExited(MouseEvent arg0) {}
-			@Override
-			public void mousePressed(MouseEvent arg0) {}
-			@Override
-			public void mouseReleased(MouseEvent arg0) {}
-		});
+		
+	
 	}
 
+	protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        BufferedImage backg = null;
+        try {
+			backg = ImageIO.read(new File("Images/Death.png"));
+		} catch (IOException e) {
+			System.out.println(e);
+		}
+        g.drawImage(backg, 0, 0, getWidth(), getHeight(), this);
+    }
 	public static void main(String[] args){
-		JFrame frame = new JFrame("CrabGame");
-		StartMenu sm = new StartMenu(frame);
+		JFrame frame = new JFrame("crabgame");
+		Death d = new Death(frame);
 		frame.setSize((int)(FRAMEWIDTH), (int)(FRAMEHEIGHT));
-		frame.add(sm);
+		frame.add(d);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 	}
+
+	
 }
