@@ -111,19 +111,8 @@ public class Painter extends JPanel{
 		Graphics2D g2d = (Graphics2D) g;
 		int xsaltindex = 0;
 		int ysaltindex = 0;
-//		if (game.getPlayer().getColor() == color.WHITE){
-//			g2d.setColor(Color.RED);
-//			int xsize = 50;
-//			Font xs = new Font("Impact", Font.BOLD, xsize);
-//			g2d.setFont(xs);
-//			g2d.drawString("X", game.getPlayer().getXpos(), game.getPlayer().getYpos());			
-//		}
 		for(int i = 0; i<40; i++){
 			for(int j = 0; j<20; j++){
-//				double xsaltindexprep = i / ((double) FRAMEWIDTH);
-//				xsaltindex = (int) (40 * xsaltindexprep);
-//				double ysaltindexprep = j / ((double) FRAMEHEIGHT);
-//				ysaltindex = (int) (20 * ysaltindexprep);
 				if(board[i][j] == 1){
 					g2d.setColor(Color.BLUE);
 				    g2d.drawImage(salt,i*(FRAMEWIDTH/40), j*(FRAMEHEIGHT/20), FRAMEWIDTH/40,FRAMEHEIGHT/20, null);

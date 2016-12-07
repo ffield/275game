@@ -201,8 +201,9 @@ public class Controller extends JPanel implements KeyListener {
 				game.getPoints(), game.getPlayer().getSalmax(), FRAMEWIDTH, FRAMEHEIGHT, game.getWind(), game.getPlayer().getTool(),
 				game.isGameOver());
 		repaint();
-		if (game.isGameOver())
+		if (game.isGameOver()){
 			game.stop();
+		}
 		if(count%300 == 0)
 			game.changeWind();
 		if(count%100 == 0)

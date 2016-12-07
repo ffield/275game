@@ -10,8 +10,6 @@ import javax.swing.JFrame;
 import javax.swing.Timer;
 
 import controller.Controller;
-import controller.Death;
-import controller.Party;
 
 public class Main {
 	public static void main(String[] args) throws InterruptedException {
