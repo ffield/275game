@@ -46,7 +46,7 @@ public class StartMenu extends JPanel{
 		play.setBackground(null);
 		help.setBackground(null);
 		add("Play", play);
-		add("Help", help);
+		add("Help", help); 
 		setBackground(Color.BLUE);
 		StartMenu sm = this;
 		play.addMouseListener(new MouseListener(){
