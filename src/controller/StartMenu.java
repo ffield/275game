@@ -74,7 +74,7 @@ public class StartMenu extends JPanel{
 				Help h = new Help(frame);
 				frame.add(h);
 				frame.remove(sm);
-			}
+			} 
 			@Override
 			public void mouseEntered(MouseEvent arg0) {}
 			@Override
