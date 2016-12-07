@@ -55,9 +55,11 @@
 			horseshoe.setBackground(null);
 			oyster.setBackground(null);
 			back.setBackground(null);
+			
+			add("Oyster", oyster);
 			add("BlueCrab", blue);
 			add("HorseShoe", horseshoe);
-			add("Oyster", oyster);
+			
 			add("Back", back);
 			CharacterSelect cs = this;
 			back.addMouseListener(new MouseListener(){
