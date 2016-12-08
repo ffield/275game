@@ -66,7 +66,7 @@ public class Player extends Movers {
 	public Player(int xpos, int ypos, int xvel, int yvel, int salinity, double d, int salmin, int salmax, Tool tool,
 			State state, String imageName) {
 		super(xpos, ypos, xvel, yvel, imageName);
-		this.salinity = salinity;
+		this.salinity = salinity; 
 		this.saldelta = d;
 		this.salmin = salmin;
 		this.salmax = salmax;  
