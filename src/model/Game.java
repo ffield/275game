@@ -39,7 +39,7 @@ public class Game implements Serializable{
 	 */
 	public Game(Dimension screenSize){
 		System.out.println("Generating game");
-		player = new Player(30, 40, 10, 10, 500, 1, 1, 1000, Tool.TRASH, State.NEUTRAL);
+		player = new Player(30, 40, 10, 10, 500, .0002, 1, 1000, Tool.TRASH, State.NEUTRAL);
 		board = new Board();
 		hazardnum = 75;
 		wind = Wind.NEUTRAL;
@@ -58,7 +58,7 @@ public class Game implements Serializable{
 	 */
 	public Game(Dimension screenSize, String imageName){
 		System.out.println("Generating game");
-		player = new Player(30, 40, 10, 10, 500, 1, 1, 1000, Tool.TRASH, State.NEUTRAL, imageName);
+		player = new Player(30, 40, 10, 10, 500, .0002 , 1, 1000, Tool.TRASH, State.NEUTRAL, imageName);
 		board = new Board();
 		hazardnum = 75;
 		wind = Wind.NEUTRAL;

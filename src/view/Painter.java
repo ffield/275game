@@ -149,7 +149,7 @@ public class Painter extends JPanel{
 		String scorestring = "Points: ";
 		String levelstring = "Level: ";
 		String windstring = "Wind: ";
-		saltstring = saltstring + salinity;
+		saltstring = saltstring + salinity/7;
 		scorestring = scorestring + score;
 		levelstring = levelstring + level;
 		windstring = windstring + wind;

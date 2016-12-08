@@ -21,7 +21,7 @@ public class Player extends Movers {
 	int salinity;
 	int salmin;
 	int salmax;
-	int saldelta;
+	double saldelta;
 	Tool tool;
 	int life;
 	State state;
@@ -38,7 +38,7 @@ public class Player extends Movers {
 	 * @param tool - The kind of tool the player is using
 	 * @param state - The state of the player at this moment
 	 */
-	public Player(int xpos, int ypos, int xvel, int yvel, int salinity, int saldelta, int salmin, int salmax, Tool tool,
+	public Player(int xpos, int ypos, int xvel, int yvel, int salinity, double saldelta, int salmin, int salmax, Tool tool,
 			State state) {
 		super(xpos, ypos, xvel, yvel, "bluecrab_0");
 		this.salinity = salinity;
@@ -56,18 +56,18 @@ public class Player extends Movers {
 	 * @param xvel X velocity of the player
 	 * @param yvel Y Velocity of the player
 	 * @param salinity The salinity level of the player
-	 * @param saldelta How fast the salinity moves
+	 * @param d How fast the salinity moves
 	 * @param salmin The minimum salinity the player can tolerate
 	 * @param salmax The maximum salinity the player can tolerate
 	 * @param tool - The kind of tool the player is using
 	 * @param state - The state of the player at this moment
 	 * @param imageName - The name of the image of the player (String)
 	 */
-	public Player(int xpos, int ypos, int xvel, int yvel, int salinity, int saldelta, int salmin, int salmax, Tool tool,
+	public Player(int xpos, int ypos, int xvel, int yvel, int salinity, double d, int salmin, int salmax, Tool tool,
 			State state, String imageName) {
 		super(xpos, ypos, xvel, yvel, imageName);
 		this.salinity = salinity;
-		this.saldelta = saldelta;
+		this.saldelta = d;
 		this.salmin = salmin;
 		this.salmax = salmax;
 		this.tool = tool;
@@ -78,7 +78,7 @@ public class Player extends Movers {
 	 * Returns the salDelta attribute passed to the constructor
 	 * @return salDelta
 	 */
-	public int getSaldelta() {
+	public double getSaldelta() {
 		return saldelta;
 	}
 	/**

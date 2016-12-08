@@ -90,8 +90,14 @@
 					frame.add(gw.control);
 					
 					
-					gw.control.getGame().getPlayer().setSalmax(800);
-					gw.control.getGame().getPlayer().setSalmin(0);
+					gw.control.getGame().getPlayer().setSalmax(150);
+					gw.control.getGame().getPlayer().setSalmin(30);
+
+					gw.control.getGame().getPlayer().setSalinity(gw.control.getGame().getPlayer().getSalmin() + ((gw.control.getGame().getPlayer().getSalmax() - 
+							gw.control.getGame().getPlayer().getSalmin())/2));
+					
+
+
 					
 					
 					ActionListener taskPerformer = new ActionListener() {
@@ -140,8 +146,12 @@
 					frame.add(gw.control);
 					
 
-					gw.control.getGame().getPlayer().setSalmax(600);
-					gw.control.getGame().getPlayer().setSalmin(0);
+					gw.control.getGame().getPlayer().setSalmax(300);
+					gw.control.getGame().getPlayer().setSalmin(150);
+					gw.control.getGame().getPlayer().setSalinity(gw.control.getGame().getPlayer().getSalmin() + ((gw.control.getGame().getPlayer().getSalmax() - 
+							gw.control.getGame().getPlayer().getSalmin())/2));
+		
+
 					
 					
 					ActionListener taskPerformer = new ActionListener() {
@@ -207,9 +217,12 @@
 					frame.add(gw.control);
 					
 
-					gw.control.getGame().getPlayer().setSalmax(1000);
-					gw.control.getGame().getPlayer().setSalmin(0);
+					gw.control.getGame().getPlayer().setSalmax(350);
+					gw.control.getGame().getPlayer().setSalmin(50);
+					gw.control.getGame().getPlayer().setSalinity(gw.control.getGame().getPlayer().getSalmin() + ((gw.control.getGame().getPlayer().getSalmax() - 
+							gw.control.getGame().getPlayer().getSalmin())/2));
 					
+
 					ActionListener taskPerformer = new ActionListener() {
 						public void actionPerformed(ActionEvent evt) {
 							if (gw.control.getGame().getLevel()==3){
