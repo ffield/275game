@@ -85,7 +85,7 @@ public class StartMenu extends JPanel{
 			public void mouseReleased(MouseEvent arg0) {}
 		});
 	}
-
+ 
 	public static void main(String[] args){
 		JFrame frame = new JFrame("CrabGame");
 		StartMenu sm = new StartMenu(frame);
