@@ -90,8 +90,8 @@
 					frame.add(gw.control);
 					
 					
-					gw.control.getGame().getPlayer().setSalmax(150);
-					gw.control.getGame().getPlayer().setSalmin(30);
+					gw.control.getGame().getPlayer().setSalmax(200);
+					gw.control.getGame().getPlayer().setSalmin(0);
 
 					gw.control.getGame().getPlayer().setSalinity(gw.control.getGame().getPlayer().getSalmin() + ((gw.control.getGame().getPlayer().getSalmax() - 
 							gw.control.getGame().getPlayer().getSalmin())/2));
@@ -147,7 +147,7 @@
 					
 
 					gw.control.getGame().getPlayer().setSalmax(300);
-					gw.control.getGame().getPlayer().setSalmin(150);
+					gw.control.getGame().getPlayer().setSalmin(100);
 					gw.control.getGame().getPlayer().setSalinity(gw.control.getGame().getPlayer().getSalmin() + ((gw.control.getGame().getPlayer().getSalmax() - 
 							gw.control.getGame().getPlayer().getSalmin())/2));
 		
