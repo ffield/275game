@@ -69,7 +69,7 @@ public class Player extends Movers {
 		this.salinity = salinity;
 		this.saldelta = d;
 		this.salmin = salmin;
-		this.salmax = salmax;
+		this.salmax = salmax;  
 		this.tool = tool;
 		this.state = state;
 		this.life = 3;
